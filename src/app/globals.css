@@ -1,26 +1,186 @@
-@import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-primary: var(--primary);
+	--color-primary-hover: var(--primary-hover);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-hover: var(--secondary-hover);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-hover: var(--muted-hover);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-hover: var(--accent-hover);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-danger: var(--danger);
+	--color-danger-hover: var(--danger-hover);
+	--color-danger-foreground: var(--danger-foreground);
+	--color-warning: var(--warning);
+	--color-warning-hover: var(--warning-hover);
+	--color-warning-foreground: var(--warning-foreground);
+	--color-success: var(--success);
+	--color-success-hover: var(--success-hover);
+	--color-success-foreground: var(--success-foreground);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-chart-1: var(--chart-1);
+	--color-chart-2: var(--chart-2);
+	--color-chart-3: var(--chart-3);
+	--color-chart-4: var(--chart-4);
+	--color-chart-5: var(--chart-5);
+
+	--animate-accordion-down: accordion-down 0.4s ease-out;
+	--animate-accordion-up: accordion-up 0.4s ease-out;
+	--animate-dropdown-in: dropdown-in 0.4s ease-out;
+	--animate-dropdown-up: dropdown-up 0.4s ease-out;
+	--animate-modal-in: modal-in 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+	--animate-modal-out: modal-out 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+	@keyframes accordion-down {
+		from {
+			height: 0;
+			opacity: 0;
+		}
+		to {
+			height: var(--accordion-content-height);
+		}
+	}
+	@keyframes accordion-up {
+		from {
+			height: var(--accordion-content-height);
+		}
+		to {
+			height: 0;
+			opacity: 0;
+		}
+	}
+	@keyframes dropdown-in {
+		from {
+			height: 0;
+			opacity: 0;
+			transform: scale(0.95);
+		}
+		to {
+			height: var(--dropdown-content-height);
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+	@keyframes dropdown-up {
+		from {
+			height: var(--dropdown-content-height);
+			opacity: 1;
+			transform: scale(1);
+		}
+		to {
+			height: 0;
+			opacity: 0;
+			transform: scale(0.95);
+		}
+	}
+	@keyframes modal-in {
+		0% {
+			opacity: 0;
+			transform: scale(0.95);
+		}
+		100% {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+	@keyframes modal-out {
+		0% {
+			opacity: 1;
+			transform: scale(1);
+		}
+		100% {
+			opacity: 0;
+			transform: scale(0.95);
+		}
+	}
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+	:root {
+		--background: hsl(204, 45%, 99%);
+		--foreground: hsl(0, 0%, 0%);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+		--primary: hsl(237, 80%, 24%);
+		--primary-hover: hsl(237, 80%, 34%);
+		--primary-foreground: hsl(0, 0%, 100%);
+		--secondary: hsl(237, 40%, 24%);
+		--secondary-hover: hsl(237, 40%, 34%);
+		--secondary-foreground: hsl(0, 0%, 100%);
+		--muted: hsl(220, 14%, 96%);
+		--muted-hover: hsl(220, 14%, 96%);
+		--muted-foreground: hsl(220, 9%, 46%);
+		--accent: hsl(237, 100%, 44%);
+		--accent-hover: hsl(237, 100%, 54%);
+		--accent-foreground: hsl(0, 0%, 100%);
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+		--danger: hsl(0, 72%, 51%);
+		--danger-hover: hsl(0, 72%, 61%);
+		--danger-foreground: hsl(0, 0%, 100%);
+		--warning: hsl(43, 96%, 56%);
+		--warning-hover: hsl(43, 96%, 66%);
+		--warning-foreground: hsl(0, 0%, 0%);
+		--success: hsl(160, 84%, 39%);
+		--success-hover: hsl(160, 84%, 49%);
+		--success-foreground: hsl(0, 0%, 0%);
+
+		--border: hsl(204, 45%, 88%);
+		--ring: hsl(237, 80%, 24%);
+		--input: hsl(0, 0%, 100%);
+
+		--chart-1: hsl(237, 100%, 34%);
+		--chart-2: hsl(267, 100%, 34%);
+		--chart-3: hsl(297, 100%, 34%);
+		--chart-4: hsl(327, 100%, 34%);
+		--chart-5: hsl(357, 100%, 34%);
+ }
+
+	.dark {
+		--background: hsl(241, 7%, 6%);
+		--foreground: hsl(0, 0%, 100%);
+
+		--primary: hsl(237, 80%, 24%);
+		--primary-hover: hsl(237, 80%, 34%);
+		--primary-foreground: hsl(0, 0%, 100%);
+		--secondary: hsl(237, 40%, 24%);
+		--secondary-hover: hsl(237, 40%, 34%);
+		--secondary-foreground: hsl(0, 0%, 100%);
+		--muted: hsl(223, 20%, 14%);
+		--muted-hover: hsl(0, 0%, 29%);
+		--muted-foreground: hsl(212, 7%, 63%);
+		--accent: hsl(237, 100%, 44%);
+		--accent-hover: hsl(237, 100%, 54%);
+		--accent-foreground: hsl(0, 0%, 100%);
+
+		--danger: hsl(0, 72%, 51%);
+		--danger-hover: hsl(0, 72%, 61%);
+		--danger-foreground: hsl(0, 0%, 100%);
+		--warning: hsl(43, 96%, 56%);
+		--warning-hover: hsl(43, 96%, 66%);
+		--warning-foreground: hsl(0, 0%, 0%);
+		--success: hsl(160, 84%, 39%);
+		--success-hover: hsl(160, 84%, 49%);
+		--success-foreground: hsl(0, 0%, 0%);
+
+		--border: hsl(240, 6%, 20%);
+		--ring: hsl(237, 80%, 24%);
+		--input: hsl(0, 0%, 0%);
+
+		--chart-1: hsl(237, 100%, 34%);
+		--chart-2: hsl(267, 100%, 34%);
+		--chart-3: hsl(297, 100%, 34%);
+		--chart-4: hsl(327, 100%, 34%);
+		--chart-5: hsl(357, 100%, 34%);
+	}
 }
