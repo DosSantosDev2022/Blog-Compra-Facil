@@ -105,8 +105,8 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
 
 		const hoverClasses =
 			hoverType === 'text'
-				? 'hover:text-muted-hover'
-				: 'hover:bg-muted-hover'
+				? 'hover:text-primary-hover'
+				: 'hover:bg-primary-hover'
 
 		return (
 			<li
@@ -145,8 +145,9 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
 						id={`dropdown-${id}`}
 						aria-label='dropdown'
 						className={twMerge(
-							'absolute top-full left-0 bg-background border border-border z-10',
-							'w-full mt-1 rounded-md shadow-md p-2 transition-all duration-300 ease-in',
+							'absolute top-full lg:right-0 bg-background border border-border z-10',
+							'lg:w-xl w-xs mt-1 rounded-md shadow-md p-2 transition-all duration-300 ease-in',
+							'grid grid-cols-1 lg:grid-cols-4',
 						)}
 					>
 						{dropdownItems.map((item, index) => (
