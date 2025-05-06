@@ -1,35 +1,51 @@
+import { CardImage } from '@/components/ui'
 import { SectionTitle } from '../sectionTitle'
+import type { Article } from '@/@types/hygraphTypes'
 
-const MostViewedPosts = () => {
+interface MostViewedProps {
+	articles: Article[]
+}
+
+const MostViewedPosts = ({ articles }: MostViewedProps) => {
 	return (
 		<div className=''>
 			<SectionTitle path='' title='Posts mais vistos' />
 			<div className='overflow-x-auto'>
 				<div className='flex gap-4 w-auto mt-3'>
-					<div className='bg-gray-300 h-74 min-w-64'>
-						{/* Conteúdo do post 1 aqui */}
-					</div>
-					<div className='bg-gray-300 h-74 min-w-64'>
-						{/* Conteúdo do post 2 aqui */}
-					</div>
-					<div className='bg-gray-300 h-74 min-w-64'>
-						{/* Conteúdo do post 3 aqui */}
-					</div>
-					<div className='bg-gray-300 h-74 min-w-64'>
-						{/* Conteúdo do post 4 aqui */}
-					</div>
-					<div className='bg-gray-300 h-74 min-w-64'>
-						{/* Conteúdo do post 5 aqui */}
-					</div>
-					<div className='bg-gray-300 h-74 min-w-64'>
-						{/* Conteúdo do post 6 aqui */}
-					</div>
-					<div className='bg-gray-300 h-74 min-w-64'>
-						{/* Conteúdo do post 7 aqui */}
-					</div>
-					<div className='bg-gray-300 h-74 min-w-64'>
-						{/* Conteúdo do post 8 aqui */}
-					</div>
+					{articles.map((article) => (
+						<CardImage
+							key={article.id}
+							className='h-74 min-w-72'
+							image={article.coverImage.url || ''}
+							title={article.title}
+						/>
+					))}
+
+					<CardImage
+						className='h-74 min-w-72'
+						image='https://placehold.co/600x400'
+						title='PlaceHolder'
+					/>
+					<CardImage
+						className='h-74 min-w-72'
+						image='https://placehold.co/600x400'
+						title='PlaceHolder'
+					/>
+					<CardImage
+						className='h-74 min-w-72'
+						image='https://placehold.co/600x400'
+						title='PlaceHolder'
+					/>
+					<CardImage
+						className='h-74 min-w-72'
+						image='https://placehold.co/600x400'
+						title='PlaceHolder'
+					/>
+					<CardImage
+						className='h-74 min-w-72'
+						image='https://placehold.co/600x400'
+						title='PlaceHolder'
+					/>
 					{/* Adicione quantos posts forem necessários */}
 				</div>
 			</div>

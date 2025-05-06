@@ -1,5 +1,5 @@
 'use client'
-
+import type { Category } from '@/@types/hygraphTypes'
 import {
 	Button,
 	Input,
@@ -8,11 +8,29 @@ import {
 	NavigationLink,
 	NavigationList,
 } from '@/components/ui'
-import { useState } from 'react'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { IoClose, IoMenu } from 'react-icons/io5'
 
 const Header = () => {
 	const [isOpen, setIsOpen] = useState(false)
+	const [category, setCategory] = useState<Category[]>([])
+
+	useEffect(() => {
+		const fetchCategoriesClient = async () => {
+			try {
+				const response = await fetch('/api/categories')
+				if (!response.ok) {
+					throw new Error(`Erro na requisição: ${response.status}`)
+				}
+				const data = await response.json()
+				setCategory(data.categories) // Assumindo que sua action do Zustand agora aceita os dados diretamente
+			} catch (error) {
+				console.error('Erro ao buscar categorias no cliente:', error)
+			}
+		}
+		fetchCategoriesClient()
+	}, [])
 
 	const handleOpenMenu = () => {
 		setIsOpen(!isOpen)
@@ -23,24 +41,6 @@ const Header = () => {
 		{ label: 'About', url: '/#' },
 		{ label: 'Blog', url: '/#' },
 		{ label: 'Contact', url: '/#' },
-	]
-
-	const categories = [
-		{ label: 'Política', slug: 'politica' },
-		{ label: 'Economia', slug: 'economia' },
-		{ label: 'Mundo', slug: 'mundo' },
-		{ label: 'Esportes', slug: 'esportes' },
-		{ label: 'Tecnologia', slug: 'tecnologia' },
-		{ label: 'Saúde', slug: 'saude' },
-		{ label: 'Entretenimento', slug: 'entretenimento' },
-		{ label: 'Ciência', slug: 'ciencia' },
-		{ label: 'Educação', slug: 'educacao' },
-		{ label: 'Cultura', slug: 'cultura' },
-		{ label: 'Viagem', slug: 'viagem' },
-		{ label: 'Gastronomia', slug: 'gastronomia' },
-		{ label: 'Automobilismo', slug: 'automobilismo' },
-		{ label: 'Cinema', slug: 'cinema' },
-		{ label: 'Música', slug: 'musica' },
 	]
 
 	return (
@@ -63,7 +63,7 @@ const Header = () => {
 				<div
 					className={`
 						transition-all duration-300 ease-in-out
-						 p-1
+						 p-1 z-50
 						w-full lg:w-auto
 						${isOpen ? 'max-h-[500px] opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2 '}
 						lg:!max-h-none lg:!opacity-100 lg:!translate-y-0 lg:flex
@@ -74,19 +74,17 @@ const Header = () => {
 						<NavigationList>
 							{links.map((link, index) => (
 								<NavigationItem key={index}>
-									<NavigationLink href={link.url}>
-										{link.label}
-									</NavigationLink>
+									<Link href={link.url}>{link.label}</Link>
 								</NavigationItem>
 							))}
 
 							<NavigationItem
 								isDrop
 								id='dropdown1'
-								dropdownItems={categories.map((category, index) => (
-									<NavigationLink key={index} href={category.slug}>
-										{category.label}
-									</NavigationLink>
+								dropdownItems={category.map((cat) => (
+									<Link key={cat.id} href={cat.slug || ''}>
+										{cat.name}
+									</Link>
 								))}
 							>
 								Categorias

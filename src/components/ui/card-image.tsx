@@ -3,8 +3,8 @@ import { twMerge } from 'tailwind-merge'
 
 interface CardImageProps {
 	image: string
-	title: string
-	description: string
+	title?: string
+	description?: string
 }
 
 const CardTitle = React.forwardRef<
@@ -16,7 +16,7 @@ const CardTitle = React.forwardRef<
 			ref={ref}
 			{...props}
 			className={twMerge(
-				'text-2xl font-bold leading-tight text-accent-foreground sm:text-3xl md:text-4xl lg:text-5xl',
+				'text-2xl font-bold leading-tight text-secondary-foreground',
 				className,
 			)}
 		>
@@ -56,7 +56,7 @@ const CardImage = React.forwardRef<
 			ref={ref}
 			className={twMerge(
 				'group relative overflow-hidden rounded-2xl p-0 shadow-sm',
-				'lg:h-112 h-80 w-full max-w-xs sm:h-96 md:max-w-sm lg:max-w-md',
+				'',
 				className,
 			)}
 			{...props}
@@ -71,12 +71,12 @@ const CardImage = React.forwardRef<
 				style={{ backgroundImage: `url(${image})` }}
 			/>
 			{/* Gradiente sobre a imagem */}
-			<div className='absolute inset-0 bg-gradient-to-t from-accent' />
+			<div className='absolute inset-0 bg-gradient-to-t from-secondary' />
 
 			{/* Conteúdo */}
 			<div className='absolute inset-0 flex flex-col justify-end gap-2 p-4'>
-				<CardTitle label={title} />
-				<CardDescription label={description} />
+				<CardTitle label={title || ''} />
+				<CardDescription className='text-xs' label={description || ''} />
 			</div>
 		</div>
 	)

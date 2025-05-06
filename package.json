@@ -26,6 +26,8 @@
 		]
 	},
 	"dependencies": {
+		"@graphcms/rich-text-react-renderer": "^0.6.2",
+		"@graphcms/rich-text-types": "^0.5.1",
 		"@radix-ui/react-navigation-menu": "^1.2.10",
 		"@radix-ui/react-slot": "^1.2.0",
 		"date-fns": "^4.1.0",
@@ -34,7 +36,8 @@
 		"react-dom": "^19.0.0",
 		"react-icons": "^5.5.0",
 		"tailwind-merge": "^3.2.0",
-		"uuid": "^11.1.0"
+		"uuid": "^11.1.0",
+		"zustand": "^5.0.4"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",

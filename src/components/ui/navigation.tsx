@@ -145,7 +145,7 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
 						id={`dropdown-${id}`}
 						aria-label='dropdown'
 						className={twMerge(
-							'absolute top-full lg:right-0 bg-background border border-border z-10',
+							'absolute top-full lg:right-0 bg-background border border-border z-50 ',
 							'lg:w-xl w-xs mt-1 rounded-md shadow-md p-2 transition-all duration-300 ease-in',
 							'grid grid-cols-1 lg:grid-cols-4',
 						)}

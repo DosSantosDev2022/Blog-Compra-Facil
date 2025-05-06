@@ -1,0 +1,82 @@
+import { SectionTitle } from '@/components/global/sectionTitle'
+import { Button } from '@/components/ui'
+import { getArticleCategories } from '@/services/getArticleCategory'
+import Link from 'next/link'
+
+export default async function CategoryPage({
+	params,
+}: {
+	params: Promise<{ slug: string }>
+}) {
+	const categoryName = (await params).slug
+		? (await params).slug.charAt(0).toUpperCase() +
+			(await params).slug.slice(1)
+		: 'Categoria'
+
+	const { articles } = await getArticleCategories(categoryName, 1, 10)
+	console.log(articles)
+	return (
+		<div className='grid grid-cols-12 gap-4'>
+			<div className='container mx-auto col-span-10 py-8 6'>
+				<SectionTitle path='' title={`Categoria: ${categoryName}`} />
+
+				{/* Espaço para anúncio no topo da página de categoria */}
+				<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md mt-6'>
+					{/* Anúncio aqui */}
+					Anúncio
+				</div>
+
+				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
+					{articles.map((article, index) => (
+						<div
+							key={article.id}
+							className='bg-gray-100 rounded-md shadow-md overflow-hidden'
+						>
+							<div className='h-48 bg-zinc-300'>
+								{/* Imagem de destaque do artigo (simulada) */}
+							</div>
+							<div className='p-4 space-y-2'>
+								<h3 className='font-semibold text-xl'>{article.title}</h3>
+								<p className='text-gray-600'>{article.createdAt}</p>
+								<Button sizes='sm' asChild>
+									<Link href={`/artigo/${article.id}`}>Ler mais</Link>
+								</Button>
+							</div>
+						</div>
+					))}
+				</div>
+
+				{/* Espaço para anúncio após a lista de artigos */}
+				<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md mt-8'>
+					{/* Anúncio aqui */}
+					Anúncio
+				</div>
+
+				{/* Adicionar paginação aqui (se necessário) */}
+				<div className='mt-8 flex justify-center'>
+					{/* <Button variant='outline' className='mr-2'>Anterior</Button>
+        <Button variant='outline'>Próximo</Button> */}
+				</div>
+			</div>
+
+			<div className='col-span-2 py-8'>
+				<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md mb-6'>
+					{/* Anúncio aqui */}
+					Anúncio
+				</div>
+				<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md mb-6'>
+					{/* Anúncio aqui */}
+					Anúncio
+				</div>
+				<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md mb-6'>
+					{/* Anúncio aqui */}
+					Anúncio
+				</div>
+				<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md mb-6'>
+					{/* Anúncio aqui */}
+					Anúncio
+				</div>
+			</div>
+		</div>
+	)
+}
