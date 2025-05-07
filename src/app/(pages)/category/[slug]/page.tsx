@@ -1,6 +1,7 @@
+import page from '@/app/page'
 import { CardSimple } from '@/components/global/posts/cardSimple'
 import { SectionTitle } from '@/components/global/sectionTitle'
-import { Button } from '@/components/ui'
+import { Button, Pagination } from '@/components/ui'
 import { getArticles } from '@/services/getArticles'
 
 export default async function CategoryPage({
@@ -51,12 +52,9 @@ export default async function CategoryPage({
 				</div>
 
 				{/* Adicionar paginação aqui (se necessário) */}
-				<div className='mt-8 flex justify-center'>
-					<Button variants='outline' className='mr-2'>
-						Anterior
-					</Button>
-					<Button variants='outline'>Próximo</Button>
-				</div>
+				{/* 				<div className='w-full flex justify-between px-2 py-3'>
+					<Pagination page={page} limit={first} total={10} />
+				</div> */}
 			</div>
 
 			<div className='col-span-2 py-8'>

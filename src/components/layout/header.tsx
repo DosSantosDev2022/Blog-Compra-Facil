@@ -41,7 +41,7 @@ const Header = () => {
 		{ label: 'Home', url: '/#' },
 		{ label: 'About', url: '/#' },
 		{ label: 'Blog', url: '/#' },
-		{ label: 'Contact', url: '/#' },
+		{ label: 'Newsletters', url: '/#' },
 	]
 
 	return (
@@ -83,7 +83,7 @@ const Header = () => {
 								isDrop
 								id='dropdown1'
 								dropdownItems={category.map((cat) => (
-									<Link key={cat.id} href={cat.slug || ''}>
+									<Link key={cat.id} href={`/category/${cat.slug || ''}`}>
 										{cat.name}
 									</Link>
 								))}

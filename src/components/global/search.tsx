@@ -10,9 +10,9 @@ export function InputSearch() {
 	const searchParams = new URLSearchParams(query as unknown as string)
 	const [searchTerm, setSearchTerm] = useState('')
 
-	function handleSearch(term: string) {
-		if (term) {
-			searchParams.set('', term)
+	function handleSearch(search: string) {
+		if (search) {
+			searchParams.set('query', search)
 		} else {
 			searchParams.delete('query')
 		}
@@ -30,8 +30,8 @@ export function InputSearch() {
 				const target = e.target as typeof e.target & {
 					search: { value: string }
 				}
-				const term = target.search.value
-				handleSearch(term)
+				const search = target.search.value
+				handleSearch(search)
 			}}
 			className='flex gap-2 w-full'
 		>
