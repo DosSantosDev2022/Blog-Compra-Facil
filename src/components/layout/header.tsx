@@ -11,6 +11,7 @@ import {
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { IoClose, IoMenu } from 'react-icons/io5'
+import { InputSearch } from '../global/search'
 
 const Header = () => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -91,7 +92,7 @@ const Header = () => {
 							</NavigationItem>
 						</NavigationList>
 					</Navigation>
-					<Input placeholder='Buscar...' />
+					<InputSearch />
 				</div>
 			</div>
 		</header>

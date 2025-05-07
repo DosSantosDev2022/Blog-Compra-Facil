@@ -1,12 +1,9 @@
 import { CardImage } from '@/components/ui'
 import { SectionTitle } from '../sectionTitle'
-import type { Article } from '@/@types/hygraphTypes'
+import { getArticles } from '@/services/getArticles'
 
-interface MostViewedProps {
-	articles: Article[]
-}
-
-const MostViewedPosts = ({ articles }: MostViewedProps) => {
+const MostViewedPosts = async () => {
+	const { articles } = await getArticles({ where: 'view', pageSize: 10 })
 	return (
 		<div className=''>
 			<SectionTitle path='' title='Posts mais vistos' />
@@ -20,33 +17,6 @@ const MostViewedPosts = ({ articles }: MostViewedProps) => {
 							title={article.title}
 						/>
 					))}
-
-					<CardImage
-						className='h-74 min-w-72'
-						image='https://placehold.co/600x400'
-						title='PlaceHolder'
-					/>
-					<CardImage
-						className='h-74 min-w-72'
-						image='https://placehold.co/600x400'
-						title='PlaceHolder'
-					/>
-					<CardImage
-						className='h-74 min-w-72'
-						image='https://placehold.co/600x400'
-						title='PlaceHolder'
-					/>
-					<CardImage
-						className='h-74 min-w-72'
-						image='https://placehold.co/600x400'
-						title='PlaceHolder'
-					/>
-					<CardImage
-						className='h-74 min-w-72'
-						image='https://placehold.co/600x400'
-						title='PlaceHolder'
-					/>
-					{/* Adicione quantos posts forem necessários */}
 				</div>
 			</div>
 		</div>

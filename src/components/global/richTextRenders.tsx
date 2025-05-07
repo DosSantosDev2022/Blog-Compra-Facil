@@ -5,19 +5,19 @@ interface defaultRendersProps {
 }
 const defaultRenders = {
 	h1: ({ children }: defaultRendersProps) => (
-		<h1 className='text-accent font-bold text-4xl'>{children}</h1>
+		<h1 className='text-foreground font-bold text-4xl'>{children}</h1>
 	),
 	h2: ({ children }: defaultRendersProps) => (
-		<h2 className='text-accent font-bold text-2xl'>{children}</h2>
+		<h2 className='text-foreground font-bold text-2xl'>{children}</h2>
 	),
 	h3: ({ children }: defaultRendersProps) => (
-		<h3 className='text-accent font-bold text-xl'>{children}</h3>
+		<h3 className='text-foreground font-bold text-xl'>{children}</h3>
 	),
 	h4: ({ children }: defaultRendersProps) => (
-		<h4 className='text-accent font-bold text-lg'>{children}</h4>
+		<h4 className='text-foreground font-bold text-lg'>{children}</h4>
 	),
 	bold: ({ children }: defaultRendersProps) => (
-		<b className='text-accent font-bold'>{children} </b>
+		<b className='text-foreground font-bold'>{children} </b>
 	),
 	p: ({ children }: defaultRendersProps) => (
 		<p className='font-light mt-4'>{children}</p>

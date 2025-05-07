@@ -25,8 +25,32 @@ export interface Article {
   content: {
     raw : RichTextContent
   }
+  view: number
+}
+
+export type ArticleDetail = {
+  article: Article
 }
 
 export type ArticleQueryResponse = {
   articles: Article[]
 }
+
+/* artigos relacionados type */
+export interface RelatedArticle {
+  id: string
+  slug: string
+  title : string
+  coverImage:{
+    url: string
+  }
+  category: {
+    name: string
+  }
+  createdAt: string
+}
+
+export type RelatedArticleResponse = {
+  articles: RelatedArticle[]
+}
+

@@ -7,33 +7,47 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui'
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+import Image from 'next/image'
 import Link from 'next/link'
 
 interface CardSimpleProps {
 	id: string
 	title: string
-	excerpt: string
+	alt: string
+	coverImage: string
 	slug: string
+	createdAt: string
 }
 
-const CardSimple = ({ id, title, slug, excerpt }: CardSimpleProps) => {
+const CardSimple = ({
+	id,
+	alt,
+	coverImage,
+	title,
+	slug,
+	createdAt,
+}: CardSimpleProps) => {
 	return (
-		<Card
-			key={id}
-			className='bg-gray-100 rounded-md shadow-md overflow-hidden'
-		>
-			<CardHeader className='h-48 bg-zinc-300'>
-				{/* Imagem de destaque do artigo (simulada) */}
+		<Card className='p-3' key={id}>
+			<CardHeader className='relative h-48 mb-0'>
+				<Image
+					alt={alt}
+					src={coverImage}
+					fill
+					className='object-cover rounded-md'
+				/>
 			</CardHeader>
-			<CardContent>
+			<CardContent className='p-4 space-y-2'>
 				<CardTitle>{title}</CardTitle>
-				<CardDescription>{excerpt}</CardDescription>
-			</CardContent>
-			<CardFooter>
+				<p className='text-sm text-muted-foreground'>
+					{`Publicado em: ${format(createdAt, 'dd/MM/yyyy', { locale: ptBR })}`}
+				</p>
 				<Button sizes='sm' asChild>
-					<Link href={`/artigo/${slug}`}>Ler mais</Link>
+					<Link href={`/article/${slug}`}>Ler mais</Link>
 				</Button>
-			</CardFooter>
+			</CardContent>
 		</Card>
 	)
 }

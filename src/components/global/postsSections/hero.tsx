@@ -1,47 +1,30 @@
-import type { Article } from '@/@types/hygraphTypes'
 import { CardImage } from '@/components/ui'
+import { getArticles } from '@/services/getArticles'
+import Link from 'next/link'
+import { SectionTitle } from '../sectionTitle'
 
-interface HeroSectionProps {
-	articles: Article[]
-}
-
-const HeroSection = ({ articles }: HeroSectionProps) => {
-	const articleshighlights = articles.find((a) => a.highlights === true)
+const HeroSection = async () => {
+	const { articles } = await getArticles({
+		where: 'highlights',
+		pageSize: 50,
+	})
 
 	return (
-		<div className='grid grid-cols-1 lg:grid-cols-5 gap-4 w-full h-auto'>
-			{/* Post Principal */}
-			<CardImage
-				image={articleshighlights?.coverImage.url || ''}
-				title={articleshighlights?.title}
-				className=' h-96 lg:h-full lg:col-span-2'
-			/>
-
-			{/* Container para os posts menores */}
-			<div className='lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4 overflow-x-scroll max-h-[628px] '>
-				{articles.map((article) => (
-					<CardImage
-						key={article.id}
-						image={article.coverImage?.url}
-						title={article.title}
-						className=' h-64 md:h-74'
-					/>
+		<div>
+			<SectionTitle path='' title='Notícias em destaque' />
+			<div className='grid grid-cols-1 lg:grid-cols-3 gap-4 w-full h-auto overflow-y-scroll max-h-[528px] mt-6'>
+				{/* Container para os posts menores */}
+				{articles.map((article, index) => (
+					<Link href={`/article/${article.slug}`} key={article.id}>
+						<CardImage
+							image={
+								article.coverImage?.url || 'https://placehold.co/600x400'
+							}
+							title={article.title}
+							className={`h-64 ${index === 0 ? 'lg:h-96 lg:col-span-2' : ''}`} // Primeiro card maior
+						/>
+					</Link>
 				))}
-				<CardImage
-					image='https://placehold.co/600x400'
-					title='Post de destaque'
-					className=' h-64 md:h-74'
-				/>
-				<CardImage
-					image='https://placehold.co/600x400'
-					title='Post de destaque'
-					className=' h-64 md:h-74'
-				/>
-				<CardImage
-					image='https://placehold.co/600x400'
-					title='Post de destaque'
-					className=' h-64 md:h-74'
-				/>
 			</div>
 		</div>
 	)

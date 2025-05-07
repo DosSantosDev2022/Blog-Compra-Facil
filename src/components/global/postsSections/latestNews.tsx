@@ -1,21 +1,13 @@
-import {
-	Button,
-	Card,
-	CardContent,
-	CardDescription,
-	CardImage,
-	CardTitle,
-} from '@/components/ui'
 import Link from 'next/link'
 import { SectionTitle } from '../sectionTitle'
-import type { Article } from '@/@types/hygraphTypes'
 import { SmallCard } from '../posts/smalCard'
+import { getArticles } from '@/services/getArticles'
 
-interface LatestNewsProps {
-	articles: Article[]
-}
-
-const LatestNews = ({ articles }: LatestNewsProps) => {
+const LatestNews = async () => {
+	const { articles } = await getArticles({
+		orderBy: 'createdAt_DESC',
+		pageSize: 1000,
+	})
 	return (
 		<div>
 			<SectionTitle path='/noticias/recentes' title='Últimas Notícias' />
@@ -25,13 +17,14 @@ const LatestNews = ({ articles }: LatestNewsProps) => {
 					{/* Futuro anúncio aqui */}
 					Anúncio
 				</div>
-				<ul className='overflow-x-scroll max-h-48 space-y-3 '>
+				<ul className='overflow-x-scroll max-h-64 space-y-3 '>
 					{articles.map((article) => (
 						<SmallCard
 							key={article.id}
 							title={article.title}
 							coverImage={article.coverImage.url || ''}
 							description={article.description}
+							slug={article.slug}
 						/>
 					))}
 				</ul>

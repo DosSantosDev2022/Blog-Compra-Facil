@@ -1,46 +1,28 @@
 import { CardSimple } from '@/components/global/posts/cardSimple'
 import { SectionTitle } from '@/components/global/sectionTitle'
+import { getArticles } from '@/services/getArticles'
 
 interface SearchResultsPageParms {
-	searchParams: {
-		query: string
-	}
+	searchParams: Promise<{ query: string | undefined }>
 }
 
-export default function SearchResultsPage({
+export default async function SearchResultsPage({
 	searchParams,
 }: SearchResultsPageParms) {
-	// Simulando os resultados da busca (você buscará isso do seu backend com base na 'query')
-	const searchResults = [
-		{
-			id: '7',
-			title: `Resultados para: ${searchParams.query} - Artigo 1`,
-			excerpt: 'Breve descrição do artigo encontrado para a sua busca...',
-			slug: '',
-		},
-		{
-			id: '8',
-			title: `Resultados para: ${searchParams.query} - Artigo 2`,
-			excerpt: 'Mais informações relevantes sobre o termo de busca...',
-			slug: '',
-		},
-		{
-			id: '9',
-			title: `Resultados para: ${searchParams.query} - Artigo 3`,
-			excerpt:
-				'Um outro artigo que corresponde aos seus critérios de busca...',
-			slug: '',
-		},
-		// Mais resultados da busca
-	]
+	const { query } = await searchParams
 
-	const hasResults = searchResults && searchResults.length > 0
+	const { articles } = await getArticles({
+		where: 'search',
+		search: query,
+	})
+
+	const hasResults = articles && articles.length > 0
 
 	return (
 		<div className='container mx-auto py-8'>
 			<SectionTitle
 				path=''
-				title={`Resultados da Busca para: "${searchParams.query}"`}
+				title={`Resultados da Busca para: "${query}"`}
 			/>
 
 			{/* Espaço para anúncio no topo da página de resultados */}
@@ -51,13 +33,15 @@ export default function SearchResultsPage({
 
 			{hasResults ? (
 				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
-					{searchResults.map((article, index) => (
+					{articles.map((article, index) => (
 						<CardSimple
 							id={article.id}
 							title={article.title}
 							slug={article.slug}
-							excerpt={article.excerpt}
-							key={index}
+							coverImage={article.coverImage.url}
+							createdAt={article.createdAt}
+							alt={article.title}
+							key={article.id}
 						/>
 					))}
 				</div>
