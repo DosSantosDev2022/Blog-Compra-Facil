@@ -1,4 +1,4 @@
-import { HygraphQuery } from '@/app/api/hygraph'
+import { HygraphQuery } from '@/app/api/cms/hygraph'
 import type {ArticleDetail} from '@/@types/hygraphTypes'
 
 
@@ -8,6 +8,7 @@ export const getDetailsArticle = async (
 	const query = `
     query MyQuery($slug: String!) {
       article(where: {slug: $slug}) {
+        id
         title
         slug
         description
@@ -28,6 +29,5 @@ export const getDetailsArticle = async (
 	const variables = { slug }
 	return HygraphQuery(query, variables, {
 		cache: 'no-cache',
-		revalidate: 60 * 60 * 24,
 	})
 }

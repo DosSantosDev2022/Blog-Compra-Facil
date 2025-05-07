@@ -1,5 +1,5 @@
 import type { ArticleQueryResponse } from '@/@types/hygraphTypes'
-import { HygraphQuery } from '@/app/api/hygraph'
+import { HygraphQuery } from '@/app/api/cms/hygraph'
 
 interface ArticleQueryOptions {
   page?: number
@@ -47,7 +47,9 @@ export const getArticles = async (
           url
         }
         category {
+          id
           name
+          view
         }
         createdAt
         highlights

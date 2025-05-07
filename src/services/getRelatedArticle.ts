@@ -1,4 +1,4 @@
-import { HygraphQuery } from '@/app/api/hygraph'
+import { HygraphQuery } from '@/app/api/cms/hygraph'
 import type { RelatedArticleResponse } from '@/@types/hygraphTypes'
 
 

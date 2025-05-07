@@ -8,6 +8,7 @@ import { defaultRenders } from '@/components/global/richTextRenders'
 import Link from 'next/link'
 import { CardImage } from '@/components/ui'
 import { getRelatedArticle } from '@/services/getRelatedArticle'
+import { updateViewCount } from '@/services/updateViewCount'
 
 interface PagePostProps {
 	params: {
@@ -17,7 +18,7 @@ interface PagePostProps {
 
 export default async function ArticlePage({ params }: PagePostProps) {
 	const { article } = await getDetailsArticle(params.slug)
-
+	await updateViewCount(article.id, article.view + 1)
 	// Verifica se existe uma categoria associada
 	const { articles: relatedArticles } = article.category
 		? await getRelatedArticle(article.category.name, article.slug)
@@ -39,10 +40,15 @@ export default async function ArticlePage({ params }: PagePostProps) {
 			<div className='grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8'>
 				{/* Conteúdo principal do artigo */}
 				<div className='lg:col-span-2 space-y-6'>
-					<h1 className='text-3xl font-bold'>{article.title}</h1>
-					<p className='text-muted-foreground'>
-						{`Publicado em: ${format(article.createdAt, 'dd/MM/yyyy', { locale: ptBR })}`}
-					</p>
+					<div className='space-y-3'>
+						<h1 className='text-3xl font-bold'>{article.title}</h1>
+						<p className='text-muted-foreground'>
+							{`Publicado em: ${format(article.createdAt, 'dd/MM/yyyy', { locale: ptBR })}`}
+						</p>
+						<span className='text-muted-foreground'>
+							{`Visualizações: ${article.view}`}{' '}
+						</span>
+					</div>
 
 					{/* Espaço para anúncio no topo do conteúdo */}
 					<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md'>

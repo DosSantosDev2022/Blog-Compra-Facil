@@ -18,7 +18,9 @@ export interface Article {
     url: string
   }
   category: {
+    id: string
     name: string
+    view: number
   }
   createdAt: string
   highlights: boolean

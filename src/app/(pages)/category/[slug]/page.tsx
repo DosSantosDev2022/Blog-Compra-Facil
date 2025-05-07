@@ -3,6 +3,7 @@ import { CardSimple } from '@/components/global/posts/cardSimple'
 import { SectionTitle } from '@/components/global/sectionTitle'
 import { Button, Pagination } from '@/components/ui'
 import { getArticles } from '@/services/getArticles'
+import { updateCategoryViewCount } from '@/services/updateCategoryViewCount'
 
 export default async function CategoryPage({
 	params,
@@ -13,17 +14,22 @@ export default async function CategoryPage({
 		? (await params).slug.charAt(0).toUpperCase() +
 			(await params).slug.slice(1)
 		: 'Categoria'
-	console.log(categoryName)
+
 	const { articles } = await getArticles({
 		where: 'category',
 		categoryName,
 		pageSize: 100,
 	})
 
+	await updateCategoryViewCount(
+		articles[0].category.id,
+		articles[0].category.view + 1,
+	)
+
 	return (
 		<div className='grid lg:grid-cols-12 grid-cols-1 gap-4'>
 			<div className='container mx-auto col-span-10 py-8 6'>
-				<SectionTitle path='' title={`Categoria: ${categoryName}`} />
+				<SectionTitle title={`Categoria: ${categoryName}`} />
 
 				{/* Espaço para anúncio no topo da página de categoria */}
 				<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md mt-6'>

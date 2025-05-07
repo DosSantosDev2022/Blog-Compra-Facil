@@ -1,4 +1,4 @@
-import { HygraphQuery } from '@/app/api/hygraph';
+import { HygraphQuery } from '@/app/api/cms/hygraph';
 import { NextResponse } from 'next/server';
 import type { Category, CategoryResponse } from '@/@types/hygraphTypes';
 

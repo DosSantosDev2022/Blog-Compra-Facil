@@ -1,48 +1,23 @@
 'use client'
-import type { Category } from '@/@types/hygraphTypes'
+
 import {
 	Button,
-	Input,
 	Navigation,
 	NavigationItem,
-	NavigationLink,
 	NavigationList,
 } from '@/components/ui'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { IoClose, IoMenu } from 'react-icons/io5'
 import { InputSearch } from '../global/search'
+import { categories, links } from '@/config/links'
 
 const Header = () => {
 	const [isOpen, setIsOpen] = useState(false)
-	const [category, setCategory] = useState<Category[]>([])
-
-	useEffect(() => {
-		const fetchCategoriesClient = async () => {
-			try {
-				const response = await fetch('/api/categories')
-				if (!response.ok) {
-					throw new Error(`Erro na requisição: ${response.status}`)
-				}
-				const data = await response.json()
-				setCategory(data.categories) // Assumindo que sua action do Zustand agora aceita os dados diretamente
-			} catch (error) {
-				console.error('Erro ao buscar categorias no cliente:', error)
-			}
-		}
-		fetchCategoriesClient()
-	}, [])
 
 	const handleOpenMenu = () => {
 		setIsOpen(!isOpen)
 	}
-
-	const links = [
-		{ label: 'Home', url: '/#' },
-		{ label: 'About', url: '/#' },
-		{ label: 'Blog', url: '/#' },
-		{ label: 'Newsletters', url: '/#' },
-	]
 
 	return (
 		<header className='w-full px-4 lg:px-10 py-5 border border-border bg-primary text-primary-foreground'>
@@ -82,7 +57,7 @@ const Header = () => {
 							<NavigationItem
 								isDrop
 								id='dropdown1'
-								dropdownItems={category.map((cat) => (
+								dropdownItems={categories.map((cat) => (
 									<Link key={cat.id} href={`/category/${cat.slug || ''}`}>
 										{cat.name}
 									</Link>

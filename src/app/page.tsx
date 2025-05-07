@@ -45,7 +45,7 @@ export default async function Home() {
 				Anúncio
 			</div>
 
-			<VariableArticles title='Esportes' path='' categoryName='Esportes' />
+			<VariableArticles title='Esportes' categoryName='Esportes' />
 
 			<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500'>
 				{/* Futuro anúncio aqui */}
@@ -59,7 +59,6 @@ export default async function Home() {
 
 			<VariableArticles
 				title='Automobilismo'
-				path=''
 				categoryName='Automobilismo'
 			/>
 
@@ -68,7 +67,7 @@ export default async function Home() {
 				Anúncio
 			</div>
 
-			<VariableArticles title='Política' path='' categoryName='Politica' />
+			<VariableArticles title='Política' categoryName='Politica' />
 		</div>
 	)
 }

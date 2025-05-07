@@ -6,12 +6,10 @@ import Link from 'next/link'
 
 interface VariableArticlesProps {
 	title: string
-	path: string
 	categoryName: string
 }
 
 const VariableArticles = async ({
-	path,
 	title,
 	categoryName,
 }: VariableArticlesProps) => {
@@ -23,7 +21,7 @@ const VariableArticles = async ({
 	})
 	return (
 		<div className='space-y-3'>
-			<SectionTitle path={path} title={title} />
+			<SectionTitle title={title} />
 			<div className='grid grid-cols-1 lg:grid-cols-3 gap-4 w-full h-auto'>
 				{articles.map((article) => (
 					<Link href={`/article/${article.slug}`} key={article.id}>
