@@ -1,22 +1,22 @@
-import { Button, Input } from '@/components/ui'
+import { Button } from '@/components/ui'
+import { NewsLetterForm } from '@/components/global/newsletterForm'
 import Link from 'next/link'
+import { BsTwitterX } from 'react-icons/bs'
+import { FaFacebook } from 'react-icons/fa'
+import { RiInstagramFill } from 'react-icons/ri'
 
 const Footer = () => {
 	const socialLinks = [
 		{
-			label: 'Dr',
+			icon: <RiInstagramFill className='w-6 h-6' />,
 			url: '/#',
 		},
 		{
-			label: 'Be',
+			icon: <BsTwitterX className='w-6 h-6' />,
 			url: '/#',
 		},
 		{
-			label: 'Tw',
-			url: '/#',
-		},
-		{
-			label: 'Ig',
+			icon: <FaFacebook className='w-6 h-6' />,
 			url: '/#',
 		},
 	]
@@ -41,8 +41,8 @@ const Footer = () => {
 						<ul className='flex gap-2 space-y-1 text-sm'>
 							{socialLinks.map((list, index) => (
 								<Link key={index} href={list.url}>
-									<li className='bg-accent hover:bg-accent-hover duration-300 transition-colors rounded-full p-2 w-10 h-10 text-center'>
-										{list.label}
+									<li className='bg-accent hover:bg-accent-hover duration-300 transition-colors rounded-full p-0.5 w-10 h-10 flex items-center justify-center'>
+										{list.icon}
 									</li>
 								</Link>
 							))}
@@ -55,11 +55,7 @@ const Footer = () => {
 					<h3 className='text-2xl font-semibold mb-2'>
 						Inscreva-se para receber novidades
 					</h3>
-					<label htmlFor=''>Seu Email</label>
-					<Input placeholder='Digite o seu e-mail' />
-					<Button variants='ghost' sizes='full'>
-						Inscreva-se
-					</Button>
+					<NewsLetterForm />
 				</div>
 			</div>
 			{/* Copyright */}

@@ -52,7 +52,7 @@ export const categories = [
 ]
 
 export const links = [
-  { label: 'Home', url: '/#' },
+  { label: 'Home', url: '/' },
   { label: 'About', url: '/#' },
   { label: 'Blog', url: '/#' },
   { label: 'Newsletters', url: '/#' },
