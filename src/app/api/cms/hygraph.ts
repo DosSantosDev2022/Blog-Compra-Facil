@@ -27,7 +27,9 @@ export const HygraphQuery = async <T>(
     const { data, errors } = await response.json()
 
     return data
+    
   } catch (error) {
+    
     console.error('Erro ao realizar a consulta Hygraph:', error)
     throw error
   }
