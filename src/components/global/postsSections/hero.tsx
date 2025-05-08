@@ -11,7 +11,7 @@ const HeroSection = async () => {
 
 	return (
 		<div>
-			<SectionTitle path='' title='Notícias em destaque' />
+			<SectionTitle title='Notícias em destaque' />
 			<div className='grid grid-cols-1 lg:grid-cols-3 gap-4 w-full h-auto overflow-y-scroll max-h-[528px] mt-6'>
 				{/* Container para os posts menores */}
 				{articles.map((article, index) => (

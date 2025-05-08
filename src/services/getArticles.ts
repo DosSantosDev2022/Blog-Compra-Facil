@@ -85,8 +85,7 @@ export const getArticles = async (
     query,
     variables,
     {
-      cache: 'no-cache',
-      revalidate: 0,
+      revalidate: 60,
     }
   )
 

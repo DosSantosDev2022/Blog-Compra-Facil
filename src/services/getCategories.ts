@@ -31,7 +31,6 @@ export const getCategories = async (
    `
 
   return HygraphQuery(query, {
-    cache: 'no-cache',
     revalidate: 60 * 60 * 24,
   })
 }

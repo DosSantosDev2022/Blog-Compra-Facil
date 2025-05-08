@@ -24,7 +24,7 @@ export function AdBanner({ dataAdFormat, dataAdSlot }: AdBannerTypes) {
 
 	return (
 		<ins
-			className='adsbygoogle bg-transparent w-full  flex justify-center items-center'
+			className='adsbygoogle bg-transparent'
 			style={{ display: 'block' }}
 			data-ad-client='ca-pub-2827166560948178'
 			data-ad-slot={dataAdSlot}

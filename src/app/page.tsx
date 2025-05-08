@@ -4,6 +4,7 @@ import { HeroSection } from '@/components/global/postsSections/hero'
 import { LatestNews } from '@/components/global/postsSections/latestNews'
 import { MostViewedPosts } from '@/components/global/postsSections/mostViewedPosts'
 import { VariableArticles } from '@/components/global/postsSections/variableArticles'
+import { categories } from '@/config/links'
 
 export default async function Home() {
 	return (
@@ -34,28 +35,18 @@ export default async function Home() {
 			{/* anúncio horizontal 4 */}
 			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 
-			<VariableArticles title='Esportes' categoryName='Esportes' />
-
-			{/* anúncio horizontal 4 */}
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-
-			{/* anúncio horizontal 5 */}
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-
-			<VariableArticles
-				title='Automobilismo'
-				categoryName='Automobilismo'
-			/>
-
-			{/* anúncio horizontal 6 */}
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-
-			<VariableArticles title='Política' categoryName='Politica' />
-
-			<VariableArticles title='Saúde' categoryName='Saude' />
-
-			{/* anúncio horizontal 7 */}
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			{categories.map((category) => (
+				<div key={category.id} className='border border-border shadow p-2'>
+					{/* anúncio horizontal 4 */}
+					<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+					<div className=' max-h-[768px] overflow-y-scroll w-full '>
+						<VariableArticles
+							title={category.name}
+							categoryName={category.name}
+						/>
+					</div>
+				</div>
+			))}
 		</div>
 	)
 }

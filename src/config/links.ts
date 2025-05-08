@@ -48,7 +48,17 @@ export const categories = [
     id: "cmaci0eu82tqj07lnzajkoe81",
     name: "Entretenimento",
     slug: "entretenimento"
-  }
+  },
+  {
+    id: "cmaci1xe32urg07ln60ixkn22",
+    name: "Gastronomia",
+    slug: "gastronomia"
+  },
+  {
+    id: "cmaci24as2vb307loiwcfov7t",
+    name: "Games",
+    slug: "games"
+  },
 ]
 
 export const links = [
