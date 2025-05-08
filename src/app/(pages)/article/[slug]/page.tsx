@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { CardImage } from '@/components/ui'
 import { getRelatedArticle } from '@/services/getRelatedArticle'
 import { updateViewCount } from '@/services/updateViewCount'
+import { AdBanner } from '@/components/global/google'
 
 interface PagePostProps {
 	params: {
@@ -50,11 +51,8 @@ export default async function ArticlePage({ params }: PagePostProps) {
 						</span>
 					</div>
 
-					{/* Espaço para anúncio no topo do conteúdo */}
-					<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md'>
-						{/* Anúncio aqui */}
-						Anúncio
-					</div>
+					{/*  anúncio horizontal */}
+					<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 
 					<article className='space-y-4 text-lg'>
 						<RichText
@@ -64,15 +62,12 @@ export default async function ArticlePage({ params }: PagePostProps) {
 					</article>
 
 					{/* Espaço para anúncio no meio do conteúdo */}
-					<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md'>
-						{/* Anúncio aqui */}
-						Anúncio
-					</div>
+					{/*  anúncio In-article */}
+					<AdBanner dataAdFormat='fluid' dataAdSlot='6057711657' />
 
 					{/* Área de compartilhamento */}
 					<div className='mt-8 border-t border-gray-200 py-4'>
-						<h3 className='text-lg font-semibold mb-2'>Compartilhe:</h3>
-						<ShareButtons />
+						<ShareButtons slug={article.slug} title={article.title} />
 					</div>
 				</div>
 
@@ -92,11 +87,8 @@ export default async function ArticlePage({ params }: PagePostProps) {
 							</Link>
 						))}
 					</div>
-					{/* Espaço para anúncio na sidebar */}
-					<div className='w-full h-48 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md'>
-						{/* Anúncio aqui */}
-						Anúncio
-					</div>
+					{/* Anúncio vertical */}
+					<AdBanner dataAdFormat='auto' dataAdSlot='2302299472' />
 				</aside>
 			</div>
 		</div>

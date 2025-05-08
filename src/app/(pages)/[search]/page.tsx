@@ -1,3 +1,4 @@
+import { AdBanner } from '@/components/global/google'
 import { CardSimple } from '@/components/global/posts/cardSimple'
 import { SectionTitle } from '@/components/global/sectionTitle'
 import { getArticles } from '@/services/getArticles'
@@ -20,16 +21,10 @@ export default async function SearchResultsPage({
 
 	return (
 		<div className='container mx-auto py-8'>
-			<SectionTitle
-				path=''
-				title={`Resultados da Busca para: "${query}"`}
-			/>
+			<SectionTitle title={`Resultados da Busca para: "${query}"`} />
 
-			{/* Espaço para anúncio no topo da página de resultados */}
-			<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md mt-3 mb-6'>
-				{/* Anúncio aqui */}
-				Anúncio
-			</div>
+			{/* anúncio horizontal 1 */}
+			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 
 			{hasResults ? (
 				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
@@ -51,11 +46,8 @@ export default async function SearchResultsPage({
 				</p>
 			)}
 
-			{/* Espaço para anúncio após os resultados da busca */}
-			<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md mt-8'>
-				{/* Anúncio aqui */}
-				Anúncio
-			</div>
+			{/* anúncio horizontal 2 */}
+			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 
 			{/* Adicionar paginação aqui (se necessário) */}
 			<div className='mt-8 flex justify-center'>

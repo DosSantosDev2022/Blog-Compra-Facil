@@ -1,4 +1,5 @@
 import page from '@/app/page'
+import { AdBanner } from '@/components/global/google'
 import { CardSimple } from '@/components/global/posts/cardSimple'
 import { SectionTitle } from '@/components/global/sectionTitle'
 import { Button, Pagination } from '@/components/ui'
@@ -32,10 +33,8 @@ export default async function CategoryPage({
 				<SectionTitle title={`Categoria: ${categoryName}`} />
 
 				{/* Espaço para anúncio no topo da página de categoria */}
-				<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md mt-6'>
-					{/* Anúncio aqui */}
-					Anúncio
-				</div>
+				{/* anúncio horizontal 1 */}
+				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 
 				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
 					{articles.map((article, index) => (
@@ -52,10 +51,8 @@ export default async function CategoryPage({
 				</div>
 
 				{/* Espaço para anúncio após a lista de artigos */}
-				<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md mt-8'>
-					{/* Anúncio aqui */}
-					Anúncio
-				</div>
+				{/* anúncio horizontal 2 */}
+				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 
 				{/* Adicionar paginação aqui (se necessário) */}
 				{/* 				<div className='w-full flex justify-between px-2 py-3'>
@@ -64,22 +61,11 @@ export default async function CategoryPage({
 			</div>
 
 			<div className='col-span-2 py-8'>
-				<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md mb-6'>
-					{/* Anúncio aqui */}
-					Anúncio
-				</div>
-				<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md mb-6'>
-					{/* Anúncio aqui */}
-					Anúncio
-				</div>
-				<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md mb-6'>
-					{/* Anúncio aqui */}
-					Anúncio
-				</div>
-				<div className='w-full h-24 bg-zinc-200 flex items-center justify-center text-gray-500 rounded-md mb-6'>
-					{/* Anúncio aqui */}
-					Anúncio
-				</div>
+				{/* anúncio In-feed */}
+				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
+				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
+				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
+				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
 			</div>
 		</div>
 	)

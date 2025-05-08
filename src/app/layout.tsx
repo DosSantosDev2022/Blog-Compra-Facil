@@ -21,6 +21,13 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='pt-BR'>
+			<head>
+				<script
+					async
+					src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2827166560948178'
+					crossOrigin='anonymous'
+				/>
+			</head>
 			<body className={`${poppins.className} antialiased`}>
 				<Header />
 				<main className='lg:px-24 px-4 py-6'>{children}</main>
