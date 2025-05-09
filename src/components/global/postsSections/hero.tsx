@@ -2,6 +2,8 @@ import { CardImage } from '@/components/ui'
 import { getArticles } from '@/services/getArticles'
 import Link from 'next/link'
 import { SectionTitle } from '../sectionTitle'
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
 const HeroSection = async () => {
 	const { articles } = await getArticles({
@@ -21,6 +23,9 @@ const HeroSection = async () => {
 								article.coverImage?.url || 'https://placehold.co/600x400'
 							}
 							title={article.title}
+							label={format(article.createdAt, 'dd/MM/yyyy', {
+								locale: ptBR,
+							})}
 							className={`h-64 ${index === 0 ? 'lg:h-96 lg:col-span-2' : ''}`} // Primeiro card maior
 						/>
 					</Link>

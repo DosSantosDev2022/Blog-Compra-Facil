@@ -5,6 +5,7 @@ interface CardImageProps {
 	image: string
 	title?: string
 	description?: string
+	label?: string
 }
 
 const CardTitle = React.forwardRef<
@@ -47,10 +48,30 @@ const CardDescription = React.forwardRef<
 
 CardDescription.displayName = 'CardDescription'
 
+const CardLabel = React.forwardRef<
+	HTMLParagraphElement,
+	ComponentProps<'span'> & { label: string }
+>(({ className, label, ...props }, ref) => {
+	return (
+		<span
+			ref={ref}
+			{...props}
+			className={twMerge(
+				'text-sm font-light leading-tight text-muted lg:text-lg',
+				className,
+			)}
+		>
+			{label}
+		</span>
+	)
+})
+
+CardLabel.displayName = 'CardLabel'
+
 const CardImage = React.forwardRef<
 	HTMLDivElement,
 	React.HTMLAttributes<HTMLDivElement> & CardImageProps
->(({ className, image, title, description, ...props }, ref) => {
+>(({ className, image, title, description, label, ...props }, ref) => {
 	return (
 		<div
 			ref={ref}
@@ -77,6 +98,7 @@ const CardImage = React.forwardRef<
 			<div className='absolute inset-0 flex flex-col justify-end gap-2 p-4'>
 				<CardTitle label={title || ''} />
 				<CardDescription className='text-xs' label={description || ''} />
+				<CardLabel label={label || ''} />
 			</div>
 		</div>
 	)
