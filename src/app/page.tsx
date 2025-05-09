@@ -10,7 +10,7 @@ export default async function Home() {
 	const { categories } = await getCategories()
 
 	return (
-		<div className='space-y-8'>
+		<div className='space-y-8 lg:mt-20 mt-8'>
 			{/* seção hero posts */}
 			<HeroSection />
 			{/* anúncio horizontal */}

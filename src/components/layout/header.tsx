@@ -22,7 +22,7 @@ const Header = () => {
 	}
 
 	return (
-		<header className='w-full px-4 py-5 lg:px-10 lg:py-12 border border-border bg-primary text-primary-foreground'>
+		<header className='w-full lg:fixed z-50 px-4 py-5 lg:px-10 lg:py-12 border border-border bg-primary text-primary-foreground'>
 			<div className='flex flex-col lg:flex-row items-center justify-between gap-5 lg:gap-10'>
 				{/* Logo + Toggle Mobile */}
 				<div className='flex items-center justify-between w-full lg:w-auto'>
