@@ -16,7 +16,7 @@ const CardTitle = React.forwardRef<
 			ref={ref}
 			{...props}
 			className={twMerge(
-				'text-2xl font-bold leading-tight text-secondary-foreground',
+				'text-2xl font-bold leading-tight text-primary-foreground',
 				className,
 			)}
 		>
@@ -71,7 +71,7 @@ const CardImage = React.forwardRef<
 				style={{ backgroundImage: `url(${image})` }}
 			/>
 			{/* Gradiente sobre a imagem */}
-			<div className='absolute inset-0 bg-gradient-to-t from-secondary' />
+			<div className='absolute inset-0 bg-gradient-to-t from-primary/75' />
 
 			{/* Conteúdo */}
 			<div className='absolute inset-0 flex flex-col justify-end gap-2 p-4'>

@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
+import { getCategories } from '@/services/getCategories'
 
 const poppins = Poppins({
 	weight: ['200', '300', '400', '500', '600'],
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 	description: 'O seu portal de nóticias atualizado',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode
@@ -28,7 +29,9 @@ export default function RootLayout({
 					crossOrigin='anonymous'
 				/>
 			</head>
-			<body className={`${poppins.className} antialiased`}>
+			<body
+				className={`${poppins.className} bg-background text-foreground antialiased dark`}
+			>
 				<Header />
 				<main className='lg:px-24 px-4 py-6'>{children}</main>
 				<Footer />

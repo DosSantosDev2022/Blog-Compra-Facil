@@ -36,6 +36,7 @@ export function InputSearch() {
 			className='flex gap-2 w-full'
 		>
 			<Input
+				className='w-full'
 				type='text'
 				id='search'
 				value={searchTerm}

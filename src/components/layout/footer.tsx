@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui'
 import { NewsLetterForm } from '@/components/global/newsletterForm'
 import Link from 'next/link'
 import { BsTwitterX } from 'react-icons/bs'
@@ -25,10 +24,11 @@ const Footer = () => {
 		<footer className='px-4 py-8 md:px-8 bg-primary text-primary-foreground'>
 			<div className='h-72  w-full grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 items-center'>
 				{/* Logo / About */}
-				<div>
-					<h2 className='text-2xl font-bold'>Atualiza News</h2>
-					<p className='mt-2 text-sm'>
-						Receba nóticias todos os dias e se mantenha atualizado !
+				<div className=' max-w-sm  p-2'>
+					<h2 className='text-6xl font-bold'>onTech</h2>
+					<p className='mt-2 text-lg'>
+						Receba nóticias todos os dias e se mantenha atualizado sobre o
+						mundo de tecnologia !
 					</p>
 				</div>
 
@@ -41,7 +41,7 @@ const Footer = () => {
 						<ul className='flex gap-2 space-y-1 text-sm'>
 							{socialLinks.map((list, index) => (
 								<Link key={index} href={list.url}>
-									<li className='bg-accent hover:bg-accent-hover duration-300 transition-colors rounded-full p-0.5 w-10 h-10 flex items-center justify-center'>
+									<li className='bg-accent hover:scale-95 text-primary duration-500 transition-colors rounded-full p-0.5 w-10 h-10 flex items-center justify-center'>
 										{list.icon}
 									</li>
 								</Link>
@@ -60,8 +60,7 @@ const Footer = () => {
 			</div>
 			{/* Copyright */}
 			<div className='mt-8 h-10 border-t border-border pt-4 text-xs text-center text-muted'>
-				© {new Date().getFullYear()} Atualiza News. Todos os direitos
-				reservados
+				© {new Date().getFullYear()} onTech. Todos os direitos reservados
 			</div>
 		</footer>
 	)

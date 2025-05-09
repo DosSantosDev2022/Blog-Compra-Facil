@@ -4,9 +4,11 @@ import { HeroSection } from '@/components/global/postsSections/hero'
 import { LatestNews } from '@/components/global/postsSections/latestNews'
 import { MostViewedPosts } from '@/components/global/postsSections/mostViewedPosts'
 import { VariableArticles } from '@/components/global/postsSections/variableArticles'
-import { categories } from '@/config/links'
+import { getCategories } from '@/services/getCategories'
 
 export default async function Home() {
+	const { categories } = await getCategories()
+
 	return (
 		<div className='space-y-8'>
 			{/* seção hero posts */}

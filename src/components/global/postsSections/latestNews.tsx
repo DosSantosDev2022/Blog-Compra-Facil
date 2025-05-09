@@ -10,7 +10,7 @@ const LatestNews = async () => {
 	})
 	return (
 		<div>
-			<SectionTitle title='Últimas Notícias' />
+			<SectionTitle title='Posts rescentes' />
 			<div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-3'>
 				{/* Espaço para anúncio 3 */}
 				<div className=''>

@@ -146,14 +146,14 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
 						aria-label='dropdown'
 						className={twMerge(
 							'absolute top-full lg:right-0 bg-background border border-border z-50 ',
-							'lg:w-xl w-xs mt-1 rounded-md shadow-md p-2 transition-all duration-300 ease-in',
+							'lg:w-5xl w-xs mt-1 rounded-md shadow-md p-2 transition-all duration-300 ease-in',
 							'grid grid-cols-1 lg:grid-cols-4',
 						)}
 					>
 						{dropdownItems.map((item, index) => (
 							<li
 								key={index}
-								className='text-sm px-2 py-1.5 rounded hover:bg-muted-hover text-foreground'
+								className='text-sm w-auto px-2 py-1.5 rounded hover:bg-muted-hover text-foreground'
 							>
 								{item}
 							</li>

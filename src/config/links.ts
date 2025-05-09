@@ -63,7 +63,7 @@ export const categories = [
 
 export const links = [
   { label: 'Home', url: '/' },
-  { label: 'About', url: '/#' },
-  { label: 'Blog', url: '/#' },
-  { label: 'Newsletters', url: '/#' },
+  { label: 'Posts', url: '/posts' },
+  { label: 'Produtos', url: '/products' },
+  { label: 'Newsletters', url: '/newsletters' },
 ]

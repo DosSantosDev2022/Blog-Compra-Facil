@@ -18,7 +18,7 @@ export const getCategories = async (
 ): Promise<Category> => {
   const query = `
    query MyQuery {
-      categories(orderBy: view_DESC, where: {view_gt: 1 }) {
+      categories(orderBy: view_DESC, where: {view_gt: 10 }) {
         id
         name
         slug
@@ -30,7 +30,5 @@ export const getCategories = async (
     }
    `
 
-  return HygraphQuery(query, {
-    revalidate: 60 * 60 * 24,
-  })
+  return HygraphQuery(query)
 }
