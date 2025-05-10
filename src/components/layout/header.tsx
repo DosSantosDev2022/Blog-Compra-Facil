@@ -30,14 +30,20 @@ const Header = () => {
 			<div className='flex flex-col lg:flex-row items-center justify-between gap-5 lg:gap-10'>
 				{/* Logo + Toggle Mobile */}
 				<div className='flex items-center justify-between w-full lg:w-auto'>
-					<h1 className='text-6xl font-bold'>onTech</h1>
+					<h1 aria-label='Logo onTech blog' className='text-6xl font-bold'>
+						onTech
+					</h1>
 					<Button
 						onClick={handleOpenMenu}
 						sizes='icon'
 						className='lg:hidden'
 						aria-label='Toggle menu'
 					>
-						{isOpen ? <IoClose size={28} /> : <IoMenu size={28} />}
+						{isOpen ? (
+							<IoClose aria-label='Toggle menu close' size={28} />
+						) : (
+							<IoMenu aria-label='Toggle menu open' size={28} />
+						)}
 					</Button>
 				</div>
 
@@ -47,7 +53,7 @@ const Header = () => {
 						transition-all duration-300 ease-in-out
 						 p-1 z-50
 						w-full lg:w-auto
-						${isOpen ? 'max-h-[500px] opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2 '}
+						${isOpen ? 'max-h-[500px] opacity-100 translate-y-0' : 'max-h-0  opacity-0 -translate-y-2 '}
 						lg:!max-h-none lg:!opacity-100 lg:!translate-y-0 lg:flex
 						flex-col lg:flex-row items-start lg:items-center gap-5 lg:gap-10
 					`}
@@ -55,7 +61,11 @@ const Header = () => {
 					<Navigation>
 						<NavigationList>
 							{links.map((link, index) => (
-								<NavigationItem key={index}>
+								<NavigationItem
+									onClick={handleOpenMenu}
+									aria-label={link.label}
+									key={index}
+								>
 									<Link href={link.url}>{link.label}</Link>
 								</NavigationItem>
 							))}
@@ -65,6 +75,8 @@ const Header = () => {
 								id='dropdown1'
 								dropdownItems={categories.map((cat) => (
 									<Link
+										onClick={handleOpenMenu}
+										aria-label={cat.name}
 										key={cat.name}
 										href={`/category/${cat.slug || ''}`}
 									>

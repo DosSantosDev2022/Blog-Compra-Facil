@@ -38,12 +38,11 @@ describe('getCategories', () => {
 		expect(HygraphQuery).toHaveBeenCalledTimes(1)
 
 		expect(HygraphQuery).toHaveBeenCalledWith(
-			expect.stringContaining('categories(orderBy: view_DESC'),
-			{
-				cache: 'no-cache',
-				revalidate: 60 * 60 * 24,
-			},
+			expect.stringContaining('categories(orderBy: view_DESC, where: {view_gt: 10 })'),
+			undefined,
+			{ revalidate: 60 * 60 * 24 },
 		)
+
 
 		expect(result).toEqual(mockResponse)
 	})

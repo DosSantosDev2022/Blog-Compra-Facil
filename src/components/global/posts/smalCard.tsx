@@ -19,7 +19,7 @@ interface SmallCardProps {
 
 const SmallCard = ({ description, slug, title }: SmallCardProps) => {
 	return (
-		<Card className='px-6 py-2'>
+		<Card className='px-6 py-2 lg:max-w-full lg:w-full'>
 			<CardContent>
 				<CardHeader>
 					<CardTitle>{title}</CardTitle>
