@@ -1,5 +1,5 @@
 {
-	"name": "atualiza-news",
+	"name": "ontech",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
@@ -14,9 +14,7 @@
 		"test": "vitest"
 	},
 	"commitlint": {
-		"extends": [
-			"@commitlint/config-conventional"
-		]
+		"extends": ["@commitlint/config-conventional"]
 	},
 	"lint-staged": {
 		"**.{js|ts|cjs|mjs|d.cts|d.mts|jsx|tsx|json|jsonc}": [
