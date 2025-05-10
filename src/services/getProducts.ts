@@ -78,7 +78,7 @@ export const getProducts = async (category?: string): Promise<ProductResponse> =
     `;
   }
 
-  const data = await HygraphQuery<ProductResponse>(query, variables, { cache: 'no-cache' });
-  console.log("Resposta da HygraphQuery:", data);
+  const data = await HygraphQuery<ProductResponse>(query, variables, { revalidate: 60 * 60 * 24});
+ 
   return { products: data?.products || [], categoryProducts: data?.categoryProducts || [] };
 };
