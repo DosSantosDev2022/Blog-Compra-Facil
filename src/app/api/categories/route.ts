@@ -1,10 +1,10 @@
-import { HygraphQuery } from '@/app/api/cms/hygraph';
-import { NextResponse } from 'next/server';
-import type { Category, CategoryResponse } from '@/@types/hygraphTypes';
+import { HygraphQuery } from '@/app/api/cms/hygraph'
+import { NextResponse } from 'next/server'
+import type { Category, CategoryResponse } from '@/@types/hygraphTypes'
 
 export async function GET() {
-  try {
-    const categoriesData = await HygraphQuery<{ categories: Category[] }>(`
+	try {
+		const categoriesData = await HygraphQuery<{ categories: Category[] }>(`
       query MyQuery {
         categories {
           id
@@ -12,11 +12,10 @@ export async function GET() {
           slug
         }
       }
-    `);
-    return NextResponse.json(categoriesData);
-    
-  } catch (error) {
-    console.error('Erro na API Route de categorias:', error);
-    return NextResponse.error();
-  }
+    `)
+		return NextResponse.json(categoriesData)
+	} catch (error) {
+		console.error('Erro na API Route de categorias:', error)
+		return NextResponse.error()
+	}
 }

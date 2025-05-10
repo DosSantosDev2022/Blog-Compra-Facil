@@ -6,7 +6,7 @@ const MostViewedPosts = async () => {
 	const { articles } = await getArticles({ where: 'view', pageSize: 10 })
 	return (
 		<div className=''>
-			<SectionTitle path='' title='Posts mais vistos' />
+			<SectionTitle title='Posts mais vistos' />
 			<div className='overflow-x-auto'>
 				<div className='flex gap-4 w-auto mt-3'>
 					{articles.map((article) => (

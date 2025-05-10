@@ -1,7 +1,6 @@
 import { HygraphQuery } from '@/app/api/cms/hygraph'
 import type { RelatedArticleResponse } from '@/@types/hygraphTypes'
 
-
 export const getRelatedArticle = async (
 	categoryName: string,
 	currentSlug: string,
@@ -26,8 +25,8 @@ export const getRelatedArticle = async (
       }
     }
    `
-   const variables = { name: categoryName, currentSlug }
+	const variables = { name: categoryName, currentSlug }
 	return HygraphQuery(query, variables, {
-		revalidate: 60 * 60 * 60 ,
+		revalidate: 60 * 60 * 60,
 	})
 }

@@ -6,17 +6,17 @@ import Link from 'next/link'
 
 interface VariableArticlesProps {
 	title: string
-	categoryName: string
+	categorySlug: string
 }
 
 const VariableArticles = async ({
 	title,
-	categoryName,
+	categorySlug,
 }: VariableArticlesProps) => {
 	const { articles } = await getArticles({
 		orderBy: 'createdAt_DESC',
 		where: 'category',
-		categoryName,
+		categorySlug,
 		pageSize: 50,
 	})
 	return (

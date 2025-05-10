@@ -3,7 +3,6 @@ import { Poppins } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
-import { getCategories } from '@/services/getCategories'
 
 const poppins = Poppins({
 	weight: ['200', '300', '400', '500', '600'],
@@ -11,8 +10,9 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-	title: 'Atualiza news App',
-	description: 'O seu portal de nóticias atualizado',
+	title: 'onTech Blog',
+	description:
+		'Fique por dentro de tudo sobre o mundo da tecnologia com onTech blog.',
 }
 
 export default async function RootLayout({
@@ -27,6 +27,12 @@ export default async function RootLayout({
 					async
 					src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2827166560948178'
 					crossOrigin='anonymous'
+				/>
+				<link
+					rel='icon'
+					href='/favicon.svg'
+					type='image/<generated>'
+					sizes='<generated>'
 				/>
 			</head>
 			<body

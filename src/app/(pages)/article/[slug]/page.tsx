@@ -12,13 +12,12 @@ import { updateViewCount } from '@/services/updateViewCount'
 import { AdBanner } from '@/components/global/google'
 
 interface PagePostProps {
-	params: {
-		slug: string
-	}
+	params: Promise<{ slug: string }>
 }
 
 export default async function ArticlePage({ params }: PagePostProps) {
-	const { article } = await getDetailsArticle(params.slug)
+	const slug = (await params).slug
+	const { article } = await getDetailsArticle(slug)
 	await updateViewCount(article.id, article.view + 1)
 	// Verifica se existe uma categoria associada
 	const { articles: relatedArticles } = article.category

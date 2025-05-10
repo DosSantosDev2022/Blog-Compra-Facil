@@ -43,6 +43,7 @@ export default async function ProductsPage({
 						name={product.name}
 						imageUrl={product.image.url}
 						description={product.description}
+						url={product.url}
 					/>
 				))}
 			</div>

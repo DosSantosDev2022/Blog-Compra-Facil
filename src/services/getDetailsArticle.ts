@@ -1,6 +1,5 @@
 import { HygraphQuery } from '@/app/api/cms/hygraph'
-import type {ArticleDetail} from '@/@types/hygraphTypes'
-
+import type { ArticleDetail } from '@/@types/hygraphTypes'
 
 export const getDetailsArticle = async (
 	slug: string,
@@ -28,6 +27,6 @@ export const getDetailsArticle = async (
    `
 	const variables = { slug }
 	return HygraphQuery(query, variables, {
-    revalidate: 60 * 60 * 24
+		revalidate: 60 * 60 * 24,
 	})
 }

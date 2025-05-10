@@ -6,12 +6,14 @@ interface ProductCardProps {
 	name: string
 	imageUrl: string
 	description: string
+	url: string
 }
 
 const ProductCard = ({
 	name,
 	imageUrl,
 	description,
+	url,
 }: ProductCardProps) => {
 	return (
 		<div className='max-w-xs rounded overflow-hidden shadow-lg m-4 flex flex-col justify-between'>
@@ -22,7 +24,9 @@ const ProductCard = ({
 			</div>
 			<div className='px-6 py-4'>
 				<Button variants='shine' sizes='full' asChild>
-					<Link href={''}>Ver mais</Link>
+					<Link target='_blank' href={url}>
+						Ver mais
+					</Link>
 				</Button>
 			</div>
 		</div>

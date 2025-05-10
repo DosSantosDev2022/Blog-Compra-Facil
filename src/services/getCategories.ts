@@ -1,22 +1,19 @@
 import { HygraphQuery } from '@/app/api/cms/hygraph'
 
 interface Category {
-   categories: {
-    id: string
-    name: string
-    slug: string
-    coverImage : {
-      url : string
-    }
-    view: number
-   }[]
+	categories: {
+		id: string
+		name: string
+		slug: string
+		coverImage: {
+			url: string
+		}
+		view: number
+	}[]
 }
 
-
-export const getCategories = async (
- 
-): Promise<Category> => {
-  const query = `
+export const getCategories = async (): Promise<Category> => {
+	const query = `
    query MyQuery {
       categories(orderBy: view_DESC, where: {view_gt: 10 }) {
         id
@@ -30,5 +27,5 @@ export const getCategories = async (
     }
    `
 
-  return HygraphQuery(query, undefined, {revalidate: 60 * 60 * 24})
+	return HygraphQuery(query, undefined, { revalidate: 60 * 60 * 24 })
 }

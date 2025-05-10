@@ -44,7 +44,7 @@ export default async function Home() {
 					<div className=' max-h-[768px] overflow-y-scroll w-full '>
 						<VariableArticles
 							title={category.name}
-							categoryName={category.name}
+							categorySlug={category.slug}
 						/>
 					</div>
 				</div>
