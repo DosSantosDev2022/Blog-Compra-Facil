@@ -34,7 +34,7 @@ describe('getDetailsArticle', () => {
     expect(HygraphQuery).toHaveBeenCalledTimes(1);
 
     expect(HygraphQuery).toHaveBeenCalledWith(expect.stringContaining('article(where: {slug: $slug})'), { slug }, {
-      cache: 'no-cache',
+      revalidate: 60 * 60 * 24
     });
 
     expect(result).toEqual(mockResponse);
