@@ -20,7 +20,7 @@ export default async function SearchResultsPage({
 	const hasResults = articles && articles.length > 0
 
 	return (
-		<div className='container mx-auto py-8'>
+		<div className='container mx-auto py-8 lg:mt-36 mt-8'>
 			<SectionTitle title={`Resultados da Busca para: "${query}"`} />
 
 			{/* anúncio horizontal 1 */}

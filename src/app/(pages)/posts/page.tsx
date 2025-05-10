@@ -7,7 +7,7 @@ export default async function AllPosts() {
 	const { articles } = await getArticles()
 
 	return (
-		<div className='container mx-auto py-8'>
+		<div className='container mx-auto py-8 lg:mt-32 mt-8'>
 			<SectionTitle title={'Todos os posts'} />
 
 			{/* anúncio horizontal 1 */}

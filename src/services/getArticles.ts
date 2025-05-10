@@ -5,7 +5,7 @@ interface ArticleQueryOptions {
   page?: number
   pageSize?: number
   where?: 'highlights' | 'view' | 'category' | 'search'
-  categoryName?: string
+  categorySlug?: string
   search?: string,
   excludeSlug?: string
   orderBy?: 'createdAt_ASC' | 'createdAt_DESC' 
@@ -20,7 +20,7 @@ export const getArticles = async (
     where,
     orderBy = 'createdAt_DESC',
     search,
-    categoryName,
+    categorySlug,
     excludeSlug,
   } = options
 
@@ -48,7 +48,7 @@ export const getArticles = async (
         }
         category {
           id
-          name
+          slug
           view
         }
         createdAt
@@ -67,7 +67,7 @@ export const getArticles = async (
       : where === 'view'
       ? { view_gt: 10 } // ou alguma lógica condicional futura
       : where === 'category'
-      ? { category: { name: categoryName } }
+      ? { category: { slug: categorySlug } }
       : where === 'search'
       ? {_search: search}
       : undefined

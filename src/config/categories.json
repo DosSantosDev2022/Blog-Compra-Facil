@@ -1,0 +1,52 @@
+{
+	"categories": [
+		{
+			"name": "Smartphones",
+			"slug": "smartphones"
+		},
+		{
+			"name": "Notebooks e PCs",
+			"slug": "notebooks-e-pcs"
+		},
+		{
+			"name": "Acessórios tecnológicos",
+			"slug": "acessorios-tecnologicos"
+		},
+		{
+			"name": "Aplicativos",
+			"slug": "aplicativos"
+		},
+		{
+			"name": "Dicas e tutoriais",
+			"slug": "dicas-e-tutoriais"
+		},
+		{
+			"name": "Sistemas operacionais",
+			"slug": "sistemas-operacionais"
+		},
+		{
+			"name": "Games",
+			"slug": "games"
+		},
+		{
+			"name": "Programação",
+			"slug": "programacao"
+		},
+		{
+			"name": "Inovações & Tendências",
+			"slug": "inovacoes-and-tendencias"
+		},
+		{
+			"name": "Inteligência artificial",
+			"slug": "inteligencia-artificial"
+		},
+		{
+			"name": "Ferramentas ",
+			"slug": "ferramentas"
+		},
+		{
+			"name": "Eventos tech",
+			"slug": "eventos-tech"
+		}
+	]
+}

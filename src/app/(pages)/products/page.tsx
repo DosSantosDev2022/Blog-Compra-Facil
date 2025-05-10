@@ -15,7 +15,7 @@ export default async function ProductsPage({
 	const { products, categoryProducts } = await getProducts(category)
 
 	return (
-		<div className='py-8 mt-32'>
+		<div className='py-8 lg:mt-32 mt-8'>
 			<SectionTitle title='Produtos recomendados' />
 			<div className='flex w-full items-center justify-between h-10 rounded-2xl border border-border text-primary-foreground px-12 py-8 mt-6'>
 				<ul className='flex items-center space-x-4'>

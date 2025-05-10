@@ -11,43 +11,46 @@ export default async function CategoryPage({
 }: {
 	params: Promise<{ slug: string }>
 }) {
-	const categoryName = (await params).slug
-		? (await params).slug.charAt(0).toUpperCase() +
-			(await params).slug.slice(1)
-		: 'Categoria'
+	const categorySlug = (await params).slug
 
 	const { articles } = await getArticles({
 		where: 'category',
-		categoryName,
+		categorySlug,
 		pageSize: 100,
 	})
 
 	await updateCategoryViewCount(
-		articles[0].category.id,
-		articles[0].category.view + 1,
+		articles[0]?.category.id,
+		articles[0]?.category.view + 1,
 	)
 
 	return (
 		<div className='grid lg:grid-cols-12 grid-cols-1 gap-4'>
-			<div className='container mx-auto col-span-10 py-8 6'>
-				<SectionTitle title={`Categoria: ${categoryName}`} />
+			<div className='container mx-auto col-span-10 py-8 lg:mt-32 mt-8'>
+				<SectionTitle title={`Categoria: ${categorySlug.toUpperCase()}`} />
 
-				{/* Espaço para anúncio no topo da página de categoria */}
-				{/* anúncio horizontal 1 */}
 				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 
 				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
-					{articles.map((article, index) => (
-						<CardSimple
-							id={article.id}
-							title={article.title}
-							slug={article.slug}
-							coverImage={article.coverImage.url}
-							createdAt={article.createdAt}
-							alt={article.title}
-							key={article.id}
-						/>
-					))}
+					{articles.length > 0 ? (
+						articles.map((article, index) => (
+							<CardSimple
+								id={article.id}
+								title={article.title}
+								slug={article.slug}
+								coverImage={article.coverImage.url}
+								createdAt={article.createdAt}
+								alt={article.title}
+								key={article.id}
+							/>
+						))
+					) : (
+						<div className='col-span-full flex justify-center items-center py-8 text-muted-foreground'>
+							<p className='text-2xl italic'>
+								Nenhum artigo encontrado por enquanto.
+							</p>
+						</div>
+					)}
 				</div>
 
 				{/* Espaço para anúncio após a lista de artigos */}

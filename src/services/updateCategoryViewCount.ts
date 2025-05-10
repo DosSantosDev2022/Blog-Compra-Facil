@@ -6,11 +6,11 @@ interface UpdateCategoryViewCountVariables {
 }
 
 interface UpdateCategoryViewCountResponse {
-  updateNomeDoSeuModelDeCategoria: {
+  updateCategory: {
     id: string;
     view: number;
   };
-  publishNomeDoSeuModelDeCategoria: { // Se você precisar republicar categorias
+  publishCategory: { 
     id: string;
     stage: string;
   };
