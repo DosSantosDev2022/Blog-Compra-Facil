@@ -5,50 +5,47 @@ import { getProducts, type Product } from '@/services/getProducts'
 import Link from 'next/link'
 
 interface ProductsPageParams {
-	searchParams: {
-		category: string
-	}
+	searchParams: Promise<{ category: string }>
 }
 
 export default async function ProductsPage({
 	searchParams,
 }: ProductsPageParams) {
-	const { products } = (await getProducts(searchParams.category)) as {
-		products: Product[]
-	}
+	const category = (await searchParams).category
+	const { products, categoryProducts } = await getProducts(category)
 
-	// Vamos supor que seus produtos têm uma propriedade 'category'
-	const categories = [
-		...new Set(
-			products.map((product) => product.category).filter(Boolean),
-		),
-	] as string[]
-	const allCategories = ['Todos', ...categories]
 	return (
-		<div className='container mx-auto py-8'>
-			<SectionTitle title={'Produtos recomendados'} />
-			<div className='flex items-center justify-between h-10 rounded-2xl bg-primary/90 text-primary-foreground px-12 py-8 mt-6'>
-				<ul className='flex space-x-4'>
-					{allCategories.map((category) => (
-						<li key={category}>
+		<div className='py-8 mt-32'>
+			<SectionTitle title='Produtos recomendados' />
+			<div className='flex w-full items-center justify-between h-10 rounded-2xl border border-border text-primary-foreground px-12 py-8 mt-6'>
+				<ul className='flex items-center space-x-4'>
+					<li className='hover:scale-95 duration-300 transition-all bg-primary-hover px-2 py-1.5 rounded-2xl'>
+						<Link href={'/products'}>Todos produtos</Link>
+					</li>
+					{categoryProducts.map((category) => (
+						<li
+							className='hover:scale-95 duration-300 bg-primary-hover transition-all px-2 py-1.5 rounded-2xl'
+							key={category.id}
+						>
 							<Link
-								href={`/products${category === 'Todos' ? '' : `?category=${category}`}`}
-								className='hover:underline'
+								href={`/products${category.name === 'Todos' ? '' : `?category=${category.name}`}`}
 							>
-								{category}
+								{category.name}
 							</Link>
 						</li>
 					))}
 				</ul>
 			</div>
-			{products.map((product) => (
-				<ProductCard
-					key={product.id}
-					name={product.name}
-					imageUrl={product.image.url}
-					description={product.description}
-				/>
-			))}
+			<div className='grid grid-cols-4 gap-3 p-3 border border-border rounded-2xl shadow mt-16'>
+				{products.map((product) => (
+					<ProductCard
+						key={product.id}
+						name={product.name}
+						imageUrl={product.image.url}
+						description={product.description}
+					/>
+				))}
+			</div>
 
 			{/* anúncio horizontal 2 */}
 			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />

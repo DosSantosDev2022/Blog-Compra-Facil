@@ -14,13 +14,13 @@ const ProductCard = ({
 	description,
 }: ProductCardProps) => {
 	return (
-		<div className='max-w-xs rounded overflow-hidden shadow-lg m-4'>
+		<div className='max-w-xs rounded overflow-hidden shadow-lg m-4 flex flex-col justify-between'>
 			<img className='w-full' src={imageUrl} alt={name} />
 			<div className='px-6 py-4'>
 				<h6 className='font-bold text-xl mb-2'>{name}</h6>
-				<p className='text-muted-foreground text-base'>{description}</p>
+				<p className='text-muted-foreground text-sm'>{description}</p>
 			</div>
-			<div className='px-6 pt-2 pb-2'>
+			<div className='px-6 py-4'>
 				<Button variants='shine' sizes='full' asChild>
 					<Link href={''}>Ver mais</Link>
 				</Button>
