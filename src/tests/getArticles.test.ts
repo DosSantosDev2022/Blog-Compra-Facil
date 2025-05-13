@@ -122,7 +122,7 @@ describe('getArticles', () => {
 
 		const result = await getArticles({
 			where: 'category',
-			categoryName: 'Technology',
+			categorySlug: 'Technology',
 		})
 
 		expect(HygraphQuery).toHaveBeenCalledWith(
@@ -130,7 +130,7 @@ describe('getArticles', () => {
 			{
 				first: 10,
 				skip: 0,
-				where: { category: { name: 'Technology' } },
+				where: { category: { slug: 'Technology' } },
 				orderBy: 'createdAt_DESC',
 			},
 			expect.any(Object),

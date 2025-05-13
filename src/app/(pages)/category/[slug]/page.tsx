@@ -31,9 +31,9 @@ export default async function CategoryPage({
 
 				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 
-				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
+				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-6'>
 					{articles.length > 0 ? (
-						articles.map((article, index) => (
+						articles.map((article) => (
 							<CardSimple
 								id={article.id}
 								title={article.title}

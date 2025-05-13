@@ -9,6 +9,16 @@ export interface CategoryResponse {
 	categories?: Category[] // O '?' indica que 'categories' pode ser undefined enquanto os dados estão sendo carregados
 }
 
+type Products = {
+	  id: string
+		name: string
+		url: string
+		description: string
+		image : {
+			url : string
+	}
+}
+
 export interface Article {
 	id: string
 	slug: string
@@ -28,6 +38,7 @@ export interface Article {
 		raw: RichTextContent
 	}
 	view: number
+	product : Products[]
 }
 
 export type ArticleDetail = {

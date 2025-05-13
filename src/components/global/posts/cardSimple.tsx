@@ -30,7 +30,7 @@ const CardSimple = ({
 	createdAt,
 }: CardSimpleProps) => {
 	return (
-		<Card className='p-3' key={id}>
+		<Card className='p-4 justify-between' key={id}>
 			<CardHeader className='relative h-48 mb-0'>
 				<Image
 					alt={alt}
@@ -39,12 +39,12 @@ const CardSimple = ({
 					className='object-cover rounded-md'
 				/>
 			</CardHeader>
-			<CardContent className='p-4 space-y-2'>
+			<CardContent className='space-y-2'>
 				<CardTitle>{title}</CardTitle>
 				<p className='text-sm text-muted-foreground'>
 					{`Publicado em: ${format(createdAt, 'dd/MM/yyyy', { locale: ptBR })}`}
 				</p>
-				<Button sizes='sm' asChild>
+				<Button variants='shine' sizes='full' asChild>
 					<Link href={`/article/${slug}`}>Ler mais</Link>
 				</Button>
 			</CardContent>

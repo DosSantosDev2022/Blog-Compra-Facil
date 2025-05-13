@@ -16,7 +16,7 @@ const LatestNews = async () => {
 				<div className=''>
 					<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 				</div>
-				<ul className='overflow-x-scroll max-h-64 space-y-3 '>
+				<ul className='overflow-x-scroll max-h-64 space-y-3 scrollbar-custom'>
 					{articles.map((article) => (
 						<SmallCard
 							key={article.id}

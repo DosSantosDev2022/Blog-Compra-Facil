@@ -12,7 +12,7 @@ export const getDetailsArticle = async (
         slug
         description
         category {
-         name
+          name
         }
         coverImage {
           url
@@ -22,6 +22,15 @@ export const getDetailsArticle = async (
         }
         createdAt
         view
+        product {
+          id
+          name
+          url
+          description
+          image {
+            url
+          }
+        }
       }
     }
    `

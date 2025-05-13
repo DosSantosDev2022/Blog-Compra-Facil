@@ -1,35 +1,52 @@
 import React from 'react'
-import { Button } from '../ui'
+import {
+	Button,
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from '../ui'
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface ProductCardProps {
 	name: string
 	imageUrl: string
 	description: string
-	url: string
+	LinkUrl: string
 }
 
 const ProductCard = ({
 	name,
 	imageUrl,
 	description,
-	url,
+	LinkUrl,
 }: ProductCardProps) => {
 	return (
-		<div className='max-w-xs rounded overflow-hidden shadow-lg m-4 flex flex-col justify-between'>
-			<img className='w-full' src={imageUrl} alt={name} />
-			<div className='px-6 py-4'>
-				<h6 className='font-bold text-xl mb-2'>{name}</h6>
-				<p className='text-muted-foreground text-sm'>{description}</p>
-			</div>
-			<div className='px-6 py-4'>
-				<Button variants='shine' sizes='full' asChild>
-					<Link target='_blank' href={url}>
-						Ver mais
-					</Link>
-				</Button>
-			</div>
-		</div>
+		<Card className='p-4 justify-between'>
+			<Image
+				width={300}
+				height={320}
+				quality={100}
+				src={imageUrl}
+				alt={name}
+			/>
+			<CardContent>
+				<CardHeader>
+					<CardTitle>{name}</CardTitle>
+					<CardDescription>{description}</CardDescription>
+				</CardHeader>
+				<CardFooter>
+					<Button variants='shine' sizes='full' asChild>
+						<Link target='_blank' href={LinkUrl}>
+							Ver mais
+						</Link>
+					</Button>
+				</CardFooter>
+			</CardContent>
+		</Card>
 	)
 }
 

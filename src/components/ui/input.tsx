@@ -16,20 +16,20 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 		return (
 			<div
 				className={twMerge(
-					'flex h-12 w-full items-center gap-1 rounded border bg-input p-3',
+					'flex h-12 w-full items-center gap-1 rounded border border-border/10 bg-input p-3',
 					'transition-all duration-300',
 					variantClasses[variants],
 					className,
 				)}
 			>
-				{icon && <i className='text-muted-foreground'>{icon}</i>}
+				{icon && <i className='text-primary-foreground/60'>{icon}</i>}
 				<input
 					type={type}
 					ref={ref}
 					{...props}
 					className={twMerge(
 						'text-md flex-1 font-light outline-none',
-						'bg-transparent text-muted-foreground placeholder:text-muted-foreground',
+						'bg-transparent text-primary-foreground/60 placeholder:text-primary-foreground/60',
 						'file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground',
 					)}
 				/>

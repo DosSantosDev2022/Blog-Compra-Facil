@@ -36,7 +36,7 @@ export default async function RootLayout({
 				/>
 			</head>
 			<body
-				className={`${poppins.className} bg-background text-foreground antialiased dark`}
+				className={`${poppins.className} bg-background text-foreground antialiased scrollbar-custom`}
 			>
 				<Header />
 				<main className='lg:px-24 px-4 py-6'>{children}</main>

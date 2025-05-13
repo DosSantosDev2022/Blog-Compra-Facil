@@ -6,10 +6,20 @@ import { ptBR } from 'date-fns/locale'
 import { RichText } from '@/components/global/posts/richText'
 import { defaultRenders } from '@/components/global/richTextRenders'
 import Link from 'next/link'
-import { CardImage } from '@/components/ui'
+import {
+	Button,
+	Card,
+	CardContent,
+	CardFooter,
+	CardHeader,
+	CardImage,
+	CardTitle,
+} from '@/components/ui'
 import { getRelatedArticle } from '@/services/getRelatedArticle'
 import { updateViewCount } from '@/services/updateViewCount'
 import { AdBanner } from '@/components/global/google'
+import { ProductCard } from '@/components/global/products'
+import { SectionTitle } from '@/components/global/sectionTitle'
 
 interface PagePostProps {
 	params: Promise<{ slug: string }>
@@ -23,11 +33,11 @@ export default async function ArticlePage({ params }: PagePostProps) {
 	const { articles: relatedArticles } = article.category
 		? await getRelatedArticle(article.category.name, article.slug)
 		: { articles: [] }
-
+	console.log(article)
 	return (
 		<div className='container mx-auto py-8'>
 			{/* Header com foto de destaque */}
-			<div className='relative w-full lg:h-[520px] h-48 rounded-lg overflow-hidden'>
+			<div className='relative w-full lg:h-[520px] h-48 rounded-lg overflow-hidden mt-32'>
 				<Image
 					src={article.coverImage.url}
 					alt={article.title}
@@ -59,10 +69,20 @@ export default async function ArticlePage({ params }: PagePostProps) {
 							renderers={defaultRenders}
 						/>
 					</article>
-
-					{/* Espaço para anúncio no meio do conteúdo */}
-					{/*  anúncio In-article */}
-					<AdBanner dataAdFormat='fluid' dataAdSlot='6057711657' />
+					<div className='space-y-6'>
+						<SectionTitle title='Produtos recomendados' />
+						<div className='grid grid-cols-3 gap-2'>
+							{article.product.map((product) => (
+								<ProductCard
+									key={product.id}
+									name={product.name}
+									description={product.description}
+									imageUrl={product.image.url}
+									LinkUrl={product.url}
+								/>
+							))}
+						</div>
+					</div>
 
 					{/* Área de compartilhamento */}
 					<div className='mt-8 border-t border-gray-200 py-4'>
@@ -86,6 +106,7 @@ export default async function ArticlePage({ params }: PagePostProps) {
 							</Link>
 						))}
 					</div>
+
 					{/* Anúncio vertical */}
 					<AdBanner dataAdFormat='auto' dataAdSlot='2302299472' />
 				</aside>

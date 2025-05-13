@@ -3,6 +3,13 @@ import type { ReactNode } from 'react'
 interface defaultRendersProps {
 	children: ReactNode
 }
+interface ImageRenderProps {
+	src?: string
+	altText?: string
+	width?: number
+	height?: number
+}
+
 const defaultRenders = {
 	h1: ({ children }: defaultRendersProps) => (
 		<h1 className='text-foreground font-bold text-4xl'>{children}</h1>
@@ -34,6 +41,17 @@ const defaultRenders = {
 		<li className='mb-2 text-start font-light text-muted-foreground'>
 			{children}
 		</li>
+	),
+	img: ({ src, altText, width, height }: ImageRenderProps) => (
+		<div className='my-6 flex justify-center'>
+			<img
+				src={src}
+				alt={altText ?? ''}
+				width={width}
+				height={height}
+				className='rounded-lg shadow-lg max-w-full h-[420px] object-cover'
+			/>
+		</div>
 	),
 }
 
