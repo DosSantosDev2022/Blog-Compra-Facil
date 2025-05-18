@@ -17,7 +17,7 @@ const CardTitle = React.forwardRef<
 			ref={ref}
 			{...props}
 			className={twMerge(
-				'text-2xl font-bold leading-tight text-primary-foreground',
+				'text-xl font-bold leading-tight text-primary-foreground',
 				className,
 			)}
 		>
@@ -57,7 +57,7 @@ const CardLabel = React.forwardRef<
 			ref={ref}
 			{...props}
 			className={twMerge(
-				'text-sm font-light leading-tight text-muted lg:text-lg',
+				'text-sm font-light leading-tight text-muted lg:text-base',
 				className,
 			)}
 		>

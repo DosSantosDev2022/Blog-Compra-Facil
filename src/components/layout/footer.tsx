@@ -1,3 +1,4 @@
+import { chakra } from '@/assets/fonts'
 import { NewsLetterForm } from '@/components/global/newsletterForm'
 import Link from 'next/link'
 import { BsTwitterX } from 'react-icons/bs'
@@ -28,7 +29,12 @@ const Footer = () => {
 			<div className='max-w-full grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center'>
 				{/* Logo / About */}
 				<div className='max-w-sm p-2 md:col-span-1'>
-					<h2 className='text-4xl md:text-6xl font-bold'>onTech</h2>
+					<h6
+						aria-label='Logo onTech blog'
+						className={`${chakra.className} text-5xl font-bold`}
+					>
+						onTech
+					</h6>
 					<p className='mt-2 text-base md:text-lg'>
 						Receba notícias todos os dias e se mantenha atualizado sobre o
 						mundo de tecnologia!

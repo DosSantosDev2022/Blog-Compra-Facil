@@ -11,6 +11,7 @@ import { useState } from 'react'
 import { IoClose, IoMenu } from 'react-icons/io5'
 import { InputSearch } from '../global/search'
 import { categories } from '@/config/categories.json'
+import { chakra } from '@/assets/fonts'
 
 const Header = () => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -26,11 +27,14 @@ const Header = () => {
 	]
 
 	return (
-		<header className='w-full lg:fixed top-0 z-50 px-4 py-5 lg:px-10 lg:py-12 border border-border bg-primary text-primary-foreground'>
+		<header className='w-full lg:fixed top-0 z-50 px-4 py-5 lg:px-10 lg:py-6 border border-border bg-primary text-primary-foreground'>
 			<div className='flex flex-col lg:flex-row items-center justify-between gap-5 lg:gap-10'>
 				{/* Logo + Toggle Mobile */}
 				<div className='flex items-center justify-between w-full lg:w-auto'>
-					<h1 aria-label='Logo onTech blog' className='text-6xl font-bold'>
+					<h1
+						aria-label='Logo onTech blog'
+						className={`${chakra.className} text-5xl font-bold`}
+					>
 						onTech
 					</h1>
 					<Button

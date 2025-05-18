@@ -1,13 +1,8 @@
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
-
-const poppins = Poppins({
-	weight: ['200', '300', '400', '500', '600'],
-	subsets: ['latin'],
-})
+import { poppins } from '@/assets/fonts'
 
 export const metadata: Metadata = {
 	title: 'onTech Blog',
