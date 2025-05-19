@@ -1,11 +1,13 @@
 import React, { type ComponentProps } from 'react'
 import { twMerge } from 'tailwind-merge'
+import { Badge } from './badge'
 
 interface CardImageProps {
 	image: string
 	title?: string
 	description?: string
 	label?: string
+	category?: string
 }
 
 const CardTitle = React.forwardRef<
@@ -28,26 +30,6 @@ const CardTitle = React.forwardRef<
 
 CardTitle.displayName = 'CardTitle'
 
-const CardDescription = React.forwardRef<
-	HTMLParagraphElement,
-	ComponentProps<'p'> & { label: string }
->(({ className, label, ...props }, ref) => {
-	return (
-		<p
-			ref={ref}
-			{...props}
-			className={twMerge(
-				'text-base font-normal leading-tight text-accent-foreground lg:text-lg',
-				className,
-			)}
-		>
-			{label}
-		</p>
-	)
-})
-
-CardDescription.displayName = 'CardDescription'
-
 const CardLabel = React.forwardRef<
 	HTMLParagraphElement,
 	ComponentProps<'span'> & { label: string }
@@ -57,7 +39,7 @@ const CardLabel = React.forwardRef<
 			ref={ref}
 			{...props}
 			className={twMerge(
-				'text-sm font-light leading-tight text-muted lg:text-base',
+				'text-sm font-light leading-tight text-muted dark:text-primary-foreground lg:text-base',
 				className,
 			)}
 		>
@@ -71,38 +53,45 @@ CardLabel.displayName = 'CardLabel'
 const CardImage = React.forwardRef<
 	HTMLDivElement,
 	React.HTMLAttributes<HTMLDivElement> & CardImageProps
->(({ className, image, title, description, label, ...props }, ref) => {
-	return (
-		<div
-			ref={ref}
-			className={twMerge(
-				'group relative overflow-hidden rounded-2xl p-0 shadow-sm',
-				'',
-				className,
-			)}
-			{...props}
-		>
-			{/* Imagem de fundo com efeito hover */}
+>(
+	(
+		{ className, image, title, description, label, category, ...props },
+		ref,
+	) => {
+		return (
 			<div
+				ref={ref}
 				className={twMerge(
-					'flex h-full flex-col justify-end gap-3 p-4',
-					' transform transition-transform duration-300 ease-in group-hover:scale-105',
-					'rounded-md bg-cover bg-center bg-no-repeat',
+					'group relative overflow-hidden rounded-2xl p-0 shadow-sm',
+					'',
+					className,
 				)}
-				style={{ backgroundImage: `url(${image})` }}
-			/>
-			{/* Gradiente sobre a imagem */}
-			<div className='absolute inset-0 bg-gradient-to-t from-primary/75' />
+				{...props}
+			>
+				{/* Imagem de fundo com efeito hover */}
+				<div
+					className={twMerge(
+						'flex h-full flex-col justify-end gap-3 p-4',
+						' transform transition-transform duration-300 ease-in group-hover:scale-105',
+						'rounded-md bg-cover bg-center bg-no-repeat',
+					)}
+					style={{ backgroundImage: `url(${image})` }}
+				/>
+				{/* Gradiente sobre a imagem */}
+				<div className='absolute inset-0 bg-gradient-to-t from-primary/75' />
 
-			{/* Conteúdo */}
-			<div className='absolute inset-0 flex flex-col justify-end gap-2 p-4'>
-				<CardTitle label={title || ''} />
-				<CardDescription className='text-xs' label={description || ''} />
-				<CardLabel label={label || ''} />
+				{/* Conteúdo */}
+				<div className='absolute inset-0 flex flex-col justify-end gap-2 p-4'>
+					<div>
+						<Badge size='md'>{category}</Badge>
+					</div>
+					<CardTitle label={title || ''} />
+					<CardLabel label={label || ''} />
+				</div>
 			</div>
-		</div>
-	)
-})
+		)
+	},
+)
 
 CardImage.displayName = 'CardImage'
 

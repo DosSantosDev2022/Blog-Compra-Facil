@@ -38,15 +38,14 @@ export default async function Home() {
 			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 
 			{categories.map((category) => (
-				<div key={category.id} className='border border-border shadow p-2'>
-					{/* anúncio horizontal 4 */}
-					<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-					<div className=' max-h-[768px] overflow-y-scroll w-full '>
-						<VariableArticles
-							title={category.name}
-							categorySlug={category.slug}
-						/>
-					</div>
+				<div
+					key={category.id}
+					className=' max-h-[768px] overflow-y-scroll scrollbar-custom w-full p-2'
+				>
+					<VariableArticles
+						title={category.name}
+						categorySlug={category.slug}
+					/>
 				</div>
 			))}
 		</div>

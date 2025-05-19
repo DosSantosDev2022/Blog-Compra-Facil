@@ -22,7 +22,6 @@ describe('updateViewCount', () => {
 				stage: 'PUBLISHED',
 			},
 		}
-
 		;(HygraphMutation as Mock).mockResolvedValueOnce(mockResponse)
 
 		const result = await updateViewCount('abc123', 42)
@@ -41,7 +40,6 @@ describe('updateViewCount', () => {
 		const consoleSpy = vi
 			.spyOn(console, 'error')
 			.mockImplementation(() => {})
-
 		;(HygraphMutation as Mock).mockRejectedValueOnce(error)
 
 		const result = await updateViewCount('def456', 100)
@@ -61,7 +59,6 @@ describe('updateViewCount', () => {
 			updateArticle: { id: 'xyz999', view: 10 },
 			publishArticle: { id: 'xyz999', stage: 'PUBLISHED' },
 		}
-
 		;(HygraphMutation as Mock).mockResolvedValueOnce(mockResponse)
 
 		await updateViewCount('xyz999', 10)

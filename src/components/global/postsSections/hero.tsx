@@ -10,6 +10,7 @@ const HeroSection = async () => {
 		where: 'highlights',
 		pageSize: 50,
 	})
+	console.log(articles)
 
 	return (
 		<div className='lg:mt-40 mt-8'>
@@ -23,6 +24,7 @@ const HeroSection = async () => {
 								article.coverImage?.url || 'https://placehold.co/600x400'
 							}
 							title={article.title}
+							category={article.category.name}
 							label={format(article.createdAt, 'dd/MM/yyyy', {
 								locale: ptBR,
 							})}

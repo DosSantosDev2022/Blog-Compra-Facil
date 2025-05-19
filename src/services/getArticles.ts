@@ -49,6 +49,7 @@ export const getArticles = async (
         category {
           id
           slug
+					name
           view
         }
         createdAt
@@ -65,7 +66,7 @@ export const getArticles = async (
 		where === 'highlights'
 			? { highlights: true }
 			: where === 'view'
-				? { view_gt: 10 } // ou alguma lógica condicional futura
+				? { view_gt: 1 } // ou alguma lógica condicional futura
 				: where === 'category'
 					? { category: { slug: categorySlug } }
 					: where === 'search'

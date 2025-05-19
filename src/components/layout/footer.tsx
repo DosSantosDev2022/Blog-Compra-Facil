@@ -69,7 +69,7 @@ const Footer = () => {
 			</div>
 
 			{/* Copyright */}
-			<div className='mt-8 h-10 border-t border-border pt-4 text-xs text-center text-muted'>
+			<div className='mt-8 h-10 border-t border-border dark:border-muted-foreground pt-4 text-xs text-center text-primary-foreground'>
 				© {new Date().getFullYear()} onTech. Todos os direitos reservados
 			</div>
 		</footer>

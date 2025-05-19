@@ -27,8 +27,8 @@ const Header = () => {
 	]
 
 	return (
-		<header className='w-full lg:fixed top-0 z-50 px-4 py-5 lg:px-10 lg:py-6 border border-border bg-primary text-primary-foreground'>
-			<div className='flex flex-col lg:flex-row items-center justify-between gap-5 lg:gap-10'>
+		<header className='w-full  lg:fixed top-0 z-50 px-4 py-5 lg:px-10 lg:py-6 border border-border bg-primary text-primary-foreground'>
+			<div className='flex flex-col lg:h-24 lg:flex-row items-center justify-between lg:gap-10'>
 				{/* Logo + Toggle Mobile */}
 				<div className='flex items-center justify-between w-full lg:w-auto'>
 					<h1
@@ -54,7 +54,7 @@ const Header = () => {
 				{/* Navegação */}
 				<div
 					className={`
-						transition-all duration-300 ease-in-out
+						transition-all duration-300 ease-in-out 
 						 p-1 z-50
 						w-full lg:w-auto
 						${isOpen ? 'max-h-[500px] opacity-100 translate-y-0' : 'max-h-0  opacity-0 -translate-y-2 '}

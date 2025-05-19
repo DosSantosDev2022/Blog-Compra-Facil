@@ -26,12 +26,12 @@ export default async function CategoryPage({
 
 	return (
 		<div className='grid lg:grid-cols-12 grid-cols-1 gap-4'>
-			<div className='container mx-auto col-span-10 py-8 lg:mt-32 mt-8'>
+			<div className='col-span-9 py-8 lg:mt-32 mt-8'>
 				<SectionTitle title={`Categoria: ${categorySlug.toUpperCase()}`} />
 
 				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 
-				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-6'>
+				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-6'>
 					{articles.length > 0 ? (
 						articles.map((article) => (
 							<CardSimple
@@ -62,8 +62,8 @@ export default async function CategoryPage({
 					<Pagination page={page} limit={first} total={10} />
 				</div> */}
 			</div>
-
-			<div className='col-span-2 py-8'>
+			{/* seção com anunicos */}
+			<div className='col-span-3 py-8 px-4 mt-48'>
 				{/* anúncio In-feed */}
 				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
 				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />

@@ -30,7 +30,6 @@ describe('getCategories', () => {
 				},
 			],
 		}
-
 		;(HygraphQuery as Mock).mockResolvedValueOnce(mockResponse)
 
 		const result = await getCategories()
@@ -38,11 +37,12 @@ describe('getCategories', () => {
 		expect(HygraphQuery).toHaveBeenCalledTimes(1)
 
 		expect(HygraphQuery).toHaveBeenCalledWith(
-			expect.stringContaining('categories(orderBy: view_DESC, where: {view_gt: 10 })'),
+			expect.stringContaining(
+				'categories(orderBy: view_DESC, where: {view_gt: 10 })',
+			),
 			undefined,
 			{ revalidate: 60 * 60 * 24 },
 		)
-
 
 		expect(result).toEqual(mockResponse)
 	})
@@ -51,7 +51,6 @@ describe('getCategories', () => {
 		const mockResponse = {
 			categories: [],
 		}
-
 		;(HygraphQuery as Mock).mockResolvedValueOnce(mockResponse)
 
 		const result = await getCategories()

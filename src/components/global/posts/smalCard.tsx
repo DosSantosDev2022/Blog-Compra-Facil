@@ -31,7 +31,7 @@ const SmallCard = ({ description, slug, title }: SmallCardProps) => {
 							pathname: `/article/${slug}`,
 						}}
 					>
-						Ver mais
+						Ler mais...
 					</Link>
 				</Button>
 			</CardContent>

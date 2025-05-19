@@ -1,19 +1,23 @@
 import { CardImage } from '@/components/ui'
 import { SectionTitle } from '../sectionTitle'
 import { getArticles } from '@/services/getArticles'
+import { CardSimple } from '../posts/cardSimple'
 
 const MostViewedPosts = async () => {
 	const { articles } = await getArticles({ where: 'view', pageSize: 10 })
 	return (
 		<div className=''>
 			<SectionTitle title='Posts mais vistos' />
-			<div className='overflow-x-auto'>
-				<div className='flex gap-4 w-auto mt-3'>
+			<div className='p-2 overflow-x-auto scrollbar-custom'>
+				<div className='grid lg:grid-cols-4 grid-cols-1 gap-4  mt-3'>
 					{articles.map((article) => (
-						<CardImage
+						<CardSimple
+							id={article.id}
 							key={article.id}
-							className='h-74 min-w-72'
-							image={article.coverImage.url || ''}
+							slug={article.slug}
+							createdAt={article.createdAt}
+							alt={`card do posts: ${article.title}`}
+							coverImage={article.coverImage.url || ''}
 							title={article.title}
 						/>
 					))}

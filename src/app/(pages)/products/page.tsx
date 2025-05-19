@@ -21,7 +21,7 @@ export default async function ProductsPage({
 				<ul className='flex items-center gap-2 overflow-x-auto scrollbar-none'>
 					<li
 						aria-label='todos-produtos'
-						className='text-xs lg:text-sm flex-shrink-0 hover:scale-95 duration-300 transition-all bg-primary-hover px-3 py-1.5 rounded-2xl'
+						className='text-xs lg:text-sm flex-shrink-0 bg-primary  duration-300 transition-all hover:bg-primary-hover px-3 py-1.5 rounded-2xl'
 					>
 						<Link aria-label='link-todos-produtos' href={'/products'}>
 							Todos produtos
@@ -31,7 +31,7 @@ export default async function ProductsPage({
 						<li
 							aria-label={category.name}
 							key={category.id}
-							className='text-xs lg:text-sm flex-shrink-0 hover:scale-95 duration-300 bg-primary-hover transition-all px-3 py-1.5 rounded-2xl'
+							className='text-xs lg:text-sm flex-shrink-0 duration-300 bg-primary hover:bg-primary-hover transition-all px-3 py-1.5 rounded-2xl'
 						>
 							<Link
 								aria-label={`link-${category.name}`}

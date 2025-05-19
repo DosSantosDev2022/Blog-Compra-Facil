@@ -25,7 +25,6 @@ describe('getDetailsArticle', () => {
 				view: 123,
 			},
 		}
-
 		;(HygraphQuery as Mock).mockResolvedValueOnce(mockResponse)
 
 		const slug = 'sample-article'
@@ -68,7 +67,6 @@ describe('getDetailsArticle', () => {
 				view: 88,
 			},
 		}
-
 		;(HygraphQuery as Mock).mockResolvedValueOnce(mockResponse)
 
 		const slug = 'other-article'

@@ -3,6 +3,7 @@ import './globals.css'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { poppins } from '@/assets/fonts'
+import { ToggleTheme } from '@/components/global/toggleTheme'
 
 export const metadata: Metadata = {
 	title: 'onTech Blog',
@@ -36,6 +37,7 @@ export default async function RootLayout({
 				<Header />
 				<main className='lg:px-24 px-4 py-6'>{children}</main>
 				<Footer />
+				<ToggleTheme />
 			</body>
 		</html>
 	)

@@ -30,7 +30,6 @@ describe('getRelatedArticle', () => {
 				},
 			],
 		}
-
 		;(HygraphQuery as Mock).mockResolvedValueOnce(mockResponse)
 
 		const result = await getRelatedArticle('Tech', 'current-article')

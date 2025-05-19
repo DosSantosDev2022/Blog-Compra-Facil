@@ -23,13 +23,15 @@ export function AdBanner({ dataAdFormat, dataAdSlot }: AdBannerTypes) {
 	}, [])
 
 	return (
-		<ins
-			className='adsbygoogle bg-transparent'
-			style={{ display: 'block' }}
-			data-ad-client='ca-pub-2827166560948178'
-			data-ad-slot={dataAdSlot}
-			data-ad-format={dataAdFormat}
-			data-full-width-responsive='true'
-		/>
+		<div className='p-1 mt-3 mb-2'>
+			<ins
+				className='adsbygoogle bg-transparent'
+				style={{ display: 'block' }}
+				data-ad-client='ca-pub-2827166560948178'
+				data-ad-slot={dataAdSlot}
+				data-ad-format={dataAdFormat}
+				data-full-width-responsive='true'
+			/>
+		</div>
 	)
 }

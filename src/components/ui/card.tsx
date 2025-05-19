@@ -39,7 +39,7 @@ const CardTitle = React.forwardRef<
 	<h3
 		ref={ref}
 		className={twMerge(
-			'lg:text-lg text-base font-semibold leading-tight tracking-tight text-primary',
+			'lg:text-lg text-base font-semibold leading-tight tracking-tight text-primary dark:text-primary-foreground',
 			className,
 		)}
 		{...props}

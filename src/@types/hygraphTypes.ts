@@ -10,12 +10,12 @@ export interface CategoryResponse {
 }
 
 type Products = {
-	  id: string
-		name: string
+	id: string
+	name: string
+	url: string
+	description: string
+	image: {
 		url: string
-		description: string
-		image : {
-			url : string
 	}
 }
 
@@ -30,6 +30,7 @@ export interface Article {
 	category: {
 		id: string
 		name: string
+		slug: string
 		view: number
 	}
 	createdAt: string
@@ -38,7 +39,7 @@ export interface Article {
 		raw: RichTextContent
 	}
 	view: number
-	product : Products[]
+	product: Products[]
 }
 
 export type ArticleDetail = {

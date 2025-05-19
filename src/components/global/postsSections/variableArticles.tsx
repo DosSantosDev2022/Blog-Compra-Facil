@@ -29,6 +29,7 @@ const VariableArticles = async ({
 							image={article.coverImage?.url}
 							title={article.title}
 							className=' h-64 md:h-74'
+							category={article.category.name}
 						/>
 					</Link>
 				))}
