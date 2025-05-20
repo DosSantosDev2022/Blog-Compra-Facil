@@ -6,15 +6,7 @@ import { ptBR } from 'date-fns/locale'
 import { RichText } from '@/components/global/posts/richText'
 import { defaultRenders } from '@/components/global/richTextRenders'
 import Link from 'next/link'
-import {
-	Button,
-	Card,
-	CardContent,
-	CardFooter,
-	CardHeader,
-	CardImage,
-	CardTitle,
-} from '@/components/ui'
+import { CardImage } from '@/components/ui'
 import { getRelatedArticle } from '@/services/getRelatedArticle'
 import { updateViewCount } from '@/services/updateViewCount'
 import { AdBanner } from '@/components/global/google'
@@ -33,7 +25,6 @@ export default async function ArticlePage({ params }: PagePostProps) {
 	const { articles: relatedArticles } = article.category
 		? await getRelatedArticle(article.category.name, article.slug)
 		: { articles: [] }
-	console.log(article)
 	return (
 		<div className='container mx-auto py-8'>
 			{/* Header com foto de destaque */}

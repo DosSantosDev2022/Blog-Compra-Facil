@@ -48,6 +48,7 @@ export type ArticleDetail = {
 
 export type ArticleQueryResponse = {
 	articles: Article[]
+	totalCount: number;
 }
 
 /* artigos relacionados type */

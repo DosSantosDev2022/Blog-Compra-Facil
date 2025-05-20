@@ -9,7 +9,7 @@ interface VariableArticlesProps {
 	categorySlug: string
 }
 
-const VariableArticles = async ({
+const CategoryBlock = async ({
 	title,
 	categorySlug,
 }: VariableArticlesProps) => {
@@ -38,4 +38,4 @@ const VariableArticles = async ({
 	)
 }
 
-export { VariableArticles }
+export { CategoryBlock }

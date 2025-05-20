@@ -6,17 +6,23 @@ import { Button, Pagination } from '@/components/ui'
 import { getArticles } from '@/services/getArticles'
 import { updateCategoryViewCount } from '@/services/updateCategoryViewCount'
 
+interface CategoryPageParams {
+	params: Promise<{ slug: string }>
+	searchParams: Promise<{ page?: string }>
+}
+
 export default async function CategoryPage({
 	params,
-}: {
-	params: Promise<{ slug: string }>
-}) {
+	searchParams,
+}: CategoryPageParams) {
 	const categorySlug = (await params).slug
-
-	const { articles } = await getArticles({
+	const currentPage = Number((await searchParams).page || 1)
+	const pageSize = 50
+	const { articles, totalCount } = await getArticles({
 		where: 'category',
 		categorySlug,
-		pageSize: 100,
+		pageSize,
+		page: currentPage,
 	})
 
 	await updateCategoryViewCount(
@@ -25,13 +31,12 @@ export default async function CategoryPage({
 	)
 
 	return (
-		<div className='grid lg:grid-cols-12 grid-cols-1 gap-4'>
-			<div className='col-span-9 py-8 lg:mt-32 mt-8'>
-				<SectionTitle title={`Categoria: ${categorySlug.toUpperCase()}`} />
-
-				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-
-				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-6'>
+		<div className='grid lg:grid-cols-12 grid-cols-1 gap-6'>
+			<div className='col-span-10 py-10 lg:mt-36 mt-12'>
+				<SectionTitle
+					title={`Categoria: ${articles[0].category.name.toUpperCase()}`}
+				/>
+				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8'>
 					{articles.length > 0 ? (
 						articles.map((article) => (
 							<CardSimple
@@ -52,19 +57,19 @@ export default async function CategoryPage({
 						</div>
 					)}
 				</div>
-
-				{/* Espaço para anúncio após a lista de artigos */}
-				{/* anúncio horizontal 2 */}
-				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-
 				{/* Adicionar paginação aqui (se necessário) */}
-				{/* 				<div className='w-full flex justify-between px-2 py-3'>
-					<Pagination page={page} limit={first} total={10} />
-				</div> */}
+				<div className='w-full flex justify-end px-2 py-3 mt-10'>
+					<Pagination
+						page={currentPage}
+						limit={pageSize}
+						total={totalCount}
+					/>
+				</div>
+				{/* anúncio horizontal 2 */}
+				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />{' '}
 			</div>
 			{/* seção com anunicos */}
-			<div className='col-span-3 py-8 px-4 mt-48'>
-				{/* anúncio In-feed */}
+			<div className='col-span-2 py-10 px-4 mt-36 border'>
 				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
 				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
 				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />

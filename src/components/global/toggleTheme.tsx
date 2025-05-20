@@ -40,12 +40,12 @@ const ToggleTheme = () => {
 			{' '}
 			{/* Container flutuante */}
 			<Button
-				variants='primary'
+				variants={theme === 'light' ? 'primary' : 'secondary'}
 				onClick={handleThemeToggle}
 				sizes='icon'
-				className='rounded-full shadow-md' // Estilos adicionais para o botão
+				className='rounded-full shadow-md active:scale-75 duration-500 transition-all'
 			>
-				{theme === 'light' ? <MdSunny size={20} /> : <FaMoon size={20} />}
+				{theme === 'light' ? <MdSunny size={18} /> : <FaMoon size={18} />}
 			</Button>
 		</div>
 	)

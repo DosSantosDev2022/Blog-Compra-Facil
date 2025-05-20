@@ -1,17 +1,24 @@
 import { AdBanner } from '@/components/global/google'
 import { CardSimple } from '@/components/global/posts/cardSimple'
 import { SectionTitle } from '@/components/global/sectionTitle'
+import { Pagination } from '@/components/ui'
 import { getArticles } from '@/services/getArticles'
 
-export default async function AllPosts() {
-	const { articles } = await getArticles()
+interface AllPostsParams {
+	searchParams: Promise<{ page?: string }>
+}
+
+export default async function AllPosts({ searchParams }: AllPostsParams) {
+	const currentPage = Number((await searchParams).page || 1)
+	const pageSize = 2
+	const { articles, totalCount } = await getArticles({
+		pageSize,
+		page: currentPage,
+	})
 
 	return (
 		<div className='container mx-auto py-8 lg:mt-32 mt-8'>
 			<SectionTitle title={'Todos os posts'} />
-
-			{/* anúncio horizontal 1 */}
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 
 			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-6'>
 				{articles.map((article, index) => (
@@ -27,14 +34,17 @@ export default async function AllPosts() {
 				))}
 			</div>
 
-			{/* anúncio horizontal 2 */}
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-
 			{/* Adicionar paginação aqui (se necessário) */}
-			<div className='mt-8 flex justify-center'>
-				{/* <Button variant='outline' className='mr-2'>Anterior</Button>
-        <Button variant='outline'>Próximo</Button> */}
+			<div className='w-full flex justify-end px-2 py-3 mt-10'>
+				<Pagination
+					page={currentPage}
+					limit={pageSize}
+					total={totalCount}
+				/>
 			</div>
+
+			{/* anúncio horizontal 1 */}
+			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 		</div>
 	)
 }

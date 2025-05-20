@@ -23,12 +23,12 @@ const Header = () => {
 	const links = [
 		{ label: 'Home', url: '/' },
 		{ label: 'Posts', url: '/posts' },
-		{ label: 'Produtos', url: '/products' },
+		{ label: 'Produtos recomendados', url: '/products' },
 	]
 
 	return (
-		<header className='w-full  lg:fixed top-0 z-50 px-4 py-5 lg:px-10 lg:py-6 border border-border bg-primary text-primary-foreground'>
-			<div className='flex flex-col lg:h-24 lg:flex-row items-center justify-between lg:gap-10'>
+		<header className='w-full  lg:fixed top-0 z-50 px-4 py-5 lg:px-10 lg:py-6 border border-border bg-primary dark:bg-secondary text-primary-foreground'>
+			<div className='flex flex-col lg:h-10 lg:flex-row items-center justify-between lg:gap-10'>
 				{/* Logo + Toggle Mobile */}
 				<div className='flex items-center justify-between w-full lg:w-auto'>
 					<h1
@@ -66,6 +66,7 @@ const Header = () => {
 						<NavigationList>
 							{links.map((link, index) => (
 								<NavigationItem
+									className='truncate'
 									onClick={handleOpenMenu}
 									aria-label={link.label}
 									key={index}

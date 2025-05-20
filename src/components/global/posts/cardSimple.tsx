@@ -30,7 +30,7 @@ const CardSimple = ({
 	createdAt,
 }: CardSimpleProps) => {
 	return (
-		<Card className='p-4 justify-between' key={id}>
+		<Card className='lg:w-xs p-4 justify-between' key={id}>
 			<CardHeader className='relative h-48 mb-0'>
 				<Image
 					alt={alt}

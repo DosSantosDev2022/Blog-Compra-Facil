@@ -13,9 +13,9 @@ const HeroSection = async () => {
 	console.log(articles)
 
 	return (
-		<div className='lg:mt-40 mt-8'>
+		<section aria-label='Posts em destaque' className='lg:mt-40 mt-8'>
 			<SectionTitle title='Posts em destaque' />
-			<div className='grid grid-cols-1 lg:grid-cols-3 gap-4 w-full h-auto overflow-y-scroll max-h-[628px] scrollbar-custom p-2 mt-6'>
+			<div className='grid grid-cols-1 lg:grid-cols-4 gap-4 w-full h-auto overflow-y-scroll max-h-[628px] scrollbar-custom p-2 mt-6'>
 				{/* Container para os posts menores */}
 				{articles.map((article, index) => (
 					<Link href={`/article/${article.slug}`} key={article.id}>
@@ -33,7 +33,7 @@ const HeroSection = async () => {
 					</Link>
 				))}
 			</div>
-		</div>
+		</section>
 	)
 }
 

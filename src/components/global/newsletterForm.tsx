@@ -59,7 +59,7 @@ const NewsLetterForm = () => {
 				)}
 			</div>
 
-			<Button className='w-full  h-10 ' variants={'secondary'}>
+			<Button className='w-full' variants={'outline'}>
 				Inscrever
 			</Button>
 		</form>

@@ -3,7 +3,7 @@ import { FeaturedCategories } from '@/components/global/postsSections/featuredCa
 import { HeroSection } from '@/components/global/postsSections/hero'
 import { LatestNews } from '@/components/global/postsSections/latestNews'
 import { MostViewedPosts } from '@/components/global/postsSections/mostViewedPosts'
-import { VariableArticles } from '@/components/global/postsSections/variableArticles'
+import { CategoryBlock } from '@/components/global/postsSections/variableArticles'
 import { getCategories } from '@/services/getCategories'
 
 export default async function Home() {
@@ -19,12 +19,6 @@ export default async function Home() {
 			{/* posts mais vistos */}
 			<MostViewedPosts />
 
-			{/* anúncio horizontal 2 */}
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-
-			{/* seção de categorias em destaque */}
-			<FeaturedCategories />
-
 			{/* anúncio horizontal 3 */}
 			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 
@@ -37,17 +31,23 @@ export default async function Home() {
 			{/* anúncio horizontal 4 */}
 			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 
+			{/* seção de categorias em destaque */}
+			<FeaturedCategories />
+
 			{categories.map((category) => (
 				<div
 					key={category.id}
 					className=' max-h-[768px] overflow-y-scroll scrollbar-custom w-full p-2'
 				>
-					<VariableArticles
+					<CategoryBlock
 						title={category.name}
 						categorySlug={category.slug}
 					/>
 				</div>
 			))}
+
+			{/* anúncio horizontal 2 */}
+			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 		</div>
 	)
 }

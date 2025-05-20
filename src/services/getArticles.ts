@@ -1,4 +1,4 @@
-import type { ArticleQueryResponse } from '@/@types/hygraphTypes'
+import type { Article, ArticleQueryResponse } from '@/@types/hygraphTypes'
 import { HygraphQuery } from '@/app/api/cms/hygraph'
 
 interface ArticleQueryOptions {
@@ -16,7 +16,7 @@ export const getArticles = async (
 ): Promise<ArticleQueryResponse> => {
 	const {
 		page = 1,
-		pageSize = 10,
+		pageSize = 50,
 		where,
 		orderBy = 'createdAt_DESC',
 		search,
@@ -60,6 +60,16 @@ export const getArticles = async (
       }
     }
   `
+	 // Consulta para obter o total de artigos
+  const totalCountQuery = `
+    query ArticlesCountQuery($where: ArticleWhereInput) {
+      articlesConnection(where: $where) {
+        aggregate {
+          count
+        }
+      }
+    }
+  `;
 
 	// Mapeia dinamicamente o filtro `where`
 	const whereClause =
@@ -80,13 +90,25 @@ export const getArticles = async (
 		orderBy: orderBy,
 	}
 
-	const { articles } = await HygraphQuery<ArticleQueryResponse>(
-		query,
-		variables,
-		{
-			revalidate: 60,
-		},
-	)
+	const totalCountVariables: Record<string, unknown> = {
+    where: whereClause,
+  };
 
-	return { articles }
+	const [articlesData, totalCountData] = await Promise.all([
+    HygraphQuery<{ articles: Article[] }>(query, variables, {
+      revalidate: 60,
+    }),
+    HygraphQuery<{ articlesConnection: { aggregate: { count: number } } }>(
+      totalCountQuery,
+      totalCountVariables,
+      {
+        revalidate: 60,
+      },
+    ),
+  ]);
+
+	const articles = articlesData?.articles || [];
+  const totalCount = totalCountData?.articlesConnection?.aggregate?.count || 0;
+
+  return { articles, totalCount };
 }

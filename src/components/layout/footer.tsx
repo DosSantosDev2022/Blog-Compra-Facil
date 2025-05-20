@@ -25,7 +25,7 @@ const Footer = () => {
 	]
 
 	return (
-		<footer className='px-4 py-8 md:px-8 bg-primary text-primary-foreground'>
+		<footer className='px-4 py-8 md:px-8 bg-primary dark:bg-secondary text-primary-foreground'>
 			<div className='max-w-full grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center'>
 				{/* Logo / About */}
 				<div className='max-w-sm p-2 md:col-span-1'>
