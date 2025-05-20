@@ -43,7 +43,7 @@ export default async function ProductsPage({
 					))}
 				</ul>
 			</div>
-			<div className='grid lg:grid-cols-5 md:grid-cols-4 grid-cols-1 gap-3 p-3 mt-16'>
+			<div className='flex flex-wrap gap-4 p-3 mt-16'>
 				{products.map((product) => (
 					<ProductCard
 						key={product.id}

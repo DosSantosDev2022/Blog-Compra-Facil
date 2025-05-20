@@ -8,7 +8,7 @@ const MostViewedPosts = async () => {
 	return (
 		<section aria-label='Posts mais vistos'>
 			<SectionTitle title='Posts mais vistos' />
-			<div className='grid lg:grid-cols-5 md:grid-cols-4 grid-cols-1 gap-4 p-2 overflow-x-auto scrollbar-custom mt-3'>
+			<div className='flex flex-wrap gap-4 p-2  mt-3'>
 				{articles.map((article) => (
 					<CardSimple
 						id={article.id}

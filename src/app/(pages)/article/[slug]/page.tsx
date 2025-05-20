@@ -42,7 +42,9 @@ export default async function ArticlePage({ params }: PagePostProps) {
 				{/* Conteúdo principal do artigo */}
 				<div className='lg:col-span-2 space-y-6'>
 					<div className='space-y-3'>
-						<h1 className='text-3xl font-bold'>{article.title}</h1>
+						<h1 className='lg:text-3xl text-2xl font-bold'>
+							{article.title}
+						</h1>
 						<p className='text-muted-foreground'>
 							{`Publicado em: ${format(article.createdAt, 'dd/MM/yyyy', { locale: ptBR })}`}
 						</p>
@@ -62,7 +64,7 @@ export default async function ArticlePage({ params }: PagePostProps) {
 					</article>
 					<div className='space-y-6'>
 						<SectionTitle title='Produtos recomendados' />
-						<div className='grid grid-cols-3 gap-2'>
+						<div className='flex flex-wrap gap-4'>
 							{article.product.map((product) => (
 								<ProductCard
 									key={product.id}

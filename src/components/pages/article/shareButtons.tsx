@@ -37,23 +37,23 @@ const ShareButtons = ({ slug, title }: ToShareProps) => {
 				</h4>
 				<div className='flex  items-center justify-start gap-3 w-full'>
 					<EmailShareButton url={shareUrl} title={title}>
-						<EmailIcon size={48} className='rounded-full' />
+						<EmailIcon size={36} className='rounded-full' />
 					</EmailShareButton>
 
 					<FacebookShareButton url={shareUrl} title={title}>
-						<FacebookIcon size={48} className='rounded-full' />
+						<FacebookIcon size={36} className='rounded-full' />
 					</FacebookShareButton>
 
 					<LinkedinShareButton url={shareUrl} title={title}>
-						<LinkedinIcon size={48} className='rounded-full' />
+						<LinkedinIcon size={36} className='rounded-full' />
 					</LinkedinShareButton>
 
 					<WhatsappShareButton url={shareUrl} title={title}>
-						<WhatsappIcon size={48} className='rounded-full' />
+						<WhatsappIcon size={36} className='rounded-full' />
 					</WhatsappShareButton>
 
 					<TwitterShareButton url={shareUrl} title={title}>
-						<XIcon size={48} className='rounded-full' />
+						<XIcon size={36} className='rounded-full' />
 					</TwitterShareButton>
 				</div>
 			</div>

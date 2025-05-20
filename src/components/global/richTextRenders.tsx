@@ -24,10 +24,18 @@ const defaultRenders = {
 		<h4 className='text-foreground font-bold text-lg'>{children}</h4>
 	),
 	bold: ({ children }: defaultRendersProps) => (
-		<b className='text-foreground font-bold'>{children} </b>
+		<b className='text-primary dark:text-accent-foreground font-bold'>
+			{children}{' '}
+		</b>
 	),
 	p: ({ children }: defaultRendersProps) => (
-		<p className='font-light mt-4'>{children}</p>
+		<p className='font-light text-base lg:text-lg mt-4'>{children}</p>
+	),
+	a: ({ children }: defaultRendersProps) => (
+		// biome-ignore lint/a11y/useValidAnchor: <explanation>
+		<a className='text-blue-400 cursor-pointer hover:underline'>
+			{children}
+		</a>
 	),
 	code_block: ({ children }: defaultRendersProps) => (
 		<pre className='bg-primary text-muted p-4 rounded-md overflow-x-auto w-full custom-scrollbar'>
@@ -38,7 +46,7 @@ const defaultRenders = {
 		<ul className=' p-2'>{children}</ul>
 	),
 	li: ({ children }: defaultRendersProps) => (
-		<li className='mb-2 text-start font-light text-muted-foreground'>
+		<li className='mb-2 text-start font-light text-foreground '>
 			{children}
 		</li>
 	),

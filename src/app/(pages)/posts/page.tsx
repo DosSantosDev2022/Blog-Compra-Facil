@@ -20,7 +20,7 @@ export default async function AllPosts({ searchParams }: AllPostsParams) {
 		<div className='container mx-auto py-8 lg:mt-32 mt-8'>
 			<SectionTitle title={'Todos os posts'} />
 
-			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-6'>
+			<div className='flex flex-wrap gap-4 mt-6'>
 				{articles.map((article, index) => (
 					<CardSimple
 						id={article.id}

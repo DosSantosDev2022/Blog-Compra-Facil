@@ -28,7 +28,7 @@ export const getCategories = async (): Promise<Category> => {
    `
 
 	return HygraphQuery(query, undefined, {
-		cache: 'no-cache',
-		revalidate: 0,
+		cache: 'force-cache',
+		revalidate: 60, // revalida a cada 60s
 	})
 }

@@ -36,6 +36,7 @@ export const getDetailsArticle = async (
    `
 	const variables = { slug }
 	return HygraphQuery(query, variables, {
-		revalidate: 60,
+    cache: 'force-cache',
+		revalidate: 60 * 60 * 24, // revalida a página a cada 1 dia
 	})
 }

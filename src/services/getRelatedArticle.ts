@@ -27,6 +27,7 @@ export const getRelatedArticle = async (
    `
 	const variables = { name: categoryName, currentSlug }
 	return HygraphQuery(query, variables, {
-		revalidate: 60 * 60 * 60,
+    cache: 'force-cache',
+		revalidate: 60, // revalida a cada 60s
 	})
 }

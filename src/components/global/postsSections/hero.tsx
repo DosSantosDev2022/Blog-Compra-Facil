@@ -10,8 +10,6 @@ const HeroSection = async () => {
 		where: 'highlights',
 		pageSize: 50,
 	})
-	console.log(articles)
-
 	return (
 		<section aria-label='Posts em destaque' className='lg:mt-40 mt-8'>
 			<SectionTitle title='Posts em destaque' />
