@@ -21,7 +21,7 @@ const FeaturedCategories = async () => {
 					>
 						<div className='absolute inset-0 bg-gradient-to-t from-primary/70' />
 						<div className='bg-secondary bg-opacity-50 rounded-md p-2 z-10'>
-							<Badge size='md'>{category.name}</Badge>
+							<Badge>{category.name}</Badge>
 						</div>
 					</Link>
 				))}
