@@ -21,7 +21,7 @@ const LatestNews = async () => {
 						<SmallCard
 							key={article.id}
 							title={article.title}
-							coverImage={article.coverImage.url || ''}
+							coverImage={article.coverImage?.url || ''}
 							description={article.description}
 							slug={article.slug}
 						/>

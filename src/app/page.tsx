@@ -3,6 +3,7 @@ import { FeaturedCategories } from '@/components/global/postsSections/featuredCa
 import { HeroSection } from '@/components/global/postsSections/hero'
 import { LatestNews } from '@/components/global/postsSections/latestNews'
 import { MostViewedPosts } from '@/components/global/postsSections/mostViewedPosts'
+import { SectionBanner } from '@/components/global/postsSections/sectionBanner'
 import { CategoryBlock } from '@/components/global/postsSections/variableArticles'
 import { getCategories } from '@/services/getCategories'
 
@@ -11,6 +12,7 @@ export default async function Home() {
 
 	return (
 		<div className='space-y-8 lg:mt-20 mt-8'>
+			<SectionBanner />
 			{/* seção hero posts */}
 			<HeroSection />
 			{/* anúncio horizontal */}
