@@ -17,6 +17,8 @@ interface PagePostProps {
 	params: Promise<{ slug: string }>
 }
 
+export const dynamicParams = true
+
 export default async function ArticlePage({ params }: PagePostProps) {
 	const slug = (await params).slug
 	const { article } = await getDetailsArticle(slug)

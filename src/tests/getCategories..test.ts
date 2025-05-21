@@ -38,7 +38,7 @@ describe('getCategories', () => {
 
 		expect(HygraphQuery).toHaveBeenCalledWith(
 			expect.stringContaining(
-				'categories(orderBy: view_DESC, where: {view_gt: 10 })',
+				'categories(orderBy: view_DESC, where: {view_gt: 0 })',
 			),
 			undefined,
 			{ revalidate: 60 * 60 * 24 },

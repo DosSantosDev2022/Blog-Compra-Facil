@@ -45,12 +45,12 @@ describe('getArticles', () => {
 		expect(HygraphQuery).toHaveBeenCalledWith(
 			expect.any(String),
 			{
-				first: 10,
+				first: 50,
 				skip: 0,
 				where: undefined,
 				orderBy: 'createdAt_DESC',
 			},
-			expect.any(Object),
+			{ revalidate: 60 * 60 * 24 }
 		)
 
 		expect(result.articles).toEqual(mockResponse.articles)
@@ -70,7 +70,7 @@ describe('getArticles', () => {
 				where: undefined,
 				orderBy: 'createdAt_DESC',
 			},
-			expect.any(Object),
+			{ revalidate: 60 * 60 * 24 }
 		)
 
 		expect(result.articles).toEqual(mockResponse.articles)
@@ -85,12 +85,12 @@ describe('getArticles', () => {
 		expect(HygraphQuery).toHaveBeenCalledWith(
 			expect.any(String),
 			{
-				first: 10,
+				first: 50,
 				skip: 0,
 				where: { highlights: true },
 				orderBy: 'createdAt_DESC',
 			},
-			expect.any(Object),
+			{ revalidate: 60 * 60 * 24 }
 		)
 
 		expect(result.articles).toEqual(mockResponse.articles)
@@ -105,12 +105,12 @@ describe('getArticles', () => {
 		expect(HygraphQuery).toHaveBeenCalledWith(
 			expect.any(String),
 			{
-				first: 10,
+				first: 50,
 				skip: 0,
-				where: { view_gt: 10 },
+				where: { view_gt: 1 },
 				orderBy: 'createdAt_DESC',
 			},
-			expect.any(Object),
+			{ revalidate: 60 * 60 * 24 }
 		)
 
 		expect(result.articles).toEqual(mockResponse.articles)
@@ -128,12 +128,12 @@ describe('getArticles', () => {
 		expect(HygraphQuery).toHaveBeenCalledWith(
 			expect.any(String),
 			{
-				first: 10,
+				first: 50,
 				skip: 0,
 				where: { category: { slug: 'Technology' } },
 				orderBy: 'createdAt_DESC',
 			},
-			expect.any(Object),
+			{ revalidate: 60 * 60 * 24 }
 		)
 
 		expect(result.articles).toEqual(mockResponse.articles)
@@ -148,12 +148,12 @@ describe('getArticles', () => {
 		expect(HygraphQuery).toHaveBeenCalledWith(
 			expect.any(String),
 			{
-				first: 10,
+				first: 50,
 				skip: 0,
 				where: { _search: 'React' },
 				orderBy: 'createdAt_DESC',
 			},
-			expect.any(Object),
+			{ revalidate: 60 * 60 * 24 }
 		)
 
 		expect(result.articles).toEqual(mockResponse.articles)
@@ -168,12 +168,12 @@ describe('getArticles', () => {
 		expect(HygraphQuery).toHaveBeenCalledWith(
 			expect.any(String),
 			{
-				first: 10,
+				first: 50,
 				skip: 0,
 				where: undefined,
 				orderBy: 'createdAt_ASC',
 			},
-			expect.any(Object),
+			{ revalidate: 60 * 60 * 24 }
 		)
 
 		expect(result.articles).toEqual(mockResponse.articles)

@@ -33,7 +33,7 @@ export const getArticles = async (
       $where: ArticleWhereInput,
       $orderBy: ArticleOrderByInput
     ) {
-      articles(
+      articles (
         first: $first,
         skip: $skip,
         where: $where,
@@ -96,15 +96,13 @@ export const getArticles = async (
 
 	const [articlesData, totalCountData] = await Promise.all([
     HygraphQuery<{ articles: Article[] }>(query, variables, {
-      cache: 'force-cache',
-      revalidate: 60,
+      revalidate: 60 * 60 * 24, // revalida a página a cada 24h
     }),
     HygraphQuery<{ articlesConnection: { aggregate: { count: number } } }>(
       totalCountQuery,
       totalCountVariables,
       {
-        cache: 'force-cache',
-        revalidate: 60, // revalida a cada 60s
+        revalidate: 60 * 60 * 24, // revalida a página a cada 24h
       },
     ),
   ]);

@@ -15,7 +15,7 @@ interface Category {
 export const getCategories = async (): Promise<Category> => {
 	const query = `
    query MyQuery {
-      categories(orderBy: view_DESC, where: {view_gt: 1 }) {
+      categories(orderBy: view_DESC, where: {view_gt: 0 }) {
         id
         name
         slug
@@ -28,7 +28,6 @@ export const getCategories = async (): Promise<Category> => {
    `
 
 	return HygraphQuery(query, undefined, {
-		cache: 'force-cache',
-		revalidate: 60, // revalida a cada 60s
+		revalidate: 60 * 60 * 24, // revalida a página a cada 24h
 	})
 }
