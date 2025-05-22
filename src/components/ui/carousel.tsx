@@ -55,10 +55,10 @@ const CarouselIndicators = ({
 				onClick={() => goToSlide(index)}
 				aria-label={`Go to slide ${index + 1}`}
 				className={twMerge(
-					'h-1.5 w-1.5 rounded-full transition-all duration-300 sm:h-2 sm:w-2',
+					'h-1.5 w-1.5 rounded-full transition-all duration-300 sm:h-2 sm:w-2 cursor-pointer',
 					index === currentIndex
 						? 'scale-110 bg-primary'
-						: 'bg-secondary hover:bg-primary-hover',
+						: 'bg-foreground hover:bg-primary-hover',
 				)}
 			/>
 		))}
@@ -91,7 +91,8 @@ const Carousel = ({
 		<div
 			aria-label='carousel-root'
 			className={twMerge(
-				'relative h-56 w-full overflow-hidden sm:h-72 lg:h-96 ',
+				'relative w-full overflow-hidden',
+				'aspect-video sm:aspect-square md:aspect-video lg:aspect-21/9 xl:aspect-21/9',
 				'flex items-center justify-center',
 				className,
 			)}
@@ -100,7 +101,7 @@ const Carousel = ({
 			{/* Conteúdo do Carrossel */}
 			<div
 				aria-label='carousel-content'
-				className='flex h-full transition-transform duration-700 ease-in-out'
+				className='flex h-full w-full transition-transform duration-700 ease-in-out'
 				style={{
 					transform: `translateX(-${currentIndex * 100}%)`,
 				}}
@@ -109,7 +110,7 @@ const Carousel = ({
 					<div
 						aria-label='carousel-image'
 						key={index}
-						className='flex w-full flex-shrink-0 items-center justify-center'
+						className='flex w-full h-full flex-shrink-0 items-center justify-center'
 					>
 						{child}
 					</div>
