@@ -21,11 +21,11 @@ function useCarousel(autoPlay: boolean, autoPlayInterval: number) {
   // Lógica de autoplay
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useEffect(() => {
-    if (autoPlay) {
+    if (autoPlay  && itemsLength > 0) {
       const interval = setInterval(nextSlide, autoPlayInterval)
       return () => clearInterval(interval)
     }
-  }, [autoPlay, autoPlayInterval])
+  }, [autoPlay, autoPlayInterval, itemsLength])
 
   // Lógica de navegação por teclado
   useEffect(() => {

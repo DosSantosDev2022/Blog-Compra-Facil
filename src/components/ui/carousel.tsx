@@ -24,7 +24,7 @@ const CarouselButton = ({
 		aria-label={direction === 'prev' ? 'Previous Slide' : 'Next Slide'}
 		className={twMerge(
 			'absolute top-1/2 -translate-y-1/2 transform rounded-full p-2',
-			'bg-transparent text-accent-foreground duration-300 hover:bg-primary-hover hover:text-accent focus:outline-none active:scale-95',
+			'bg-transparent text-accent-foreground duration-300 hover:bg-primary-hover hover:text-primary-foreground focus:outline-none active:scale-95',
 			direction === 'prev' ? 'left-2 sm:left-4' : 'right-2 sm:right-4',
 		)}
 	>
@@ -91,7 +91,7 @@ const Carousel = ({
 		<div
 			aria-label='carousel-root'
 			className={twMerge(
-				'relative h-56 w-full overflow-hidden sm:h-72 md:h-96',
+				'relative h-56 w-full overflow-hidden sm:h-72 lg:h-96 ',
 				'flex items-center justify-center',
 				className,
 			)}
@@ -109,7 +109,7 @@ const Carousel = ({
 					<div
 						aria-label='carousel-image'
 						key={index}
-						className='flex h-full w-full flex-shrink-0 items-center justify-center'
+						className='flex w-full flex-shrink-0 items-center justify-center'
 					>
 						{child}
 					</div>
@@ -117,8 +117,8 @@ const Carousel = ({
 			</div>
 
 			{/* Botões de navegação */}
-			{/* 	<CarouselButton direction='prev' onClick={prevSlide} />
-			<CarouselButton direction='next' onClick={nextSlide} /> */}
+			<CarouselButton direction='prev' onClick={prevSlide} />
+			<CarouselButton direction='next' onClick={nextSlide} />
 
 			{/* Indicadores */}
 			<CarouselIndicators

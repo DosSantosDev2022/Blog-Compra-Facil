@@ -10,52 +10,37 @@ const SectionBanner = async () => {
 
 	return (
 		<>
-			<div className='mx-auto mt-8 w-full max-w-full'>
-				<Carousel autoPlay>
-					{articles.map((article) => (
-						<div
-							key={article.id}
-							className='relative w-full h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden'
-						>
-							{' '}
-							{/* Adicionamos 'relative' para posicionar o texto */}
-							<Image
-								width={1280}
-								height={720}
-								alt={article.title}
-								src={article.coverImage?.url}
-								className='object-cover w-full h-full'
-								style={{
-									maxWidth: '100%',
-									height: 'auto%',
-									display: 'block',
-								}}
-							/>
-							{/* Adicionando a sobreposição de texto */}
-							<div className='absolute inset-0 z-10 bg-gradient-to-t from-primary via-transparent to-transparent flex items-end p-6 text-white'>
-								<div className='max-w-3xl'>
-									{/* Categoria */}
-									{article.category?.name && (
-										<Badge>{article.category.name}</Badge>
-									)}
-									{/* Título */}
-									<h2 className='mt-2 text-2xl font-bold leading-tight'>
-										{article.title}
-									</h2>
-									{/* Data */}
-									{article.createdAt && (
-										<p className='mt-1 text-sm text-gray-400'>
-											{format(article.createdAt, 'dd/MM/yyyy', {
-												locale: ptBR,
-											})}
-										</p>
-									)}
-								</div>
+			<Carousel autoPlay>
+				{articles.map((article) => (
+					<div key={article.id} className='relative w-full'>
+						<Image
+							src={article.coverImage.url}
+							alt={article.title}
+							fill
+							className='object-cover object-center'
+							quality={100} // ajuste conforme necessidade
+							priority // se for importante no primeiro load
+						/>
+						<div className='absolute inset-0  p-8 flex flex-col justify-center items-start lg:items-center gap-3 z-10'>
+							<div className='border max-w-full lg:max-w-7xl'>
+								{article.category?.name && (
+									<Badge size='lg'>{article.category.name}</Badge>
+								)}
+								<h2 className='mt-2 text-2xl lg:text-6xl font-bold leading-tight'>
+									{article.title}
+								</h2>
+								{article.createdAt && (
+									<p className='mt-1 text-lg'>
+										{format(article.createdAt, 'dd/MM/yyyy', {
+											locale: ptBR,
+										})}
+									</p>
+								)}
 							</div>
 						</div>
-					))}
-				</Carousel>
-			</div>
+					</div>
+				))}
+			</Carousel>
 		</>
 	)
 }

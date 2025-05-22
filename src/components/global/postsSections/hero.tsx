@@ -11,7 +11,7 @@ const HeroSection = async () => {
 		pageSize: 50,
 	})
 	return (
-		<section aria-label='Posts em destaque' className='lg:mt-40 mt-8'>
+		<section aria-label='Posts em destaque' className='mt-8'>
 			<SectionTitle title='Posts em destaque' />
 			<div className='flex flex-col lg:flex-row gap-4 w-full  p-2 mt-6'>
 				{/* Renderiza o primeiro post com destaque */}
