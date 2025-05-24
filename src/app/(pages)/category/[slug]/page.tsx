@@ -12,14 +12,13 @@ interface CategoryPageParams {
 	searchParams: Promise<{ page?: string }>
 }
 
-export async function generateMetadata(
-	{ params }: { params: { slug: string } },
-	_parent: ResolvingMetadata,
-): Promise<Metadata> {
-	const { slug } = params
+export async function generateMetadata({
+	params,
+}: CategoryPageParams): Promise<Metadata> {
+	const categorySlug = (await params).slug
 	const { articles } = await getArticles({
 		where: 'category',
-		categorySlug: slug,
+		categorySlug: categorySlug,
 		pageSize: 1,
 		page: 1,
 	})
@@ -34,7 +33,7 @@ export async function generateMetadata(
 		openGraph: {
 			title: `onTech Blog | ${categoryName}`,
 			description: categoryDescription,
-			url: `${dominio}${slug}`,
+			url: `${dominio}${categorySlug}`,
 		},
 	}
 }
