@@ -12,8 +12,8 @@ const dominio = 'https://on-tech-rho.vercel.app/'
 
 export async function generateMetadata({
 	searchParams,
-}: { searchParams: { query?: string } }): Promise<Metadata> {
-	const query = searchParams.query?.trim()
+}: SearchResultsPageParms): Promise<Metadata> {
+	const { query } = await searchParams
 	const title = query
 		? `Resultados da busca por "${query}" |onTech Blog`
 		: 'onTech Blog'
