@@ -96,13 +96,13 @@ export const getArticles = async (
 
 	const [articlesData, totalCountData] = await Promise.all([
     HygraphQuery<{ articles: Article[] }>(query, variables, {
-      revalidate: 60 * 60 * 24, // revalida a página a cada 24h
+      revalidate: 60 * 60 * 3, // revalida a página a cada 3h
     }),
     HygraphQuery<{ articlesConnection: { aggregate: { count: number } } }>(
       totalCountQuery,
       totalCountVariables,
       {
-        revalidate: 60 * 60 * 24, // revalida a página a cada 24h
+        revalidate: 60 * 60 * 3, // revalida a página a cada 3h
       },
     ),
   ]);

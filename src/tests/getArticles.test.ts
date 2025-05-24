@@ -50,7 +50,7 @@ describe('getArticles', () => {
 				where: undefined,
 				orderBy: 'createdAt_DESC',
 			},
-			{ revalidate: 60 * 60 * 24 }
+			{ revalidate: 60 * 60 * 3 }
 		)
 
 		expect(result.articles).toEqual(mockResponse.articles)
@@ -70,7 +70,7 @@ describe('getArticles', () => {
 				where: undefined,
 				orderBy: 'createdAt_DESC',
 			},
-			{ revalidate: 60 * 60 * 24 }
+			{ revalidate: 60 * 60 * 3 }
 		)
 
 		expect(result.articles).toEqual(mockResponse.articles)
@@ -90,7 +90,7 @@ describe('getArticles', () => {
 				where: { highlights: true },
 				orderBy: 'createdAt_DESC',
 			},
-			{ revalidate: 60 * 60 * 24 }
+			{ revalidate: 60 * 60 * 3 }
 		)
 
 		expect(result.articles).toEqual(mockResponse.articles)
@@ -110,7 +110,7 @@ describe('getArticles', () => {
 				where: { view_gt: 1 },
 				orderBy: 'createdAt_DESC',
 			},
-			{ revalidate: 60 * 60 * 24 }
+			{ revalidate: 60 * 60 * 3 }
 		)
 
 		expect(result.articles).toEqual(mockResponse.articles)
@@ -133,7 +133,7 @@ describe('getArticles', () => {
 				where: { category: { slug: 'Technology' } },
 				orderBy: 'createdAt_DESC',
 			},
-			{ revalidate: 60 * 60 * 24 }
+			{ revalidate: 60 * 60 * 3 }
 		)
 
 		expect(result.articles).toEqual(mockResponse.articles)
@@ -153,7 +153,7 @@ describe('getArticles', () => {
 				where: { _search: 'React' },
 				orderBy: 'createdAt_DESC',
 			},
-			{ revalidate: 60 * 60 * 24 }
+			{ revalidate: 60 * 60 * 3 }
 		)
 
 		expect(result.articles).toEqual(mockResponse.articles)
@@ -173,7 +173,7 @@ describe('getArticles', () => {
 				where: undefined,
 				orderBy: 'createdAt_ASC',
 			},
-			{ revalidate: 60 * 60 * 24 }
+			{ revalidate: 60 * 60 * 3 }
 		)
 
 		expect(result.articles).toEqual(mockResponse.articles)

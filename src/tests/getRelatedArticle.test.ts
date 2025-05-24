@@ -43,7 +43,7 @@ describe('getRelatedArticle', () => {
 				currentSlug: 'current-article',
 			},
 			{
-				revalidate: 60 * 60 * 24,
+				revalidate: 60 * 60 * 3,
 			},
 		)
 

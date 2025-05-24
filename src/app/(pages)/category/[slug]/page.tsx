@@ -5,10 +5,38 @@ import { SectionTitle } from '@/components/global/sectionTitle'
 import { Button, Pagination } from '@/components/ui'
 import { getArticles } from '@/services/getArticles'
 import { updateCategoryViewCount } from '@/services/updateCategoryViewCount'
+import type { Metadata, ResolvingMetadata } from 'next'
 
 interface CategoryPageParams {
 	params: Promise<{ slug: string }>
 	searchParams: Promise<{ page?: string }>
+}
+
+export async function generateMetadata(
+	{ params }: { params: { slug: string } },
+	_parent: ResolvingMetadata,
+): Promise<Metadata> {
+	const { slug } = params
+	const { articles } = await getArticles({
+		where: 'category',
+		categorySlug: slug,
+		pageSize: 1,
+		page: 1,
+	})
+
+	const dominio = 'https://on-tech-rho.vercel.app/'
+	const categoryName = articles[0]?.category?.name || 'Categoria'
+	const categoryDescription = `Artigos sobre ${categoryName}`
+
+	return {
+		title: `onTech Blog | ${categoryName}`,
+		description: categoryDescription,
+		openGraph: {
+			title: `onTech Blog | ${categoryName}`,
+			description: categoryDescription,
+			url: `${dominio}${slug}`,
+		},
+	}
 }
 
 export default async function CategoryPage({

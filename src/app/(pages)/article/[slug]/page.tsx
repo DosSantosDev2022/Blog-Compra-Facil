@@ -12,6 +12,8 @@ import { updateViewCount } from '@/services/updateViewCount'
 import { AdBanner } from '@/components/global/google'
 import { ProductCard } from '@/components/global/products'
 import { SectionTitle } from '@/components/global/sectionTitle'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
 interface PagePostProps {
 	params: Promise<{ slug: string }>
@@ -19,10 +21,71 @@ interface PagePostProps {
 
 export const dynamicParams = true
 
+const dominio = 'https://on-tech-rho.vercel.app/'
+
+export async function generateMetadata({
+	params,
+}: PagePostProps): Promise<Metadata> {
+	const slug = (await params).slug
+
+	const { article } = await getDetailsArticle(slug)
+
+	const title = `onTech Blog | ${article.title}`
+	const description =
+		article.description?.slice(0, 150) ||
+		'Confira este artigo completo do Blog onTech sobre tecnologia, dicas, tutoriais e novidades.'
+
+	const imageUrl = article.coverImage?.url || '/og-image.png'
+
+	return {
+		title,
+		description,
+		keywords: [
+			article.title,
+			article.category?.name || 'categoria',
+			'artigo sobre tecnologia',
+			'blog de tecnologia',
+			'tutoriais tech',
+			'dicas de produtos',
+			'novidades tecnológicas',
+			...(article.product?.map((p) => p.name) ?? []),
+		],
+		openGraph: {
+			title,
+			description,
+			url: `${dominio}article/${slug}`,
+			siteName: 'onTech Blog',
+			images: [
+				{
+					url: imageUrl,
+					width: 1200,
+					height: 630,
+					alt: article.title,
+				},
+			],
+			locale: 'pt_BR',
+			type: 'article',
+		},
+		twitter: {
+			card: 'summary_large_image',
+			title,
+			description,
+			images: [imageUrl],
+		},
+		metadataBase: new URL(dominio),
+	}
+}
+
 export default async function ArticlePage({ params }: PagePostProps) {
 	const slug = (await params).slug
+
 	const { article } = await getDetailsArticle(slug)
-	await updateViewCount(article.id, article.view + 1)
+
+	if (!article) {
+		notFound()
+	}
+
+	await updateViewCount(article.id, article.view + 1).catch(console.error)
 	// Verifica se existe uma categoria associada
 	const { articles: relatedArticles } = article.category
 		? await getRelatedArticle(article.category.name, article.slug)

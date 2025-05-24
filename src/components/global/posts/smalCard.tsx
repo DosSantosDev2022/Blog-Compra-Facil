@@ -19,12 +19,14 @@ interface SmallCardProps {
 
 const SmallCard = ({ description, slug, title }: SmallCardProps) => {
 	return (
-		<Card className='px-6 py-2 lg:max-w-full lg:w-full'>
-			<CardContent>
-				<CardHeader>
+		<Card className='lg:max-w-full lg:w-full'>
+			<CardContent className='pt-6 space-y-3'>
+				<CardHeader className='p-0'>
 					<CardTitle>{title}</CardTitle>
 				</CardHeader>
-				<CardDescription>{description}</CardDescription>
+				<CardDescription className='line-clamp-3'>
+					{description}
+				</CardDescription>
 				<Button variants='shine' asChild>
 					<Link
 						href={{

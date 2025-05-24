@@ -36,7 +36,7 @@ describe('getDetailsArticle', () => {
 			expect.stringContaining('article(where: {slug: $slug})'),
 			{ slug },
 			{
-				revalidate: 60 * 60 * 24,
+				revalidate: 60 * 60 * 3,
 			},
 		)
 
