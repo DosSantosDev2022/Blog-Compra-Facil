@@ -24,6 +24,10 @@ export default async function RootLayout({
 					type='image/<generated>'
 					sizes='<generated>'
 				/>
+				<meta
+					name='google-site-verification'
+					content='BQ3BsKxQv9wmjdsELFbZEa887IFYp_9gIOeMQ_mgnZc'
+				/>
 			</head>
 			<body
 				className={`${poppins.className} bg-background text-foreground antialiased scrollbar-custom overflow-x-hidden`}
