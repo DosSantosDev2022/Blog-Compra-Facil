@@ -41,7 +41,7 @@ describe('getCategories', () => {
 				'categories(orderBy: view_DESC, where: {view_gt: 0 })',
 			),
 			undefined,
-			{ revalidate: 60 * 60 * 24 },
+			{ revalidate: 60 * 60 * 3 },
 		)
 
 		expect(result).toEqual(mockResponse)
