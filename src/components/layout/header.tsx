@@ -10,7 +10,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { IoClose, IoMenu } from 'react-icons/io5'
 import { InputSearch } from '../global/search'
-import { categories } from '@/config/categories.json'
+import data from '@/config/categories.json'
 import { chakra } from '@/assets/fonts'
 
 const Header = () => {
@@ -78,7 +78,7 @@ const Header = () => {
 							<NavigationItem
 								isDrop
 								id='dropdown1'
-								dropdownItems={categories.map((cat) => (
+								dropdownItems={data.categories.map((cat) => (
 									<Link
 										onClick={handleOpenMenu}
 										aria-label={cat.name}
