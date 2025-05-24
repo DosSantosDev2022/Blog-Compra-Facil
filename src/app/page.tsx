@@ -6,6 +6,9 @@ import { MostViewedPosts } from '@/components/global/postsSections/mostViewedPos
 import { SectionBanner } from '@/components/global/postsSections/sectionBanner'
 import { CategoryBlock } from '@/components/global/postsSections/variableArticles'
 import { getCategories } from '@/services/getCategories'
+import { homeMetaData } from '@/metadata/homeMetaData'
+
+export const metadata = homeMetaData
 
 export default async function Home() {
 	const { categories } = await getCategories()

@@ -25,7 +25,7 @@ const ProductCard = ({
 	LinkUrl,
 }: ProductCardProps) => {
 	return (
-		<Card className='p-4 justify-between'>
+		<Card className='lg:w-xs w-full max-w-xl p-4 flex flex-col justify-between'>
 			<Image
 				width={300}
 				height={320}
@@ -33,12 +33,12 @@ const ProductCard = ({
 				src={imageUrl}
 				alt={name}
 			/>
-			<CardContent>
-				<CardHeader>
+			<CardContent className='p-4 space-y-2'>
+				<CardHeader className='p-0'>
 					<CardTitle>{name}</CardTitle>
 					<CardDescription>{description}</CardDescription>
 				</CardHeader>
-				<CardFooter>
+				<CardFooter className='p-0'>
 					<Button variants='shine' sizes='full' asChild>
 						<Link target='_blank' href={LinkUrl}>
 							Ver mais

@@ -2,9 +2,36 @@ import { AdBanner } from '@/components/global/google'
 import { CardSimple } from '@/components/global/posts/cardSimple'
 import { SectionTitle } from '@/components/global/sectionTitle'
 import { getArticles } from '@/services/getArticles'
+import type { Metadata } from 'next'
 
 interface SearchResultsPageParms {
 	searchParams: Promise<{ query: string | undefined }>
+}
+
+const dominio = 'https://on-tech-rho.vercel.app/'
+
+export async function generateMetadata({
+	searchParams,
+}: { searchParams: { query?: string } }): Promise<Metadata> {
+	const query = searchParams.query?.trim()
+	const title = query
+		? `Resultados da busca por "${query}" |onTech Blog`
+		: 'onTech Blog'
+	const description = query
+		? `Veja os artigos encontrados relacionados a "${query}"`
+		: 'Pesquise por artigos no blog.'
+
+	return {
+		title,
+		description,
+		openGraph: {
+			title,
+			description,
+			url: query
+				? `${dominio}busca?query=${encodeURIComponent(query)}`
+				: `${dominio}`,
+		},
+	}
 }
 
 export default async function SearchResultsPage({

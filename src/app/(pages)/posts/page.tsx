@@ -2,11 +2,14 @@ import { AdBanner } from '@/components/global/google'
 import { CardSimple } from '@/components/global/posts/cardSimple'
 import { SectionTitle } from '@/components/global/sectionTitle'
 import { Pagination } from '@/components/ui'
+import { postsMetaData } from '@/metadata/postsMetaData'
 import { getArticles } from '@/services/getArticles'
 
 interface AllPostsParams {
 	searchParams: Promise<{ page?: string }>
 }
+
+export const metadata = postsMetaData
 
 export default async function AllPosts({ searchParams }: AllPostsParams) {
 	const currentPage = Number((await searchParams).page || 1)

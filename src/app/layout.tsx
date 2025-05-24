@@ -5,12 +5,6 @@ import { Footer } from '@/components/layout/footer'
 import { poppins } from '@/assets/fonts'
 import { ToggleTheme } from '@/components/global/toggleTheme'
 
-export const metadata: Metadata = {
-	title: 'onTech Blog',
-	description:
-		'Fique por dentro de tudo sobre o mundo da tecnologia com onTech blog.',
-}
-
 export default async function RootLayout({
 	children,
 }: Readonly<{

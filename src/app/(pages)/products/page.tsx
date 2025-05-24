@@ -1,12 +1,15 @@
 import { AdBanner } from '@/components/global/google'
 import { ProductCard } from '@/components/global/products'
 import { SectionTitle } from '@/components/global/sectionTitle'
+import { productsMetaData } from '@/metadata/productsMetaData'
 import { getProducts } from '@/services/getProducts'
 import Link from 'next/link'
 
 interface ProductsPageParams {
 	searchParams: Promise<{ category: string }>
 }
+
+export const metadata = productsMetaData
 
 export default async function ProductsPage({
 	searchParams,
