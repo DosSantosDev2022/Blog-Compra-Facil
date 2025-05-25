@@ -80,7 +80,8 @@ export const getProducts = async (
 	}
 
 	const data = await HygraphQuery<ProductResponse>(query, variables, {
-		revalidate: 60 * 60 * 3, // revalida a página a cada 3h
+    cache: 'no-cache'
+		/* revalidate: 60 * 60 * 3, */ // revalida a página a cada 3h
 	})
 
 	return {

@@ -26,18 +26,18 @@ const ProductCard = ({
 }: ProductCardProps) => {
 	return (
 		<Card className='lg:w-xs w-full max-w-xl p-4 flex flex-col justify-between'>
-			<Image
-				width={300}
-				height={320}
-				quality={100}
-				src={imageUrl}
-				alt={name}
-			/>
-			<CardContent className='p-4 space-y-2'>
-				<CardHeader className='p-0'>
-					<CardTitle>{name}</CardTitle>
-					<CardDescription>{description}</CardDescription>
-				</CardHeader>
+			<div className='relative w-full h-46 overflow-hidden rounded-md'>
+				<Image
+					src={imageUrl}
+					alt={name}
+					fill
+					className='object-cover'
+					sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+				/>
+			</div>
+			<CardContent className='p-0 space-y-2'>
+				<CardTitle className='lg:text-base pt-2'>{name}</CardTitle>
+				<CardDescription>{description}</CardDescription>
 				<CardFooter className='p-0'>
 					<Button variants='shine' sizes='full' asChild>
 						<Link target='_blank' href={LinkUrl}>
