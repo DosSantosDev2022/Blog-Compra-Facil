@@ -84,7 +84,6 @@ export default async function CategoryPage({
 						</div>
 					)}
 				</div>
-				{/* Adicionar paginação aqui (se necessário) */}
 				<div className='w-full flex justify-end px-2 py-3 mt-10'>
 					<Pagination
 						page={currentPage}
