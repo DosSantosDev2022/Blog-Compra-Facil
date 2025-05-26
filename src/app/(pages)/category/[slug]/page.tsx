@@ -63,7 +63,7 @@ export default async function CategoryPage({
 				<SectionTitle
 					title={`Categoria: ${articles[0].category.name.toUpperCase()}`}
 				/>
-				<div className='flex flex-wrap items-center justify-around w-full gap-4 mt-8'>
+				<div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 mt-8'>
 					{articles.length > 0 ? (
 						articles.map((article) => (
 							<CardSimple
