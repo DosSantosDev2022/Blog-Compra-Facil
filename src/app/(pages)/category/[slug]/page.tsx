@@ -58,12 +58,13 @@ export default async function CategoryPage({
 	)
 
 	return (
-		<div className='grid lg:grid-cols-12 grid-cols-1 gap-6'>
-			<div className='col-span-9 py-10 lg:mt-36 mt-12'>
+		<div className='w-full'>
+			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			<div className='py-10 lg:mt-36 mt-12'>
 				<SectionTitle
 					title={`Categoria: ${articles[0].category.name.toUpperCase()}`}
 				/>
-				<div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 mt-8'>
+				<div className='grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-4 mt-8'>
 					{articles.length > 0 ? (
 						articles.map((article) => (
 							<CardSimple
@@ -93,13 +94,6 @@ export default async function CategoryPage({
 				</div>
 				{/* anúncio horizontal 2 */}
 				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />{' '}
-			</div>
-			{/* seção com anunicos */}
-			<div className='col-span-3 py-10 px-4 mt-36'>
-				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
-				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
-				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
-				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
 			</div>
 		</div>
 	)
