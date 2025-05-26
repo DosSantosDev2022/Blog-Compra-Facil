@@ -2,10 +2,10 @@ import page from '@/app/page'
 import { AdBanner } from '@/components/global/google'
 import { CardSimple } from '@/components/global/posts/cardSimple'
 import { SectionTitle } from '@/components/global/sectionTitle'
-import { Button, Pagination } from '@/components/ui'
+import { Pagination } from '@/components/ui'
 import { getArticles } from '@/services/getArticles'
 import { updateCategoryViewCount } from '@/services/updateCategoryViewCount'
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata } from 'next'
 
 interface CategoryPageParams {
 	params: Promise<{ slug: string }>
