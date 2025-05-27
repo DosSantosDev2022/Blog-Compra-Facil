@@ -19,13 +19,17 @@ export default async function Home() {
 			{/* seção hero posts */}
 			<HeroSection />
 			{/* anúncio horizontal */}
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			<div className='p-2  mb-8'>
+				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			</div>
 
 			{/* posts mais vistos */}
 			<MostViewedPosts />
 
 			{/* anúncio horizontal 3 */}
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			<div className='p-2  mb-8'>
+				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			</div>
 
 			{/* seção de últimas notícias em formato de lista */}
 			<LatestNews />
@@ -34,16 +38,15 @@ export default async function Home() {
 			<LatestNews />
 
 			{/* anúncio horizontal 4 */}
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			<div className='p-2  mb-8'>
+				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			</div>
 
 			{/* seção de categorias em destaque */}
 			<FeaturedCategories />
 
 			{categories.map((category) => (
-				<div
-					key={category.id}
-					className=' max-h-[768px] overflow-y-scroll scrollbar-custom w-full p-2'
-				>
+				<div key={category.id} className='overflow-y-hidden w-full p-2'>
 					<CategoryBlock
 						title={category.name}
 						categorySlug={category.slug}
@@ -52,7 +55,9 @@ export default async function Home() {
 			))}
 
 			{/* anúncio horizontal 2 */}
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			<div className='p-2  mb-8'>
+				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			</div>
 		</div>
 	)
 }

@@ -58,8 +58,10 @@ export default async function ProductsPage({
 				))}
 			</div>
 
-			{/* anúncio horizontal 2 */}
-			{/* 	<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' /> */}
+			<div className='p-2  mb-8'>
+				{/* anúncio horizontal 2 */}
+				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			</div>
 		</div>
 	)
 }
