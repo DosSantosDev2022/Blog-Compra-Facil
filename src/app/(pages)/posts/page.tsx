@@ -22,8 +22,14 @@ export default async function AllPosts({ searchParams }: AllPostsParams) {
 	return (
 		<div className='container mx-auto py-8 lg:mt-32 mt-8'>
 			<SectionTitle title={'Todos os posts'} />
+			<div className='mb-6'> </div>
 
-			<div className='flex flex-wrap gap-4 mt-6'>
+			<div className='p-2  mb-8'>
+				{/* anúncio horizontal 1 */}
+				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			</div>
+
+			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mt-6'>
 				{articles.map((article, index) => (
 					<CardSimple
 						id={article.id}
@@ -37,7 +43,6 @@ export default async function AllPosts({ searchParams }: AllPostsParams) {
 				))}
 			</div>
 
-			{/* Adicionar paginação aqui (se necessário) */}
 			<div className='w-full flex justify-end px-2 py-3 mt-10'>
 				<Pagination
 					page={currentPage}
@@ -46,8 +51,10 @@ export default async function AllPosts({ searchParams }: AllPostsParams) {
 				/>
 			</div>
 
-			{/* anúncio horizontal 1 */}
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			{/* anúncio horizontal 2 */}
+			<div className='p-2 mb-8'>
+				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			</div>
 		</div>
 	)
 }

@@ -44,7 +44,7 @@ export default async function CategoryPage({
 }: CategoryPageParams) {
 	const categorySlug = (await params).slug
 	const currentPage = Number((await searchParams).page || 1)
-	const pageSize = 50
+	const pageSize = 10
 	const { articles, totalCount } = await getArticles({
 		where: 'category',
 		categorySlug,
@@ -59,7 +59,10 @@ export default async function CategoryPage({
 
 	return (
 		<div className='w-full'>
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			<div className='p-2  mb-8'>
+				{/* anúncio horizontal 1 */}
+				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			</div>
 			<div className='py-10 lg:mt-36 mt-12'>
 				<SectionTitle
 					title={`Categoria: ${articles[0].category.name.toUpperCase()}`}
@@ -92,8 +95,10 @@ export default async function CategoryPage({
 						total={totalCount}
 					/>
 				</div>
-				{/* anúncio horizontal 2 */}
-				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />{' '}
+				<div className='p-2  mb-8'>
+					{/* anúncio horizontal 2 */}
+					<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+				</div>
 			</div>
 		</div>
 	)

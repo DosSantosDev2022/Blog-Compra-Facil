@@ -19,7 +19,7 @@ const CategoryBlock = async ({
 		orderBy: 'createdAt_DESC',
 		where: 'category',
 		categorySlug,
-		pageSize: 50,
+		pageSize: 10,
 	})
 	return (
 		<div className='space-y-3'>
