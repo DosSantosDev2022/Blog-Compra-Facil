@@ -1,14 +1,22 @@
 import type { Article, ArticleQueryResponse } from '@/@types/hygraphTypes'
 import { HygraphQuery } from '@/app/api/cms/hygraph'
 
+ type ArticleViewFilterOperator = 'gt' | 'gte' | 'lt' | 'lte' | 'eq';
+
+ interface ArticleViewFilter {
+  operator: ArticleViewFilterOperator;
+  value: number;
+}
+
 interface ArticleQueryOptions {
 	page?: number
 	pageSize?: number
-	where?: 'highlights' | 'view' | 'category' | 'search'
+	where?: 'highlights' | 'category' | 'search'
 	categorySlug?: string
 	search?: string
 	excludeSlug?: string
 	orderBy?: 'createdAt_ASC' | 'createdAt_DESC'
+  viewFilter?: ArticleViewFilter;
 }
 
 export const getArticles = async (
@@ -22,6 +30,7 @@ export const getArticles = async (
 		search,
 		categorySlug,
 		excludeSlug,
+    viewFilter
 	} = options
 
 	const skip = (page - 1) * pageSize
@@ -71,17 +80,34 @@ export const getArticles = async (
     }
   `;
 
-	// Mapeia dinamicamente o filtro `where`
-	const whereClause =
-		where === 'highlights'
-			? { highlights: true }
-			: where === 'view'
-				? { view_gt: 1 } // ou alguma lógica condicional futura
-				: where === 'category'
-					? { category: { slug: categorySlug } }
-					: where === 'search'
-						? { _search: search }
-						: undefined
+	 // Mapeia dinamicamente o filtro `where`
+  let whereClause: Record<string, unknown> | undefined
+
+  if (where === 'highlights') {
+    whereClause = { highlights: true }
+  } else if (where === 'category') {
+    whereClause = { category: { slug: categorySlug } }
+  } else if (where === 'search') {
+    whereClause = { _search: search }
+  }
+
+  // Adiciona o filtro de view se viewFilter estiver presente
+  if (viewFilter) {
+    if (!whereClause) {
+      whereClause = {}; // Inicializa se ainda não houver nenhum filtro
+    }
+    // Constrói a chave dinâmica para o filtro de view (ex: view_gt, view_eq)
+    const viewKey = `view_${viewFilter.operator}`;
+    whereClause[viewKey] = viewFilter.value;
+  }
+
+  // Se excludeSlug estiver presente, adicione ao whereClause
+  if (excludeSlug) {
+    if (!whereClause) {
+      whereClause = {};
+    }
+    whereClause.slug_not = excludeSlug; // Assuming `slug_not` is the correct Hygraph filter for exclusion
+  }
 
 	const variables: Record<string, unknown> = {
 		first: pageSize,

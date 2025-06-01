@@ -30,7 +30,7 @@ const CardSimple = ({
 	createdAt,
 }: CardSimpleProps) => {
 	return (
-		<Card className='flex flex-col h-full overflow-hidden max-w-xl w-xs'>
+		<Card className='flex flex-col h-full overflow-hidden max-w-xl lg:w-sm w-full'>
 			<CardHeader className='p-0 relative h-48 w-full'>
 				<Image
 					src={coverImage}

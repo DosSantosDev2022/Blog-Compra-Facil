@@ -1,10 +1,10 @@
 import { AdBanner } from '@/components/global/google'
 import { FeaturedCategories } from '@/components/global/postsSections/featuredCategories'
 import { HeroSection } from '@/components/global/postsSections/hero'
-import { LatestNews } from '@/components/global/postsSections/latestNews'
+import { VariableArticle } from '@/components/global/postsSections/variableArticle'
 import { MostViewedPosts } from '@/components/global/postsSections/mostViewedPosts'
 import { SectionBanner } from '@/components/global/postsSections/sectionBanner'
-import { CategoryBlock } from '@/components/global/postsSections/variableArticles'
+import { CategoryBlock } from '@/components/global/postsSections/categoryBlock'
 import { getCategories } from '@/services/getCategories'
 import { homeMetaData } from '@/metadata/homeMetaData'
 
@@ -18,23 +18,29 @@ export default async function Home() {
 			<SectionBanner />
 			{/* seção hero posts */}
 			<HeroSection />
-			{/* anúncio horizontal */}
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			<div className='mb-8'>
+				<p className='text-sm text-gray-500 mb-2 space-y-2'>Anúncio</p>
+				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			</div>
 
 			{/* posts mais vistos */}
 			<MostViewedPosts />
 
-			{/* anúncio horizontal 3 */}
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			<div className='mb-8'>
+				<p className='text-sm text-gray-500 mb-2 space-y-2'>Anúncio</p>
+				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			</div>
 
 			{/* seção de últimas notícias em formato de lista */}
-			<LatestNews />
+			<VariableArticle title='Posts em alta' />
 
 			{/* seção de últimas notícias em formato de lista */}
-			<LatestNews />
+			{/* <VariableArticle /> */}
 
-			{/* anúncio horizontal 4 */}
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			<div className='mb-8'>
+				<p className='text-sm text-gray-500 mb-2 space-y-2'>Anúncio</p>
+				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			</div>
 
 			{/* seção de categorias em destaque */}
 			<FeaturedCategories />
@@ -52,7 +58,11 @@ export default async function Home() {
 			))}
 
 			{/* anúncio horizontal 2 */}
-			<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+
+			<div className='mb-8'>
+				<p className='text-sm text-gray-500 mb-2 space-y-2'>Anúncio</p>
+				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			</div>
 		</div>
 	)
 }
