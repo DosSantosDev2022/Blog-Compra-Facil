@@ -4,7 +4,13 @@ import { getArticles } from '@/services/getArticles'
 import { CardSimple } from '../posts/cardSimple'
 
 const MostViewedPosts = async () => {
-	const { articles } = await getArticles({ where: 'view', pageSize: 10 })
+	const { articles } = await getArticles({
+		viewFilter: {
+			operator: 'gt',
+			value: 10,
+		},
+		pageSize: 10,
+	})
 	return (
 		<section aria-label='Posts mais vistos'>
 			<SectionTitle title='Posts mais vistos' />
