@@ -1,8 +1,7 @@
-import page from '@/app/page'
 import { AdBanner } from '@/components/global/google'
 import { CardSimple } from '@/components/global/posts/cardSimple'
 import { SectionTitle } from '@/components/global/sectionTitle'
-import { Pagination } from '@/components/ui'
+import { Button, Pagination } from '@/components/ui'
 import { getArticles } from '@/services/getArticles'
 import { updateCategoryViewCount } from '@/services/updateCategoryViewCount'
 import type { Metadata } from 'next'
@@ -52,22 +51,21 @@ export default async function CategoryPage({
 		page: currentPage,
 	})
 
-	await updateCategoryViewCount(
-		articles[0]?.category.id,
-		articles[0]?.category.view + 1,
-	)
+	// Garante que articles[0]?.category e articles[0]?.category.view existam antes de chamar updateCategoryViewCount
+	if (articles.length > 0 && articles[0]?.category) {
+		await updateCategoryViewCount(
+			articles[0].category.id,
+			articles[0].category.view + 1,
+		)
+	}
 
 	return (
-		<div className='w-full'>
-			<div className='p-2  mb-8'>
-				{/* anúncio horizontal 1 */}
-				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-			</div>
-			<div className='py-10 lg:mt-36 mt-12'>
+		<div className='grid lg:grid-cols-12 grid-cols-1 gap-6'>
+			<div className='col-span-10 py-10 lg:mt-36 mt-12'>
 				<SectionTitle
 					title={`Categoria: ${articles[0].category.name.toUpperCase()}`}
 				/>
-				<div className='grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-4 mt-8'>
+				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8'>
 					{articles.length > 0 ? (
 						articles.map((article) => (
 							<CardSimple
@@ -88,6 +86,7 @@ export default async function CategoryPage({
 						</div>
 					)}
 				</div>
+				{/* Adicionar paginação aqui (se necessário) */}
 				<div className='w-full flex justify-end px-2 py-3 mt-10'>
 					<Pagination
 						page={currentPage}
@@ -95,10 +94,15 @@ export default async function CategoryPage({
 						total={totalCount}
 					/>
 				</div>
-				<div className='p-2  mb-8'>
-					{/* anúncio horizontal 2 */}
-					<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-				</div>
+				{/* anúncio horizontal 2 */}
+				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />{' '}
+			</div>
+			{/* seção com anunicos */}
+			<div className='col-span-2 py-10 px-4 mt-36 border'>
+				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
+				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
+				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
+				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
 			</div>
 		</div>
 	)
