@@ -19,7 +19,7 @@ interface PagePostProps {
 	params: Promise<{ slug: string }>
 }
 
-const dominio = 'https://ontech.blog/'
+const dominio = 'https://www.ontech.blog/'
 
 export async function generateMetadata({
 	params,

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import {keywords} from '@/metadata/keyWords'
 
-const dominio = 'https://on-tech-rho.vercel.app/posts'
+const dominio = 'https://www.ontech.blog/posts'
 const title = 'OnTech Blog | Todos os Posts'
 
 export const postsMetaData: Metadata = { 
