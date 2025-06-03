@@ -72,14 +72,14 @@ describe('getArticles', () => {
         where: undefined,
         orderBy: 'createdAt_DESC',
       },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     // Segunda chamada para buscar a contagem total
     expect(HygraphQuery).toHaveBeenCalledWith(
       expect.stringContaining('query ArticlesCountQuery'), // Verifica se a string contém o nome da query de contagem
       { where: undefined },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(result.articles).toEqual(mockArticles);
@@ -101,14 +101,14 @@ describe('getArticles', () => {
         where: undefined,
         orderBy: 'createdAt_DESC',
       },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     // Segunda chamada para buscar a contagem total (sem paginação, apenas filtro)
     expect(HygraphQuery).toHaveBeenCalledWith(
       expect.stringContaining('query ArticlesCountQuery'),
       { where: undefined },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(result.articles).toEqual(mockArticles);
@@ -130,13 +130,13 @@ describe('getArticles', () => {
         where: expectedWhere,
         orderBy: 'createdAt_DESC',
       },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(HygraphQuery).toHaveBeenCalledWith(
       expect.stringContaining('query ArticlesCountQuery'),
       { where: expectedWhere },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(result.articles).toEqual(mockArticles);
@@ -157,13 +157,13 @@ describe('getArticles', () => {
         where: expectedWhere,
         orderBy: 'createdAt_DESC',
       },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(HygraphQuery).toHaveBeenCalledWith(
       expect.stringContaining('query ArticlesCountQuery'),
       { where: expectedWhere },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(result.articles).toEqual(mockArticles);
@@ -183,13 +183,13 @@ describe('getArticles', () => {
         where: expectedWhere,
         orderBy: 'createdAt_DESC',
       },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(HygraphQuery).toHaveBeenCalledWith(
       expect.stringContaining('query ArticlesCountQuery'),
       { where: expectedWhere },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(result.articles).toEqual(mockArticles);
@@ -209,13 +209,13 @@ describe('getArticles', () => {
         where: expectedWhere,
         orderBy: 'createdAt_DESC',
       },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(HygraphQuery).toHaveBeenCalledWith(
       expect.stringContaining('query ArticlesCountQuery'),
       { where: expectedWhere },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(result.articles).toEqual(mockArticles);
@@ -239,13 +239,13 @@ describe('getArticles', () => {
         where: expectedWhere,
         orderBy: 'createdAt_DESC',
       },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(HygraphQuery).toHaveBeenCalledWith(
       expect.stringContaining('query ArticlesCountQuery'),
       { where: expectedWhere },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(result.articles).toEqual(mockArticles);
@@ -265,13 +265,13 @@ describe('getArticles', () => {
         where: expectedWhere,
         orderBy: 'createdAt_DESC',
       },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(HygraphQuery).toHaveBeenCalledWith(
       expect.stringContaining('query ArticlesCountQuery'),
       { where: expectedWhere },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(result.articles).toEqual(mockArticles);
@@ -289,14 +289,14 @@ describe('getArticles', () => {
         where: undefined,
         orderBy: 'createdAt_ASC',
       },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     // O orderBy não afeta a query de contagem
     expect(HygraphQuery).toHaveBeenCalledWith(
       expect.stringContaining('query ArticlesCountQuery'),
       { where: undefined },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(result.articles).toEqual(mockArticles);
@@ -317,13 +317,13 @@ describe('getArticles', () => {
         where: expectedWhere,
         orderBy: 'createdAt_DESC',
       },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(HygraphQuery).toHaveBeenCalledWith(
       expect.stringContaining('query ArticlesCountQuery'),
       { where: expectedWhere },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(result.articles).toEqual(mockArticles);
@@ -354,13 +354,13 @@ describe('getArticles', () => {
         where: expectedWhere,
         orderBy: 'createdAt_ASC',
       },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(HygraphQuery).toHaveBeenCalledWith(
       expect.stringContaining('query ArticlesCountQuery'),
       { where: expectedWhere },
-      { revalidate: 60 * 60 * 3 }
+      { revalidate: 60 * 60 * 24 }
     );
 
     expect(result.articles).toEqual(mockArticles);

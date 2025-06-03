@@ -22,7 +22,6 @@ interface CardSimpleProps {
 }
 
 const CardSimple = ({
-	id,
 	alt,
 	coverImage,
 	title,
@@ -30,10 +29,10 @@ const CardSimple = ({
 	createdAt,
 }: CardSimpleProps) => {
 	return (
-		<Card className='flex flex-col h-full overflow-hidden max-w-xl lg:w-sm w-full'>
+		<Card className='flex flex-col h-full overflow-hidden max-w-xl w-full'>
 			<CardHeader className='p-0 relative h-48 w-full'>
 				<Image
-					src={coverImage}
+					src={coverImage || ''}
 					alt={alt}
 					fill
 					className='object-cover rounded-t-xl'

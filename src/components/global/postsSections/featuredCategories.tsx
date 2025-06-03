@@ -1,13 +1,18 @@
 import Link from 'next/link'
 import { SectionTitle } from '../sectionTitle'
-import { getCategories } from '@/services/getCategories'
 import { Badge } from '@/components/ui'
+import { CategoryBlock } from './categoryBlock'
+import type { Category } from '@/@types/hygraphTypes'
 
-const FeaturedCategories = async () => {
-	const { categories } = await getCategories()
+interface FeaturedCategoriesProps {
+	categories: Category[]
+}
 
+const FeaturedCategories = async ({
+	categories,
+}: FeaturedCategoriesProps) => {
 	return (
-		<div className=''>
+		<div className='space-y-4'>
 			<SectionTitle title='Categorias em Destaque' />
 			<div className='flex gap-2 mt-3 overflow-x-auto scrollbar-custom'>
 				{categories.map((category) => (
@@ -28,6 +33,14 @@ const FeaturedCategories = async () => {
 					</Link>
 				))}
 			</div>
+			{categories.map((category) => (
+				<div key={category.id} className='overflow-y-hidden w-full p-2'>
+					<CategoryBlock
+						title={category.name || ''}
+						categorySlug={category.slug || ''}
+					/>
+				</div>
+			))}
 		</div>
 	)
 }

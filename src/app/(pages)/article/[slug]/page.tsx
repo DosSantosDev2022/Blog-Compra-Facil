@@ -19,9 +19,7 @@ interface PagePostProps {
 	params: Promise<{ slug: string }>
 }
 
-export const dynamicParams = true
-
-const dominio = 'https://on-tech-rho.vercel.app/'
+const dominio = 'https://ontech.blog/'
 
 export async function generateMetadata({
 	params,
@@ -29,6 +27,10 @@ export async function generateMetadata({
 	const slug = (await params).slug
 
 	const { article } = await getDetailsArticle(slug)
+
+	if (!article) {
+		return {}
+	}
 
 	const title = `onTech Blog | ${article.title}`
 	const description =
@@ -41,7 +43,7 @@ export async function generateMetadata({
 		title,
 		description,
 		keywords: [
-			article.title,
+			article.title || '',
 			article.category?.name || 'categoria',
 			'artigo sobre tecnologia',
 			'blog de tecnologia',
@@ -85,21 +87,29 @@ export default async function ArticlePage({ params }: PagePostProps) {
 		notFound()
 	}
 
-	await updateViewCount(article.id, article.view + 1).catch(console.error)
-	// Verifica se existe uma categoria associada
-	const { articles: relatedArticles } = article.category
-		? await getRelatedArticle(article.category.name, article.slug)
-		: { articles: [] }
+	const [relatedArticlesData] = await Promise.all([
+		article.category
+			? getRelatedArticle(article.category.name, article.slug || '')
+			: { articles: [] },
+
+		article.id && article.view !== null && article.view !== undefined
+			? updateViewCount(article.id, article.view + 1).catch(console.error)
+			: Promise.resolve(), // Resolva imediatamente se não precisar atualizar
+	])
+
+	const relatedArticles = relatedArticlesData.articles
+
 	return (
 		<div className='container mx-auto py-8'>
 			{/* Header com foto de destaque */}
 			<div className='relative w-full lg:h-[520px] h-48 rounded-lg overflow-hidden mt-32'>
 				<Image
-					src={article.coverImage.url}
-					alt={article.title}
+					src={article.coverImage?.url || ''}
+					alt={article.title || 'Capa do artigo'}
 					fill
 					className='object-cover w-full h-full'
 					priority
+					sizes='(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 60vw'
 				/>
 			</div>
 
@@ -111,7 +121,7 @@ export default async function ArticlePage({ params }: PagePostProps) {
 							{article.title}
 						</h1>
 						<p className='text-muted-foreground'>
-							{`Publicado em: ${format(article.createdAt, 'dd/MM/yyyy', { locale: ptBR })}`}
+							{`Publicado em: ${format(article.createdAt || '', 'dd/MM/yyyy', { locale: ptBR })}`}
 						</p>
 						<span className='text-muted-foreground'>
 							{`Visualizações: ${article.view}`}{' '}
@@ -119,18 +129,27 @@ export default async function ArticlePage({ params }: PagePostProps) {
 					</div>
 
 					{/*  anúncio horizontal */}
-					<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+					<div className='mb-8'>
+						<p className='text-sm text-gray-500 mb-2 space-y-2'>Anúncio</p>
+						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+					</div>
 
 					<article className='space-y-4 text-lg'>
-						<RichText
-							content={article?.content?.raw}
-							renderers={defaultRenders}
-						/>
+						{article.content?.raw ? (
+							<RichText
+								content={article.content.raw}
+								renderers={defaultRenders}
+							/>
+						) : (
+							<p className='text-muted-foreground'>
+								Conteúdo não disponível.
+							</p>
+						)}
 					</article>
 					<div className='space-y-6'>
 						<SectionTitle title='Produtos recomendados' />
 						<div className='flex flex-wrap gap-4'>
-							{article.product.map((product) => (
+							{article?.product?.map((product) => (
 								<ProductCard
 									key={product.id}
 									name={product.name}
@@ -143,8 +162,16 @@ export default async function ArticlePage({ params }: PagePostProps) {
 					</div>
 
 					{/* Área de compartilhamento */}
-					<div className='mt-8 border-t border-gray-200 py-4'>
-						<ShareButtons slug={article.slug} title={article.title} />
+					<div className='mt-8 border-t border-border py-4'>
+						<ShareButtons
+							slug={article.slug || ''}
+							title={article.title || ''}
+						/>
+					</div>
+
+					<div className='mb-8'>
+						<p className='text-sm text-gray-500 mb-2 space-y-2'>Anúncio</p>
+						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 					</div>
 				</div>
 
@@ -157,16 +184,22 @@ export default async function ArticlePage({ params }: PagePostProps) {
 						{relatedArticles.map((article) => (
 							<Link href={`/article/${article.slug}`} key={article.id}>
 								<CardImage
-									image={article.coverImage?.url}
+									image={article.coverImage?.url || ''}
 									title={article.title}
+									category={article.category?.name || ''}
 									className=' h-48 md:h-52'
 								/>
 							</Link>
 						))}
 					</div>
-
-					{/* Anúncio vertical */}
-					<AdBanner dataAdFormat='auto' dataAdSlot='2302299472' />
+					<div className='mb-8'>
+						<p className='text-sm text-gray-500 mb-2 space-y-2'>Anúncio</p>
+						<div className='flex flex-col gap-2'>
+							<AdBanner dataAdFormat='auto' dataAdSlot='2302299472' />
+							<AdBanner dataAdFormat='auto' dataAdSlot='2302299472' />
+							<AdBanner dataAdFormat='auto' dataAdSlot='2302299472' />
+						</div>
+					</div>
 				</aside>
 			</div>
 		</div>

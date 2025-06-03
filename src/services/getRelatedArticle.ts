@@ -1,19 +1,19 @@
 import { HygraphQuery } from '@/app/api/cms/hygraph'
-import type { RelatedArticleResponse } from '@/@types/hygraphTypes'
+import type { Article, RelatedArticle, RelatedArticleResponse } from '@/@types/hygraphTypes'
 
 export const getRelatedArticle = async (
 	categoryName: string,
-	currentSlug: string,
+	excludeSlug: string,
 ): Promise<RelatedArticleResponse> => {
 	const query = `
-    query RelatedArticles($name: String!, $currentSlug: String!) {
+    query RelatedArticles($name: String!, $excludeSlug: String!) {
       articles(
         where: {
           category: { name: $name },
-          slug_not: $currentSlug
+          slug_not: $excludeSlug
         },
         orderBy: createdAt_DESC,
-        first: 10
+        first: 5
       ) {
         id
         title
@@ -22,11 +22,15 @@ export const getRelatedArticle = async (
         coverImage {
           url
         }
+        category {
+         name
+        }
       }
     }
    `
-	const variables = { name: categoryName, currentSlug }
-	return HygraphQuery(query, variables, {
-		revalidate: 60 * 60 * 3, // revalida a página a cada 3h
-	})
+	const variables = { name: categoryName, excludeSlug }
+  const data = await HygraphQuery<{ articles: RelatedArticle[] }>(query, variables, {
+    revalidate: 60 * 60 * 4, // revalida a cada 4 horas
+  })
+	return {articles: data?.articles || []}
 }

@@ -1,8 +1,14 @@
 import type { RichTextContent } from '@graphcms/rich-text-types'
 export interface Category {
-	id: string // Ou number, dependendo do seu backend
-	name: string
-	slug: string
+	id: string
+	name?: string
+	slug?: string
+	category?: {
+		name: string
+	}
+	coverImage?: {
+		url: string
+	}
 }
 
 export interface CategoryResponse {
@@ -21,25 +27,25 @@ type Products = {
 
 export interface Article {
 	id: string
-	slug: string
-	title: string
-	description: string
-	coverImage: {
+	slug?: string
+	title?: string
+	description?: string
+	coverImage?: {
 		url: string
 	}
-	category: {
+	category?: {
 		id: string
 		name: string
 		slug: string
 		view: number
 	}
-	createdAt: string
-	highlights: boolean
-	content: {
+	createdAt?: string
+	highlights?: boolean
+	content?: {
 		raw: RichTextContent
 	}
-	view: number
-	product: Products[]
+	view?: number
+	product?: Products[]
 }
 
 export type ArticleDetail = {

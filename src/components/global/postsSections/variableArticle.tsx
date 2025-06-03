@@ -1,20 +1,17 @@
 import { SectionTitle } from '../sectionTitle'
 import { SmallCard } from '../posts/smalCard'
-import { getArticles } from '@/services/getArticles'
 import { AdBanner } from '../google'
+import type { Article } from '@/@types/hygraphTypes'
 
 interface VariableArticleProps {
 	title: string
+	recentArticles: Article[]
 }
 
-const VariableArticle = async ({ title }: VariableArticleProps) => {
-	const { articles } = await getArticles({
-		viewFilter: {
-			operator: 'gt',
-			value: 5,
-		},
-		pageSize: 100,
-	})
+const VariableArticle = async ({
+	title,
+	recentArticles,
+}: VariableArticleProps) => {
 	return (
 		<div className=''>
 			<SectionTitle title={title} />
@@ -30,13 +27,13 @@ const VariableArticle = async ({ title }: VariableArticleProps) => {
 					</div>
 				</div>
 				<ul className='md:col-span-2 overflow-y-scroll max-h-[768px] space-y-3 scrollbar-custom grid grid-cols-1 gap-2 lg:grid-cols-2'>
-					{articles.map((article) => (
+					{recentArticles.map((article) => (
 						<SmallCard
 							key={article.id}
-							title={article.title}
+							title={article.title || ''}
 							coverImage={article.coverImage?.url || ''}
-							description={article.description}
-							slug={article.slug}
+							description={article.description || ''}
+							slug={article.slug || ''}
 						/>
 					))}
 				</ul>

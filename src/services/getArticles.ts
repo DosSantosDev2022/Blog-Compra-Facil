@@ -11,11 +11,11 @@ import { HygraphQuery } from '@/app/api/cms/hygraph'
 interface ArticleQueryOptions {
 	page?: number
 	pageSize?: number
-	where?: 'highlights' | 'category' | 'search'
+	where?: 'highlights' | 'category' | 'search' | 'mostViewed';
 	categorySlug?: string
 	search?: string
 	excludeSlug?: string
-	orderBy?: 'createdAt_ASC' | 'createdAt_DESC'
+	orderBy?: 'createdAt_ASC' | 'createdAt_DESC' | 'view_ASC' | 'view_DESC'
   viewFilter?: ArticleViewFilter;
 }
 
@@ -26,7 +26,6 @@ export const getArticles = async (
 		page = 1,
 		pageSize = 50,
 		where,
-		orderBy = 'createdAt_DESC',
 		search,
 		categorySlug,
 		excludeSlug,
@@ -51,62 +50,49 @@ export const getArticles = async (
         id
         slug
         title
-        description
         coverImage {
           url
         }
-        category {
-          id
-          slug
-					name
-          view
-        }
         createdAt
-        highlights
-        content {
-          raw
-        }
       }
-    }
-  `
-	 // Consulta para obter o total de artigos
-  const totalCountQuery = `
-    query ArticlesCountQuery($where: ArticleWhereInput) {
       articlesConnection(where: $where) {
         aggregate {
-          count
-        }
+        count
       }
     }
-  `;
-
+   }
+  `
+	
 	 // Mapeia dinamicamente o filtro `where`
-  let whereClause: Record<string, unknown> | undefined
-
+   let whereClause: Record<string, unknown> = {};
+  let orderBy: string = options.orderBy || 'createdAt_DESC';
+  // Lógica para mapear dinamicamente o filtro `where` e a ordenação
   if (where === 'highlights') {
-    whereClause = { highlights: true }
+    whereClause = { highlights: true };
   } else if (where === 'category') {
-    whereClause = { category: { slug: categorySlug } }
+    whereClause = { category: { slug: categorySlug } };
   } else if (where === 'search') {
-    whereClause = { _search: search }
+    whereClause = { _search: search };
+  } else if (where === 'mostViewed') {
+    orderBy = 'view_DESC';
   }
 
-  // Adiciona o filtro de view se viewFilter estiver presente
-  if (viewFilter) {
-    if (!whereClause) {
-      whereClause = {}; // Inicializa se ainda não houver nenhum filtro
-    }
-    // Constrói a chave dinâmica para o filtro de view (ex: view_gt, view_eq)
+  // Adiciona o filtro de view SE ele foi passado e não estamos no caso 'mostViewed'
+  // que já gerencia a ordenação por views
+  if (viewFilter && where !== 'mostViewed') {
     const viewKey = `view_${viewFilter.operator}`;
     whereClause[viewKey] = viewFilter.value;
   }
 
   // Se excludeSlug estiver presente, adicione ao whereClause
-  if (excludeSlug) {
-    if (!whereClause) {
-      whereClause = {};
-    }
-    whereClause.slug_not = excludeSlug; // Assuming `slug_not` is the correct Hygraph filter for exclusion
+ if (excludeSlug) {
+    // Usar 'AND' para combinar com outros filtros existentes
+    whereClause = {
+      AND: [
+        whereClause, // Inclui os filtros anteriores
+        { slug_not: excludeSlug }
+      ]
+    };
   }
 
 	const variables: Record<string, unknown> = {
@@ -116,25 +102,15 @@ export const getArticles = async (
 		orderBy: orderBy,
 	}
 
-	const totalCountVariables: Record<string, unknown> = {
-    where: whereClause,
-  };
+	 const responseData = await HygraphQuery<{
+    articles: Article[];
+    articlesConnection: { aggregate: { count: number } };
+  }>(query, variables, {
+    revalidate: 60 * 60 * 24, // revalida a página a cada 24h
+  });;
 
-	const [articlesData, totalCountData] = await Promise.all([
-    HygraphQuery<{ articles: Article[] }>(query, variables, {
-      revalidate: 60 * 60 * 3, // revalida a página a cada 3h
-    }),
-    HygraphQuery<{ articlesConnection: { aggregate: { count: number } } }>(
-      totalCountQuery,
-      totalCountVariables,
-      {
-        revalidate: 60 * 60 * 3, // revalida a página a cada 3h
-      },
-    ),
-  ]);
-
-	const articles = articlesData?.articles || [];
-  const totalCount = totalCountData?.articlesConnection?.aggregate?.count || 0;
+	const articles = responseData?.articles || [];
+  const totalCount = responseData?.articlesConnection?.aggregate?.count || 0;
 
   return { articles, totalCount };
 }

@@ -9,7 +9,7 @@ interface SearchResultsPageParms {
 	searchParams: Promise<{ query: string | undefined; page: string }>
 }
 
-const dominio = 'https://on-tech-rho.vercel.app/'
+const dominio = 'https://ontech.blog/'
 
 export async function generateMetadata({
 	searchParams,
@@ -55,9 +55,11 @@ export default async function SearchResultsPage({
 			<SectionTitle title={`Resultados da Busca para: "${query}"`} />
 			<div className='mb-6'> </div>
 
-			<div className='p-2  mb-8'>
-				{/* anúncio horizontal 1 */}
-				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			<div className='mb-8 flex flex-col items-start  p-4'>
+				<p className='text-sm text-gray-500 mb-2 space-y-2'>Anúncio</p>
+				<div className='flex flex-col gap-4 w-full'>
+					<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+				</div>
 			</div>
 
 			{hasResults ? (
@@ -65,11 +67,11 @@ export default async function SearchResultsPage({
 					{articles.map((article, index) => (
 						<CardSimple
 							id={article.id}
-							title={article.title}
-							slug={article.slug}
-							coverImage={article.coverImage.url}
-							createdAt={article.createdAt}
-							alt={article.title}
+							title={article.title || ''}
+							slug={article.slug || ''}
+							coverImage={article.coverImage?.url || ''}
+							createdAt={article.createdAt || ''}
+							alt={article.title || ''}
 							key={article.id}
 						/>
 					))}
@@ -80,15 +82,18 @@ export default async function SearchResultsPage({
 				</p>
 			)}
 
-			{/* Adicionar paginação aqui (se necessário) */}
-			<div className='w-full flex justify-end px-2 py-3 mt-10'>
+			<div className='w-full flex items-center gap-3 justify-start px-2 py-3 mt-10'>
+				<span className='font-light text-muted-foreground'>
+					Mostrando{' '}
+					{Math.min(pageSize, totalCount - (currentPage - 1) * pageSize)}{' '}
+					de {totalCount}
+				</span>
 				<Pagination
 					page={currentPage}
 					limit={pageSize}
 					total={totalCount}
 				/>
 			</div>
-
 			{/* anúncio horizontal 2 */}
 			<div className='p-2  mt-8'>
 				{' '}

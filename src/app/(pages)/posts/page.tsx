@@ -24,18 +24,18 @@ export default async function AllPosts({ searchParams }: AllPostsParams) {
 			<SectionTitle title={'Todos os posts'} />
 
 			{/* Contêiner principal para posts e anúncios */}
-			<div className='flex flex-col lg:flex-row gap-8 mt-6 relative'>
+			<div className='grid grid-cols-1 lg:grid-cols-5 gap-8 mt-6 relative'>
 				{/* Seção dos Posts (ocupa a maior parte do espaço) */}
-				<div className='flex-1'>
-					<div className='flex flex-wrap gap-4'>
+				<div className='lg:col-span-4'>
+					<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4'>
 						{articles.map((article) => (
 							<CardSimple
 								id={article.id}
-								title={article.title}
-								slug={article.slug}
-								coverImage={article.coverImage.url}
-								createdAt={article.createdAt}
-								alt={article.title}
+								title={article.title || ''}
+								slug={article.slug || ''}
+								coverImage={article.coverImage?.url || ''}
+								createdAt={article.createdAt || ''}
+								alt={article.title || ''}
 								key={article.id}
 							/>
 						))}
@@ -58,9 +58,14 @@ export default async function AllPosts({ searchParams }: AllPostsParams) {
 					</div>
 				</div>
 
-				<div className='mb-8'>
-					<p className='text-sm text-gray-500 mb-2 space-y-2'>Anúncio</p>
-					<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+				<div className='lg:col-span-1 mb-8 flex flex-col items-start  p-4'>
+					<p className='text-sm text-gray-500 mb-2 space-y-2'>Anúncios</p>
+					<div className='flex flex-col gap-4 w-full'>
+						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+					</div>
 				</div>
 			</div>
 		</div>

@@ -37,13 +37,13 @@ describe('getRelatedArticle', () => {
 		expect(HygraphQuery).toHaveBeenCalledTimes(1)
 
 		expect(HygraphQuery).toHaveBeenCalledWith(
-			expect.stringContaining('slug_not: $currentSlug'),
+			expect.stringContaining('slug_not: $excludeSlug'),
 			{
 				name: 'Tech',
-				currentSlug: 'current-article',
+				excludeSlug: 'current-article',
 			},
 			{
-				revalidate: 60 * 60 * 3,
+				revalidate: 60 * 60 * 4,
 			},
 		)
 
@@ -58,7 +58,7 @@ describe('getRelatedArticle', () => {
 		)
 	})
 
-	it('should use correct variables for category and currentSlug', async () => {
+	it('should use correct variables for category and excludeSlug', async () => {
 		const mockResponse = { articles: [] }
 		;(HygraphQuery as Mock).mockResolvedValueOnce(mockResponse)
 
@@ -69,7 +69,7 @@ describe('getRelatedArticle', () => {
 
 		expect(HygraphQuery).toHaveBeenCalledWith(
 			expect.any(String),
-			{ name: category, currentSlug: current },
+			{ name: category, excludeSlug: current },
 			expect.any(Object),
 		)
 	})
