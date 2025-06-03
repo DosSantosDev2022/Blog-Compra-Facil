@@ -38,8 +38,8 @@ const CategoryBlock = async ({
 									'https://placehold.co/600x400'
 								}
 								title={articles[0].title}
-								category={articles[0].category.name}
-								label={format(articles[0].createdAt, 'dd/MM/yyyy', {
+								category={articles[0].category?.name || ''}
+								label={format(articles[0].createdAt || '', 'dd/MM/yyyy', {
 									locale: ptBR,
 								})}
 								className={'h-full'} // Use h-full para o card maior preencher a altura
@@ -61,8 +61,8 @@ const CategoryBlock = async ({
 									article.coverImage?.url || 'https://placehold.co/600x400'
 								}
 								title={article.title}
-								category={article.category.name}
-								label={format(article.createdAt, 'dd/MM/yyyy', {
+								category={article.category?.name || ''}
+								label={format(article.createdAt || '', 'dd/MM/yyyy', {
 									locale: ptBR,
 								})}
 								className={'h-74'}

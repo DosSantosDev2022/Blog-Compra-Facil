@@ -2,6 +2,7 @@ import { Badge } from '@/components/ui'
 import { Carousel } from '@/components/ui/carousel'
 import { getArticles } from '@/services/getArticles'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const SectionBanner = async () => {
 	const { articles } = await getArticles()
@@ -43,10 +44,14 @@ const SectionBanner = async () => {
 		<>
 			<Carousel autoPlay>
 				{articlesForCarousel.map((article) => (
-					<div key={article.id} className='relative w-full h-full'>
+					<Link
+						href={`/article/${article.slug}`}
+						key={article.id}
+						className='relative w-full h-full'
+					>
 						<Image
-							src={article.coverImage.url}
-							alt={article.title}
+							src={article.coverImage?.url || ''}
+							alt={article.title || ''}
 							fill
 							className='object-cover object-center'
 							quality={100}
@@ -63,7 +68,7 @@ const SectionBanner = async () => {
 								</h2>
 							</div>
 						</div>
-					</div>
+					</Link>
 				))}
 			</Carousel>
 		</>

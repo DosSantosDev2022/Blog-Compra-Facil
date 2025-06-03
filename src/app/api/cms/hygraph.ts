@@ -1,3 +1,5 @@
+
+
 export const HygraphQuery = async <T>(
 	query: string,
 	variables?: Record<string, unknown>,
@@ -16,20 +18,26 @@ export const HygraphQuery = async <T>(
 					Authorization: `Bearer ${process.env.HYGRAPH_TOKEN}`,
 				},
 				cache,
-				next: revalidate ? { revalidate } : undefined,
+				next: revalidate !== undefined ? { revalidate } : undefined,
 				body: JSON.stringify({ query, variables }),
 			},
 		)
 
 		// Verifique se a resposta foi bem-sucedida
 		if (!response.ok) {
+			const errorData = await response.json().catch(() => ({}));
 			throw new Error(
-				`Erro ao buscar dados: ${response.statusText} (Código: ${response.status})`,
+				`Erro ao buscar dados: ${response.statusText} (Código: ${response.status}). Detalhes: ${JSON.stringify(errorData)}`
 			)
 		}
 
 		// Tente obter o JSON da resposta
 		const { data, errors } = await response.json()
+
+		if(errors) {
+			console.error('Erros na consulta Hygraph', errors)
+			throw new Error(`Erros na consulta Hygraph: ${JSON.stringify(errors)}`)
+		}
 
 		return data
 	} catch (error) {

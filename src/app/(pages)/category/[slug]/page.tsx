@@ -23,7 +23,8 @@ export async function generateMetadata({
 	})
 
 	const dominio = 'https://on-tech-rho.vercel.app/'
-	const categoryName = articles[0]?.category?.name || 'Categoria'
+	const categoryName =
+		articles[0]?.category?.name || 'Categoria Não Encontrada'
 	const categoryDescription = `Artigos sobre ${categoryName}`
 
 	return {
@@ -32,7 +33,7 @@ export async function generateMetadata({
 		openGraph: {
 			title: `onTech Blog | ${categoryName}`,
 			description: categoryDescription,
-			url: `${dominio}${categorySlug}`,
+			url: `${dominio}category/${categorySlug}`,
 		},
 	}
 }
@@ -51,58 +52,75 @@ export default async function CategoryPage({
 		page: currentPage,
 	})
 
-	// Garante que articles[0]?.category e articles[0]?.category.view existam antes de chamar updateCategoryViewCount
-	if (articles.length > 0 && articles[0]?.category) {
+	if (
+		articles.length > 0 &&
+		articles[0]?.category?.id &&
+		articles[0]?.category?.view !== undefined
+	) {
 		await updateCategoryViewCount(
 			articles[0].category.id,
 			articles[0].category.view + 1,
 		)
 	}
 
+	const currentCategoryName = articles[0]?.category?.name || 'Categoria'
+
 	return (
-		<div className='grid lg:grid-cols-12 grid-cols-1 gap-6'>
-			<div className='col-span-10 py-10 lg:mt-36 mt-12'>
-				<SectionTitle
-					title={`Categoria: ${articles[0].category.name.toUpperCase()}`}
-				/>
-				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8'>
-					{articles.length > 0 ? (
-						articles.map((article) => (
-							<CardSimple
-								id={article.id}
-								title={article.title}
-								slug={article.slug}
-								coverImage={article.coverImage.url}
-								createdAt={article.createdAt}
-								alt={article.title}
-								key={article.id}
+		<div className='container mx-auto py-8 lg:mt-32 mt-8'>
+			<SectionTitle
+				title={`Categoria: ${currentCategoryName.toUpperCase()}`}
+			/>
+			<div className='grid grid-cols-1 lg:grid-cols-5 gap-8 mt-6 relative'>
+				<div className='lg:col-span-4'>
+					<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4'>
+						{articles.length > 0 ? (
+							articles.map((article) => (
+								<CardSimple
+									id={article.id}
+									title={article.title || ''}
+									slug={article.slug || ''}
+									coverImage={article.coverImage?.url || ''}
+									createdAt={article.createdAt || ''}
+									alt={article.title || ''}
+									key={article.id}
+								/>
+							))
+						) : (
+							<div className='col-span-full flex justify-center items-center py-8 text-muted-foreground'>
+								<p className='text-2xl italic'>
+									Nenhum artigo encontrado por enquanto.
+								</p>
+							</div>
+						)}
+					</div>
+
+					{/* Paginação */}
+					{totalCount > pageSize && ( // Renderiza a paginação apenas se houver mais de uma página
+						<div className='w-full flex items-center gap-3 justify-start px-2 py-3 mt-10'>
+							<span className='font-light text-muted-foreground'>
+								Mostrando{' '}
+								{Math.min(
+									pageSize,
+									totalCount - (currentPage - 1) * pageSize,
+								)}{' '}
+								de {totalCount}
+							</span>
+							<Pagination
+								page={currentPage}
+								limit={pageSize}
+								total={totalCount}
 							/>
-						))
-					) : (
-						<div className='col-span-full flex justify-center items-center py-8 text-muted-foreground'>
-							<p className='text-2xl italic'>
-								Nenhum artigo encontrado por enquanto.
-							</p>
 						</div>
 					)}
 				</div>
-				{/* Adicionar paginação aqui (se necessário) */}
-				<div className='w-full flex justify-end px-2 py-3 mt-10'>
-					<Pagination
-						page={currentPage}
-						limit={pageSize}
-						total={totalCount}
-					/>
+				{/* seção com anunicos */}
+				<div className='lg:col-span-1 mb-8 flex flex-col items-start p-4'>
+					<p className='text-sm text-gray-500 mb-2 space-y-2'>Anúncios</p>
+					<div className='flex flex-col gap-4 w-full'>
+						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+					</div>
 				</div>
-				{/* anúncio horizontal 2 */}
-				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />{' '}
-			</div>
-			{/* seção com anunicos */}
-			<div className='col-span-2 py-10 px-4 mt-36 border'>
-				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
-				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
-				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
-				<AdBanner dataAdFormat='fluid' dataAdSlot='5170095842' />
 			</div>
 		</div>
 	)

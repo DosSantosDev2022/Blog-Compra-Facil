@@ -5,6 +5,8 @@ import { productsMetaData } from '@/metadata/productsMetaData'
 import { getProducts } from '@/services/getProducts'
 import Link from 'next/link'
 
+export const revalidate = 86400
+
 interface ProductsPageParams {
 	searchParams: Promise<{ category: string }>
 }
