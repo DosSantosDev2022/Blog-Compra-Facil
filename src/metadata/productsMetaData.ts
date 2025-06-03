@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const dominio = 'https://on-tech-rho.vercel.app/products'
+const dominio = 'https://www.ontech.blog/products'
 const title = 'OnTech Blog | Produtos Recomendados'
 
 export const productsMetaData: Metadata = {

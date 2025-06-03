@@ -22,7 +22,7 @@ export async function generateMetadata({
 		page: 1,
 	})
 
-	const dominio = 'https://on-tech-rho.vercel.app/'
+	const dominio = 'https://www.ontech.blog/'
 	const categoryName =
 		articles[0]?.category?.name || 'Categoria Não Encontrada'
 	const categoryDescription = `Artigos sobre ${categoryName}`
