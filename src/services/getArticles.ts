@@ -50,6 +50,9 @@ export const getArticles = async (
         id
         slug
         title
+        category {
+         name
+        }
         coverImage {
           url
         }
