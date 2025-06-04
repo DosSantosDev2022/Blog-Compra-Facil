@@ -22,6 +22,13 @@ export const getRelatedArticle = async (
         coverImage {
           url
         }
+          author{
+          id
+          name
+          image {
+            url
+          }
+        }
         category {
          name
         }

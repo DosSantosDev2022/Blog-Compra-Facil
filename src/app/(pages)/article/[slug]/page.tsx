@@ -197,6 +197,9 @@ export default async function ArticlePage({ params }: PagePostProps) {
 									title={article.title}
 									category={article.category?.name || ''}
 									className=' h-48 md:h-52'
+									authorImage={article.author.image.url || ''}
+									authorName={article.author.name}
+									createdAt={`Publicado em: ${format(article.createdAt || '', 'dd/MM/yyyy', { locale: ptBR })}`}
 								/>
 							</Link>
 						))}

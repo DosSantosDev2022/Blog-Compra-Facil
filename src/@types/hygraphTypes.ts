@@ -70,6 +70,13 @@ export interface RelatedArticle {
 	coverImage: {
 		url: string
 	}
+	author: {
+		id: string
+		name: string
+		image: {
+			url: string
+		}
+	}
 	category: {
 		name: string
 	}
