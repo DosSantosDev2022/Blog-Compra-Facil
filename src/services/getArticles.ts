@@ -100,8 +100,7 @@ export const getArticles = async (
     articles: Article[];
     articlesConnection: { aggregate: { count: number } };
   }>(query, variables, {
-    cache:'no-cache'
-    /* revalidate: 60 * 60 * 24, // revalida a página a cada 24h */
+    revalidate: 60 * 60 * 24, // revalida a página a cada 24h
   });;
 
 	const articles = responseData?.articles || [];

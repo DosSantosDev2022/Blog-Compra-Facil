@@ -1,5 +1,5 @@
 import { HygraphQuery } from '@/app/api/cms/hygraph'
-import type { Article, RelatedArticle, RelatedArticleResponse } from '@/@types/hygraphTypes'
+import type {RelatedArticle, RelatedArticleResponse } from '@/@types/hygraphTypes'
 
 export const getRelatedArticle = async (
 	categoryName: string,
