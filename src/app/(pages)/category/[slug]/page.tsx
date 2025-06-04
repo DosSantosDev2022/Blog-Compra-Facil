@@ -3,7 +3,6 @@ import { CardSimple } from '@/components/global/posts/cardSimple'
 import { SectionTitle } from '@/components/global/sectionTitle'
 import { Button, Pagination } from '@/components/ui'
 import { getArticles } from '@/services/getArticles'
-import { updateCategoryViewCount } from '@/services/updateCategoryViewCount'
 import type { Metadata } from 'next'
 
 interface CategoryPageParams {
@@ -52,24 +51,12 @@ export default async function CategoryPage({
 		page: currentPage,
 	})
 
-	if (
-		articles.length > 0 &&
-		articles[0]?.category?.id &&
-		articles[0]?.category?.view !== undefined
-	) {
-		await updateCategoryViewCount(
-			articles[0].category.id,
-			articles[0].category.view + 1,
-		)
-	}
-
-	const currentCategoryName = articles[0]?.category?.name || 'Categoria'
+	const currentCategoryName =
+		articles[0]?.category?.name || 'Esta categoria ainda não existe'
 
 	return (
 		<div className='container mx-auto py-8 lg:mt-32 mt-8'>
-			<SectionTitle
-				title={`Categoria: ${currentCategoryName.toUpperCase()}`}
-			/>
+			<SectionTitle title={`Categoria: ${currentCategoryName}`} />
 			<div className='grid grid-cols-1 lg:grid-cols-5 gap-8 mt-6 relative'>
 				<div className='lg:col-span-4'>
 					<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4'>
@@ -83,6 +70,8 @@ export default async function CategoryPage({
 									createdAt={article.createdAt || ''}
 									alt={article.title || ''}
 									key={article.id}
+									authorImage={article.author.image.url || ''}
+									authorName={article.author.name}
 								/>
 							))
 						) : (
@@ -115,7 +104,9 @@ export default async function CategoryPage({
 				</div>
 				{/* seção com anunicos */}
 				<div className='lg:col-span-1 mb-8 flex flex-col items-start p-4'>
-					<p className='text-sm text-gray-500 mb-2 space-y-2'>Anúncios</p>
+					<p className='text-sm text-muted-foreground mb-2 space-y-2'>
+						Anúncios
+					</p>
 					<div className='flex flex-col gap-4 w-full'>
 						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />

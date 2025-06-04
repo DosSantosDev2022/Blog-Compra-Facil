@@ -1,6 +1,15 @@
 import { Badge } from '@/components/ui'
+import {
+	Avatar,
+	AvatarContainer,
+	AvatarLabel,
+	AvatarName,
+	AvatarWrapper,
+} from '@/components/ui/avatar'
 import { Carousel } from '@/components/ui/carousel'
 import { getArticles } from '@/services/getArticles'
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -66,6 +75,18 @@ const SectionBanner = async () => {
 								<h2 className='mt-2 text-lg lg:text-6xl font-bold leading-tight text-primary-foreground'>
 									{article.title}
 								</h2>
+								<div className='flex flex-col items-center space-y-6 mt-2'>
+									<AvatarContainer>
+										<Avatar
+											name={article.author.name}
+											src={article.author.image.url || ''}
+										/>
+										<AvatarWrapper>
+											<AvatarName>{article.author.name}</AvatarName>
+											<AvatarLabel>{`Publicado em: ${format(article.createdAt || '', 'dd/MM/yyyy', { locale: ptBR })}`}</AvatarLabel>
+										</AvatarWrapper>
+									</AvatarContainer>
+								</div>
 							</div>
 						</div>
 					</Link>

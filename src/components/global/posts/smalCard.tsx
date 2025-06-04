@@ -3,6 +3,7 @@ import {
 	Card,
 	CardContent,
 	CardDescription,
+	CardFooter,
 	CardHeader,
 	CardTitle,
 } from '@/components/ui'
@@ -27,15 +28,17 @@ const SmallCard = ({ description, slug, title }: SmallCardProps) => {
 				<CardDescription className='line-clamp-3'>
 					{description}
 				</CardDescription>
-				<Button variants='shine' asChild>
-					<Link
-						href={{
-							pathname: `/article/${slug}`,
-						}}
-					>
-						Ler mais...
-					</Link>
-				</Button>
+				<CardFooter className='p-0'>
+					<Button variants='shine' asChild>
+						<Link
+							href={{
+								pathname: `/article/${slug}`,
+							}}
+						>
+							Ler mais...
+						</Link>
+					</Button>
+				</CardFooter>
 			</CardContent>
 		</Card>
 	)
