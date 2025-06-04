@@ -75,8 +75,7 @@ export async function getHomePageData(): Promise<HomePageResponse> {
   `;
 
   const data = await HygraphQuery<HomePageResponse>(query, undefined, {
-    cache: 'no-cache'
-    /* revalidate: 60 * 60 * 24, // 24 horas */
+    revalidate: 60 * 60 * 24, // 24 horas
   });
 
   // Garante que os arrays não sejam null/undefined

@@ -73,6 +73,8 @@ export default async function SearchResultsPage({
 							createdAt={article.createdAt || ''}
 							alt={article.title || ''}
 							key={article.id}
+							authorImage={article.coverImage?.url || ''}
+							authorName={article.author.name}
 						/>
 					))}
 				</div>
