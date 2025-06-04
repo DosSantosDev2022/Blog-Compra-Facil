@@ -37,14 +37,19 @@ export interface Article {
 		id: string
 		name: string
 		slug: string
-		view: number
+	}
+	author: {
+		id: string
+		name: string
+		image: {
+			url: string
+		}
 	}
 	createdAt?: string
 	highlights?: boolean
 	content?: {
 		raw: RichTextContent
 	}
-	view?: number
 	product?: Products[]
 }
 
