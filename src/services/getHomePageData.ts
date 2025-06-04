@@ -12,16 +12,15 @@ interface HomePageResponse {
 export async function getHomePageData(): Promise<HomePageResponse> {
   const query = `
     query HomePageData {
-      categories(orderBy: view_DESC, where: { view_gt: 0 }) {
+      categories(orderBy: createdAt_DESC, first:10) {
         id
         name
         slug
         coverImage { 
         url 
       }
-        view
       }
-      highlightArticles: articles(where: { highlights: true }, first: 12) {
+      highlightArticles: articles(orderBy: createdAt_DESC, where: { highlights: true }, first: 12) {
         id 
         slug 
         title 
@@ -31,11 +30,18 @@ export async function getHomePageData(): Promise<HomePageResponse> {
         category { 
         id 
         name 
-      } 
+      }
+        author {
+        id
+        name
+        image {
+          url
+          }
+        }
        createdAt 
        highlights 
       }
-      mostViewedArticles: articles(orderBy: view_DESC, first: 20) {
+      mostViewedArticles: articles(orderBy: createdAt_DESC, first: 20) {
         id 
         slug 
         title 
@@ -43,19 +49,34 @@ export async function getHomePageData(): Promise<HomePageResponse> {
          url 
         }  
          createdAt 
+         author {
+        id
+        name
+        image {
+          url
+          }
+        }
        }
       recentArticles: articles(orderBy: createdAt_DESC, first: 20) {
         id 
         slug 
         title 
         description 
-        createdAt 
+        createdAt
+        author {
+        id
+        name
+        image {
+          url
+          }
+        }
       }
     }
   `;
 
   const data = await HygraphQuery<HomePageResponse>(query, undefined, {
-    revalidate: 60 * 60 * 24, // 24 horas
+    cache: 'no-cache'
+    /* revalidate: 60 * 60 * 24, // 24 horas */
   });
 
   // Garante que os arrays não sejam null/undefined

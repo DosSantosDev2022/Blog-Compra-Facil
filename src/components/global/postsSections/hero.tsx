@@ -30,7 +30,9 @@ const HeroSection = async ({ highlightArticles }: HeroSectionProps) => {
 								}
 								title={highlightArticles[0].title}
 								category={highlightArticles[0].category?.name}
-								label={format(
+								authorImage={highlightArticles[0].author?.image.url}
+								authorName={highlightArticles[0].author.name}
+								createdAt={format(
 									highlightArticles[0]?.createdAt || '',
 									'dd/MM/yyyy',
 									{
@@ -57,7 +59,9 @@ const HeroSection = async ({ highlightArticles }: HeroSectionProps) => {
 								}
 								title={article.title}
 								category={article.category?.name || ''}
-								label={format(article.createdAt || '', 'dd/MM/yyyy', {
+								authorImage={article.author?.image.url}
+								authorName={article.author.name || ''}
+								createdAt={format(article.createdAt || '', 'dd/MM/yyyy', {
 									locale: ptBR,
 								})}
 								className={'h-74'}

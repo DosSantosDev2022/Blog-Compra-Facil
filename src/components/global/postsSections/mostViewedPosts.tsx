@@ -24,6 +24,8 @@ const MostViewedPosts = async ({
 						alt={`card do posts: ${article.title}`}
 						coverImage={article.coverImage?.url || ''}
 						title={article.title || ''}
+						authorName={article.author.name}
+						authorImage={article.author.image.url}
 					/>
 				))}
 			</div>

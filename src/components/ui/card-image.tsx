@@ -1,12 +1,23 @@
 import React, { type ComponentProps } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Badge } from './badge'
+import {
+	Avatar,
+	AvatarContainer,
+	AvatarLabel,
+	AvatarName,
+	AvatarWrapper,
+} from './avatar'
+import { ptBR } from 'date-fns/locale'
+import { format } from 'date-fns'
 
 interface CardImageProps {
 	image: string
 	title?: string
 	description?: string
-	label?: string
+	authorName?: string
+	authorImage?: string
+	createdAt?: string
 	category?: string
 }
 
@@ -55,7 +66,17 @@ const CardImage = React.forwardRef<
 	React.HTMLAttributes<HTMLDivElement> & CardImageProps
 >(
 	(
-		{ className, image, title, description, label, category, ...props },
+		{
+			className,
+			image,
+			title,
+			description,
+			authorName,
+			authorImage,
+			createdAt,
+			category,
+			...props
+		},
 		ref,
 	) => {
 		return (
@@ -86,7 +107,15 @@ const CardImage = React.forwardRef<
 						<Badge size='md'>{category}</Badge>
 					</div>
 					<CardTitle label={title || ''} />
-					<CardLabel label={label || ''} />
+					<div className='flex flex-col items-center space-y-6'>
+						<AvatarContainer>
+							<Avatar name={authorName} src={authorImage || ''} />
+							<AvatarWrapper>
+								<AvatarName>{authorName}</AvatarName>
+								<AvatarLabel>{createdAt}</AvatarLabel>
+							</AvatarWrapper>
+						</AvatarContainer>
+					</div>
 				</div>
 			</div>
 		)

@@ -20,8 +20,14 @@ export const getDetailsArticle = async (
         content {
           raw
         }
+       author{
+          id
+          name
+          image {
+            url
+          }
+        }
         createdAt
-        view
         product {
           id
           name

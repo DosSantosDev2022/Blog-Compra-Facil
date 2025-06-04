@@ -1,22 +1,14 @@
 import type { Article, ArticleQueryResponse } from '@/@types/hygraphTypes'
 import { HygraphQuery } from '@/app/api/cms/hygraph'
 
- type ArticleViewFilterOperator = 'gt' | 'gte' | 'lt' | 'lte' | 'eq';
-
- interface ArticleViewFilter {
-  operator: ArticleViewFilterOperator;
-  value: number;
-}
-
 interface ArticleQueryOptions {
 	page?: number
 	pageSize?: number
-	where?: 'highlights' | 'category' | 'search' | 'mostViewed';
+	where?: 'highlights' | 'category' | 'search'
 	categorySlug?: string
 	search?: string
 	excludeSlug?: string
-	orderBy?: 'createdAt_ASC' | 'createdAt_DESC' | 'view_ASC' | 'view_DESC'
-  viewFilter?: ArticleViewFilter;
+	orderBy?: 'createdAt_ASC' | 'createdAt_DESC'
 }
 
 export const getArticles = async (
@@ -29,7 +21,6 @@ export const getArticles = async (
 		search,
 		categorySlug,
 		excludeSlug,
-    viewFilter
 	} = options
 
 	const skip = (page - 1) * pageSize
@@ -56,6 +47,13 @@ export const getArticles = async (
         coverImage {
           url
         }
+      author {
+        id
+        name
+        image {
+          url
+          }
+        }
         createdAt
       }
       articlesConnection(where: $where) {
@@ -66,36 +64,29 @@ export const getArticles = async (
    }
   `
 	
-	 // Mapeia dinamicamente o filtro `where`
-   let whereClause: Record<string, unknown> = {};
-  let orderBy: string = options.orderBy || 'createdAt_DESC';
+	// Mapeia dinamicamente o filtro `where`
+  let whereClause: Record<string, unknown> = {}
+
+  const orderBy: string = options.orderBy || 'createdAt_DESC'
+
   // Lógica para mapear dinamicamente o filtro `where` e a ordenação
   if (where === 'highlights') {
-    whereClause = { highlights: true };
+    whereClause = { highlights: true }
   } else if (where === 'category') {
-    whereClause = { category: { slug: categorySlug } };
+    whereClause = { category: { slug: categorySlug } }
   } else if (where === 'search') {
-    whereClause = { _search: search };
-  } else if (where === 'mostViewed') {
-    orderBy = 'view_DESC';
+    whereClause = { _search: search }
   }
-
-  // Adiciona o filtro de view SE ele foi passado e não estamos no caso 'mostViewed'
-  // que já gerencia a ordenação por views
-  if (viewFilter && where !== 'mostViewed') {
-    const viewKey = `view_${viewFilter.operator}`;
-    whereClause[viewKey] = viewFilter.value;
-  }
-
+ 
   // Se excludeSlug estiver presente, adicione ao whereClause
- if (excludeSlug) {
+  if (excludeSlug) {
     // Usar 'AND' para combinar com outros filtros existentes
     whereClause = {
       AND: [
         whereClause, // Inclui os filtros anteriores
-        { slug_not: excludeSlug }
-      ]
-    };
+        { slug_not: excludeSlug },
+      ],
+    }
   }
 
 	const variables: Record<string, unknown> = {
@@ -109,7 +100,8 @@ export const getArticles = async (
     articles: Article[];
     articlesConnection: { aggregate: { count: number } };
   }>(query, variables, {
-    revalidate: 60 * 60 * 24, // revalida a página a cada 24h
+    cache:'no-cache'
+    /* revalidate: 60 * 60 * 24, // revalida a página a cada 24h */
   });;
 
 	const articles = responseData?.articles || [];

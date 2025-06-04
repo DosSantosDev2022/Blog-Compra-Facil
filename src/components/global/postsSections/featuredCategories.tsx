@@ -14,7 +14,7 @@ const FeaturedCategories = async ({
 	return (
 		<div className='space-y-4'>
 			<SectionTitle title='Categorias em Destaque' />
-			<div className='flex gap-2 mt-3 overflow-x-auto scrollbar-custom'>
+			<div className='flex gap-2 mt-3 overflow-x-auto max-w-[1240px] scrollbar-custom'>
 				{categories.map((category) => (
 					<Link
 						key={category.slug}
@@ -34,7 +34,10 @@ const FeaturedCategories = async ({
 				))}
 			</div>
 			{categories.map((category) => (
-				<div key={category.id} className='overflow-y-hidden w-full p-2'>
+				<div
+					key={category.id}
+					className='overflow-y-auto scrollbar-custom w-full p-2'
+				>
 					<CategoryBlock
 						title={category.name || ''}
 						categorySlug={category.slug || ''}

@@ -8,12 +8,18 @@ import { defaultRenders } from '@/components/global/richTextRenders'
 import Link from 'next/link'
 import { CardImage } from '@/components/ui'
 import { getRelatedArticle } from '@/services/getRelatedArticle'
-import { updateViewCount } from '@/services/updateViewCount'
 import { AdBanner } from '@/components/global/google'
 import { ProductCard } from '@/components/global/products'
 import { SectionTitle } from '@/components/global/sectionTitle'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import {
+	Avatar,
+	AvatarContainer,
+	AvatarLabel,
+	AvatarName,
+	AvatarWrapper,
+} from '@/components/ui/avatar'
 
 interface PagePostProps {
 	params: Promise<{ slug: string }>
@@ -91,10 +97,6 @@ export default async function ArticlePage({ params }: PagePostProps) {
 		article.category
 			? getRelatedArticle(article.category.name, article.slug || '')
 			: { articles: [] },
-
-		article.id && article.view !== null && article.view !== undefined
-			? updateViewCount(article.id, article.view + 1).catch(console.error)
-			: Promise.resolve(), // Resolva imediatamente se não precisar atualizar
 	])
 
 	const relatedArticles = relatedArticlesData.articles
@@ -120,12 +122,19 @@ export default async function ArticlePage({ params }: PagePostProps) {
 						<h1 className='lg:text-3xl text-2xl font-bold'>
 							{article.title}
 						</h1>
-						<p className='text-muted-foreground'>
-							{`Publicado em: ${format(article.createdAt || '', 'dd/MM/yyyy', { locale: ptBR })}`}
-						</p>
-						<span className='text-muted-foreground'>
-							{`Visualizações: ${article.view}`}{' '}
-						</span>
+
+						<div className='flex flex-col items-center space-y-6'>
+							<AvatarContainer>
+								<Avatar
+									name={article.author.name}
+									src={article.author.image.url || ''}
+								/>
+								<AvatarWrapper>
+									<AvatarName>{article.author.name}</AvatarName>
+									<AvatarLabel>{`Publicado em: ${format(article.createdAt || '', 'dd/MM/yyyy', { locale: ptBR })}`}</AvatarLabel>
+								</AvatarWrapper>
+							</AvatarContainer>
+						</div>
 					</div>
 
 					{/*  anúncio horizontal */}
