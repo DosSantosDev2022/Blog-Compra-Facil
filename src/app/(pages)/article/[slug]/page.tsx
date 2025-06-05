@@ -104,7 +104,7 @@ export default async function ArticlePage({ params }: PagePostProps) {
 	return (
 		<div className='container mx-auto py-8'>
 			{/* Header com foto de destaque */}
-			<div className='relative w-full lg:h-[520px] h-48 rounded-lg overflow-hidden mt-32'>
+			<div className='relative w-full lg:h-[520px] h-48 rounded-lg overflow-hidden mt-12'>
 				<Image
 					src={article.coverImage?.url || ''}
 					alt={article.title || 'Capa do artigo'}
@@ -157,7 +157,7 @@ export default async function ArticlePage({ params }: PagePostProps) {
 					</article>
 					<div className='space-y-6'>
 						<SectionTitle title='Produtos recomendados' />
-						<div className='flex flex-wrap gap-4'>
+						<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4'>
 							{article?.product?.map((product) => (
 								<ProductCard
 									key={product.id}

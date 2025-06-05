@@ -46,7 +46,7 @@ const HeroSection = async ({ highlightArticles }: HeroSectionProps) => {
 				</div>
 
 				{/* Renderiza os posts restantes */}
-				<div className='w-full grid grid-cols-1 lg:grid-cols-2 p-2 gap-2 h-auto overflow-y-scroll max-h-[628px] scrollbar-custom'>
+				<div className='w-full grid grid-cols-1  p-2 gap-2 h-auto overflow-y-scroll max-h-[628px] scrollbar-custom'>
 					{highlightArticles.slice(1, 12).map((article) => (
 						<Link
 							href={`/article/${article.slug}`}

@@ -56,7 +56,7 @@ const CategoryBlock = async ({
 						</div>
 
 						{/* Renderiza os posts restantes */}
-						<div className='w-full grid grid-cols-1 lg:grid-cols-2 gap-2 p-2 h-auto lg:h-[628px] overflow-y-scroll max-h-[628px] scrollbar-custom'>
+						<div className='w-full grid grid-cols-1  p-2 gap-2 h-auto overflow-y-scroll lg:h-[628px] scrollbar-custom'>
 							{articles.slice(1, 5).map((article) => (
 								<Link
 									href={`/article/${article.slug}`}
