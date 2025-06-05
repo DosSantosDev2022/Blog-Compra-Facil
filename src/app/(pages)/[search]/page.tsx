@@ -51,7 +51,7 @@ export default async function SearchResultsPage({
 	const hasResults = articles && articles.length > 0
 
 	return (
-		<div className='container mx-auto py-8 px-4 sm:px-6 lg:px-8 lg:mt-36 mt-8'>
+		<div className='container mx-auto py-8 px-4 sm:px-6 lg:px-8 lg:mt-24 mt-8'>
 			<SectionTitle title={`Resultados da Busca para: "${query}"`} />
 			<div className='mb-6'> </div>
 
@@ -63,7 +63,7 @@ export default async function SearchResultsPage({
 			</div>
 
 			{hasResults ? (
-				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mt-6'>
+				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 mt-6'>
 					{articles.map((article, index) => (
 						<CardSimple
 							id={article.id}
@@ -97,10 +97,11 @@ export default async function SearchResultsPage({
 				/>
 			</div>
 			{/* anúncio horizontal 2 */}
-			<div className='p-2  mt-8'>
-				{' '}
-				{/* Adicionada margem superior */}
-				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+			<div className='mb-8 flex flex-col items-start  p-4'>
+				<p className='text-sm text-gray-500 mb-2 space-y-2'>Anúncio</p>
+				<div className='flex flex-col gap-4 w-full'>
+					<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+				</div>
 			</div>
 		</div>
 	)

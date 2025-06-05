@@ -72,7 +72,7 @@ const SectionBanner = async () => {
 								{article.category?.name && (
 									<Badge size='lg'>{article.category.name}</Badge>
 								)}
-								<h2 className='mt-2 text-lg lg:text-6xl font-bold leading-tight text-primary-foreground'>
+								<h2 className='mt-2 text-lg lg:text-5xl font-bold text-primary-foreground'>
 									{article.title}
 								</h2>
 								<div className='flex flex-col items-center space-y-6 mt-2'>

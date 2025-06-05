@@ -5,6 +5,14 @@ import { Footer } from '@/components/layout/footer'
 import { poppins } from '@/assets/fonts'
 import { ToggleTheme } from '@/components/global/toggleTheme'
 
+export const metadata: Metadata = {
+	title: 'onTech Blog',
+	description: 'Seu blog de tecnologia, dicas, tutoriais e novidades.',
+	icons: {
+		icon: '/favicon.svg', // Caminho para o seu favicon SVG
+	},
+}
+
 export default async function RootLayout({
 	children,
 }: Readonly<{
@@ -18,12 +26,6 @@ export default async function RootLayout({
 					src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2827166560948178'
 					crossOrigin='anonymous'
 				/>
-				<link
-					rel='icon'
-					href='/favicon.svg'
-					type='image/<generated>'
-					sizes='<generated>'
-				/>
 				<meta
 					name='google-site-verification'
 					content='BQ3BsKxQv9wmjdsELFbZEa887IFYp_9gIOeMQ_mgnZc'
@@ -33,7 +35,7 @@ export default async function RootLayout({
 				className={`${poppins.className} bg-background text-foreground antialiased scrollbar-custom overflow-x-hidden`}
 			>
 				<Header />
-				<main className='lg:px-24 px-4 py-6'>{children}</main>
+				<main className='lg:px-14 px-4 py-6'>{children}</main>
 				<Footer />
 				<ToggleTheme />
 			</body>

@@ -12,9 +12,9 @@ const MostViewedPosts = async ({
 	mostViewdArticles,
 }: MostViewedPostsProps) => {
 	return (
-		<section aria-label='Posts mais vistos'>
+		<section className='px-2' aria-label='Posts mais vistos'>
 			<SectionTitle title='Posts mais vistos' />
-			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-3'>
+			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 mt-3'>
 				{mostViewdArticles.map((article) => (
 					<CardSimple
 						id={article.id}

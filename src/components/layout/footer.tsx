@@ -10,7 +10,7 @@ const Footer = () => {
 		{
 			label: 'Instagram',
 			icon: <RiInstagramFill className='w-6 h-6' />,
-			url: '/#',
+			url: 'https://www.instagram.com/ontechblog/',
 		},
 		{
 			label: 'TwitterX',

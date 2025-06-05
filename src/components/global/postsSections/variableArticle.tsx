@@ -13,7 +13,7 @@ const VariableArticle = async ({
 	recentArticles,
 }: VariableArticleProps) => {
 	return (
-		<div className=''>
+		<div className='px-2'>
 			<SectionTitle title={title} />
 			<div className='grid grid-cols-1 md:grid-cols-3 items-start justify-between gap-6 mt-3'>
 				{/* Espaço para anúncio 3 */}

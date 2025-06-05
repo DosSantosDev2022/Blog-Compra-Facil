@@ -1,4 +1,4 @@
-import { AdBanner } from '@/components/global/google'
+import { AdBanner, SidebarAdBlock } from '@/components/global/google'
 import { CardSimple } from '@/components/global/posts/cardSimple'
 import { SectionTitle } from '@/components/global/sectionTitle'
 import { Pagination } from '@/components/ui'
@@ -20,13 +20,13 @@ export default async function AllPosts({ searchParams }: AllPostsParams) {
 	})
 
 	return (
-		<div className='container mx-auto py-8 lg:mt-32 mt-8'>
+		<div className='container mx-auto py-8 lg:mt-24 mt-8'>
 			<SectionTitle title={'Todos os posts'} />
 
 			{/* Contêiner principal para posts e anúncios */}
-			<div className='grid grid-cols-1 lg:grid-cols-5 gap-8 mt-6 relative'>
+			<div className='grid grid-cols-1 lg:grid-cols-12 gap-8 mt-6 relative'>
 				{/* Seção dos Posts (ocupa a maior parte do espaço) */}
-				<div className='lg:col-span-4'>
+				<div className='lg:col-span-9'>
 					<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4'>
 						{articles.map((article) => (
 							<CardSimple
@@ -60,15 +60,11 @@ export default async function AllPosts({ searchParams }: AllPostsParams) {
 					</div>
 				</div>
 
-				<div className='lg:col-span-1 mb-8 flex flex-col items-start  p-4'>
-					<p className='text-sm text-gray-500 mb-2 space-y-2'>Anúncios</p>
-					<div className='flex flex-col gap-4 w-full'>
-						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-					</div>
-				</div>
+				<aside className='lg:col-span-3 mb-8 space-y-8 w-full p-4'>
+					<SidebarAdBlock slot='9849617003' />
+					<SidebarAdBlock slot='9849617003' />
+					<SidebarAdBlock slot='9849617003' />
+				</aside>
 			</div>
 		</div>
 	)
