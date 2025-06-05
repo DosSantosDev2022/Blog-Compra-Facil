@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.ontech.blog
+
+# Sitemaps
+Sitemap: https://www.ontech.blog/sitemap.xml

@@ -46,6 +46,7 @@ export interface Article {
 		}
 	}
 	createdAt?: string
+	updatedAt?: string
 	highlights?: boolean
 	content?: {
 		raw: RichTextContent
