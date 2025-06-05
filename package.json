@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
-		"build": "next build",
+		"build": "next build && next-sitemap",
 		"start": "next start",
 		"format": "npx @biomejs/biome format --write ./src ",
 		"lint": "npx @biomejs/biome lint ./src",
@@ -14,7 +14,9 @@
 		"test": "vitest"
 	},
 	"commitlint": {
-		"extends": ["@commitlint/config-conventional"]
+		"extends": [
+			"@commitlint/config-conventional"
+		]
 	},
 	"lint-staged": {
 		"**.{js|ts|cjs|mjs|d.cts|d.mts|jsx|tsx|json|jsonc}": [
@@ -31,6 +33,8 @@
 		"@radix-ui/react-slot": "^1.2.0",
 		"date-fns": "^4.1.0",
 		"next": "15.3.1",
+		"next-sitemap": "^4.2.3",
+		"node-fetch": "^2.7.0",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"react-hook-form": "^7.56.3",

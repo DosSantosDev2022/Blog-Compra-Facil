@@ -55,6 +55,7 @@ export const getArticles = async (
           }
         }
         createdAt
+        updatedAt
       }
       articlesConnection(where: $where) {
         aggregate {
