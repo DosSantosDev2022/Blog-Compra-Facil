@@ -102,6 +102,7 @@ export const getArticles = async (
     articlesConnection: { aggregate: { count: number } };
   }>(query, variables, {
     revalidate: 60 * 60 * 24, // revalida a página a cada 24h
+    tags: ['articles'],
   });;
 
 	const articles = responseData?.articles || [];

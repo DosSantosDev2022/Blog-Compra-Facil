@@ -44,6 +44,7 @@ export const getDetailsArticle = async (
   
   const data = await HygraphQuery<{article: Article}>(query, variables, {
      revalidate: 60 * 60 * 24, // revalida a página a cada 24h
+     tags: [`article-${slug}`],
   })
    
 	return {article: data?.article || null}
