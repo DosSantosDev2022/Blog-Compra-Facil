@@ -48,6 +48,7 @@ const CardSimple = ({
 					fill
 					className='object-cover rounded-t-xl'
 					sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+					unoptimized
 				/>
 			</CardHeader>
 			<CardContent className='flex-grow flex flex-col justify-between p-4 space-y-2'>

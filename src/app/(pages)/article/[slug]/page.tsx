@@ -112,6 +112,7 @@ export default async function ArticlePage({ params }: PagePostProps) {
 					className='object-cover w-full h-full'
 					priority
 					sizes='(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 60vw'
+					unoptimized
 				/>
 			</div>
 
