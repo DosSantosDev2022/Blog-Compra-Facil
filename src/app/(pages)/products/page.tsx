@@ -23,7 +23,7 @@ export default async function ProductsPage({
 		<div className='py-8 lg:mt-32 mt-8'>
 			<SectionTitle title='Produtos recomendados' />
 			<div className='flex w-full items-center justify-between h-10 text-primary-foreground px-12 py-8 mt-6'>
-				<ul className='flex items-center gap-2 overflow-x-auto scrollbar-none'>
+				<ul className='flex items-center gap-2 overflow-x-auto scrollbar-custom'>
 					<li
 						aria-label='todos-produtos'
 						className='text-xs lg:text-sm flex-shrink-0 bg-primary  duration-300 transition-all hover:bg-primary-hover px-3 py-1.5 rounded-2xl'
@@ -48,7 +48,7 @@ export default async function ProductsPage({
 					))}
 				</ul>
 			</div>
-			<div className='flex flex-wrap gap-4 p-3 mt-16'>
+			<div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 p-3 mt-16'>
 				{products.map((product) => (
 					<ProductCard
 						key={product.id}
