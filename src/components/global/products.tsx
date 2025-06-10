@@ -25,7 +25,7 @@ const ProductCard = ({
 	LinkUrl,
 }: ProductCardProps) => {
 	return (
-		<Card className='w-full p-4 flex flex-col justify-between'>
+		<Card className='w-full max-w-xl p-4 flex flex-col justify-between'>
 			<div className='relative w-full h-46 overflow-hidden rounded-md'>
 				<Image
 					src={imageUrl}
