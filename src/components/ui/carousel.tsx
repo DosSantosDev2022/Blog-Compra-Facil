@@ -55,7 +55,7 @@ const CarouselIndicators = ({
 				onClick={() => goToSlide(index)}
 				aria-label={`Go to slide ${index + 1}`}
 				className={twMerge(
-					'h-1.5 w-1.5 rounded-full transition-all duration-300 sm:h-2 sm:w-2 cursor-pointer',
+					'h-2.5 w-2.5 rounded-full transition-all duration-300 cursor-pointer',
 					index === currentIndex
 						? 'scale-110 bg-primary'
 						: 'bg-foreground hover:bg-primary-hover',

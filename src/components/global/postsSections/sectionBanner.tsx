@@ -63,9 +63,10 @@ const SectionBanner = async () => {
 							alt={article.title || ''}
 							fill
 							className='object-cover object-center'
-							quality={100}
+							quality={80}
 							priority
-							unoptimized
+							loading="eager"
+
 						/>
 						<div className='absolute inset-0 bg-black opacity-40 z-0' />
 						<div className='absolute inset-0 p-10 flex flex-col justify-center items-start lg:items-center gap-3'>

@@ -34,7 +34,7 @@ const AvatarName = React.forwardRef<
 	<span
 		ref={ref}
 		className={twMerge(
-			'truncate text-sm font-semibold dark:text-foreground text-primary-foreground ',
+			'truncate text-sm font-semibold dark:text-foreground text-primary ',
 			className,
 		)}
 		{...props}
@@ -49,7 +49,7 @@ const AvatarLabel = React.forwardRef<
 	<span
 		ref={ref}
 		className={twMerge(
-			'truncate text-xs font-normal dark:text-foreground/80 text-primary-foreground/80',
+			'truncate text-xs font-normal dark:text-foreground text-primary',
 			className,
 		)}
 		{...props}

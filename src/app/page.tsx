@@ -74,29 +74,27 @@ export default async function Home() {
 				{/* Seção da Barra Lateral (Anúncios/Outros) */}
 				{/* Ordem 2 em mobile e desktop para aparecer depois do conteúdo principal */}
 				<aside className='order-2 lg:block space-y-8 lg:col-span-3 p-4'>
-					<div>
-						<div className='space-y-4'>
-							<SidebarAdBlock slot='9849617003' />
-							<SidebarAdBlock slot='9849617003' />
-							<SidebarAdBlock slot='9849617003' />
-							{/* categorias recomendadas */}
-							<div>
-								<p className='text-sm text-muted-foreground mb-2'>
-									Categorias
-								</p>
-								<div className='flex flex-wrap justify-center gap-2'>
-									{categories.map((category) => (
-										<Link
-											className='lg:w-full xl-w-44 w-full text-center p-2 border border-border rounded-xl hover:bg-muted transition-all duration-300'
-											key={category.id}
-											href={`/category/${category.slug}`}
-										>
-											{category.name}
-										</Link>
-									))}
-								</div>
+					<div className='space-y-4'>
+						<SidebarAdBlock slot='9849617003' />
+						<SidebarAdBlock slot='9849617003' />
+						<SidebarAdBlock slot='9849617003' />
+						{/* categorias recomendadas */}
+						<>
+							<p className='text-sm text-muted-foreground mb-2'>
+								Categorias
+							</p>
+							<div className='flex flex-wrap justify-center gap-2'>
+								{categories.map((category) => (
+									<Link
+										className='lg:w-full xl-w-44 w-full text-center p-2 border border-border rounded-xl hover:bg-muted transition-all duration-300'
+										key={category.id}
+										href={`/category/${category.slug}`}
+									>
+										{category.name}
+									</Link>
+								))}
 							</div>
-						</div>
+						</>
 					</div>
 					<SidebarAdBlock slot='9849617003' />
 					<SidebarAdBlock slot='9849617003' />
