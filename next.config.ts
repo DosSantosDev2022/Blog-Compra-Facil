@@ -18,6 +18,11 @@ const nextConfig: NextConfig = {
 				hostname: 'us-west-2.graphassets.com',
 				pathname: '/**',
 			},
+			{
+				protocol: 'https',
+				hostname: 'media.graphassets.com',
+				pathname: '/**',
+			},
 		],
 	},
 };

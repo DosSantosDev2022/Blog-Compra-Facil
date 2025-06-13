@@ -1,7 +1,8 @@
 'use client'
+
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { LuChevronDown } from 'react-icons/lu'
-import { createContext, useContext, useState, forwardRef } from 'react'
+import { createContext, useContext, useState, forwardRef, useRef } from 'react' // Importar useRef
 import { twMerge } from 'tailwind-merge'
 import Link, { type LinkProps } from 'next/link'
 
@@ -38,7 +39,7 @@ const Navigation = forwardRef<HTMLElement, ComponentPropsWithRef<'nav'>>(
 	({ className, ...props }, ref) => (
 		<NavigationProvider>
 			<nav
-				aria-label='navigation'
+				aria-label='Navegação principal do site'
 				className={twMerge(
 					'h-full w-full space-y-1 flex',
 					'sm:space-y-2 lg:space-y-4',
@@ -58,6 +59,7 @@ const NavigationList = forwardRef<
 	ComponentPropsWithRef<'ul'>
 >(({ className, ...props }, ref) => (
 	<ul
+		role="menubar"
 		className={twMerge('flex flex-col lg:flex-row p-2 gap-2', className)}
 		{...props}
 		ref={ref}
@@ -71,6 +73,7 @@ interface NavigationItemProps extends ComponentPropsWithRef<'li'> {
 	isDrop?: boolean
 	dropdownItems?: ReactNode[]
 	hoverType?: 'text' | 'background'
+	label?: string
 }
 
 const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
@@ -82,24 +85,69 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
 			id,
 			children,
 			hoverType = 'background',
+			label,
 			...props
 		},
 		ref,
 	) => {
 		const { openDropdown, setOpenDropdown } = useNavigationContext()
 		const isOpen = openDropdown === id
+		const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null) // Ref para o timeout
+
+		const DROPDOWN_CLOSE_DELAY = 200 // Milissegundos de atraso para fechar
+
+		const clearCloseTimeout = () => {
+			if (closeTimeoutRef.current) {
+				clearTimeout(closeTimeoutRef.current)
+				closeTimeoutRef.current = null
+			}
+		}
 
 		const handleMouseEnter = () => {
-			if (isDrop && id) setOpenDropdown(id)
+			clearCloseTimeout() // Limpa qualquer timeout de fechamento pendente
+			if (isDrop && id) {
+				setOpenDropdown(id)
+			}
 		}
 
 		const handleMouseLeave = () => {
-			if (isDrop && id) setOpenDropdown(null)
+			if (isDrop && id) {
+				// Inicia um timeout para fechar o dropdown
+				closeTimeoutRef.current = setTimeout(() => {
+					setOpenDropdown(null)
+				}, DROPDOWN_CLOSE_DELAY)
+			}
 		}
 
+		// Adicionado para lidar com a entrada do mouse no dropdown em si
+		const handleDropdownMouseEnter = () => {
+			clearCloseTimeout() // Cancela o fechamento se o mouse entrar no dropdown
+		}
+
+		// Adicionado para lidar com a saída do mouse do dropdown em si
+		const handleDropdownMouseLeave = () => {
+			if (isDrop && id) {
+				// Fecha o dropdown se o mouse sair da área do submenu
+				setOpenDropdown(null)
+			}
+		}
+
+
 		const handleClick = () => {
+			clearCloseTimeout(); // Limpa timeout ao clicar
 			if (isDrop && id) {
 				setOpenDropdown(isOpen ? null : id)
+			}
+		}
+
+		const handleKeyDown = (event: React.KeyboardEvent) => {
+			if (isDrop && id) {
+				if (event.key === 'Enter' || event.key === ' ') {
+					event.preventDefault()
+					setOpenDropdown(isOpen ? null : id)
+				} else if (event.key === 'Escape') {
+					setOpenDropdown(null)
+				}
 			}
 		}
 
@@ -109,15 +157,9 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
 				: 'hover:bg-primary-hover'
 
 		return (
+			// biome-ignore lint/a11y/useValidAriaRole: <explanation>
 			<li
-				id={id}
-				role={isDrop ? 'menuitem' : undefined}
-				aria-haspopup={isDrop ? 'true' : undefined}
-				aria-expanded={isDrop ? isOpen : undefined}
-				aria-controls={isDrop ? `dropdown-${id}` : undefined}
-				onClick={handleClick}
-				onMouseEnter={handleMouseEnter}
-				onMouseLeave={handleMouseLeave}
+				role="none"
 				className={twMerge(
 					'flex items-center justify-start lg:justify-center rounded-md px-2 py-1.5 relative',
 					'sm:min-w-24 cursor-pointer transition-all duration-300',
@@ -128,22 +170,48 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
 				{...props}
 				ref={ref}
 			>
-				{children}
-
-				{isDrop && (
-					<LuChevronDown
-						className={twMerge(
-							'ml-1 duration-300 transition-transform',
-							isOpen ? 'rotate-180' : '',
-						)}
-					/>
+				{isDrop ? (
+					// biome-ignore lint/a11y/useButtonType: <explanation>
+					<button
+						id={id}
+						onClick={handleClick}
+						onMouseEnter={handleMouseEnter} // Evento de mouse no botão principal
+						onMouseLeave={handleMouseLeave} // Evento de mouse no botão principal
+						onKeyDown={handleKeyDown}
+						role="menuitem"
+						aria-haspopup="true"
+						aria-expanded={isOpen}
+						aria-controls={isDrop ? `dropdown-${id}` : undefined}
+						className="flex items-center justify-between w-full"
+						aria-label={label}
+					>
+						{children}
+						<LuChevronDown
+							aria-hidden="true"
+							className={twMerge(
+								'ml-1 duration-300 transition-transform',
+								isOpen ? 'rotate-180' : '',
+							)}
+						/>
+					</button>
+				) : (
+					// Para itens de navegação sem dropdown, o children é o link
+					<div
+						onMouseEnter={handleMouseEnter} // Garante que o hover behavior ainda funcione para itens sem dropdown
+						onMouseLeave={handleMouseLeave}
+						className="flex items-center w-full"
+					>
+						{children}
+					</div>
 				)}
 
 				{isDrop && isOpen && dropdownItems && (
 					<ul
 						role='menu'
 						id={`dropdown-${id}`}
-						aria-label='dropdown'
+						aria-label={label ? `Submenu de ${label}` : 'Submenu'}
+						onMouseEnter={handleDropdownMouseEnter} // Adicionado: Mouse entra no UL do dropdown
+						onMouseLeave={handleDropdownMouseLeave} // Adicionado: Mouse sai do UL do dropdown
 						className={twMerge(
 							'absolute top-full lg:right-0 bg-background border border-border z-50 ',
 							'lg:w-4xl w-xs mt-1 rounded-md shadow-md p-2 transition-all duration-300 ease-in',
@@ -151,8 +219,10 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
 						)}
 					>
 						{dropdownItems.map((item, index) => (
+							// biome-ignore lint/a11y/useValidAriaRole: <explanation>
 							<li
-								key={index}
+								key={index} // Idealmente, use um ID único para a key
+								role="none"
 								className='text-sm w-auto px-2 py-1.5 rounded hover:bg-muted-hover text-foreground'
 							>
 								{item}
@@ -167,21 +237,24 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
 
 NavigationItem.displayName = 'NavigationItem'
 
+// ... (Restante do NavigationLink e NavigationIcon permanece o mesmo)
 interface NavigationLinkProps extends LinkProps {
 	className?: string
 	children?: ReactNode
+	role?: 'menuitem' | 'button' | undefined;
 }
 
 const NavigationLink = forwardRef<HTMLAnchorElement, NavigationLinkProps>(
-	({ className, children, href, ...props }, ref) => {
+	({ className, children, href, role, ...props }, ref) => {
 		return (
 			<Link
-				className={twMerge('', className)}
+				className={twMerge('block w-full', className)}
 				ref={ref}
 				{...props}
 				href={href || ''}
 				passHref
 				legacyBehavior
+				role={role}
 			>
 				{children}
 			</Link>
@@ -209,5 +282,5 @@ export {
 	NavigationIcon,
 	NavigationItem,
 	NavigationLink,
-	NavigationList,
+	NavigationList
 }
