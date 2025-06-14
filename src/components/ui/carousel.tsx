@@ -47,7 +47,7 @@ const CarouselIndicators = ({
 	itemsLength,
 	goToSlide,
 }: CarouselIndicatorsProps) => (
-	<div className='absolute bottom-4 left-1/2 z-30 flex -translate-x-1/2 space-x-3 p-2 sm:p-0 rtl:space-x-reverse'>
+	<div className='absolute bottom-0 lg:bottom-4 left-1/2 z-30 flex -translate-x-1/2 space-x-3 p-2 sm:p-0 rtl:space-x-reverse'>
 		{Array.from({ length: itemsLength }).map((_, index) => (
 			<button
 				key={index}
@@ -55,7 +55,7 @@ const CarouselIndicators = ({
 				onClick={() => goToSlide(index)}
 				aria-label={`Go to slide ${index + 1}`}
 				className={twMerge(
-					'h-2.5 w-2.5 rounded-full transition-all duration-300 cursor-pointer',
+					'lg:h-4 lg:w-4 w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer',
 					index === currentIndex
 						? 'scale-110 bg-primary'
 						: 'bg-foreground hover:bg-primary-hover',
@@ -100,7 +100,7 @@ const Carousel = ({
 		>
 			{/* Conteúdo do Carrossel */}
 			<div
-				aria-label='carousel-content'
+				aria-label='carousel-image'
 				className='flex h-full w-full transition-transform duration-700 ease-in-out'
 				style={{
 					transform: `translateX(-${currentIndex * 100}%)`,
@@ -118,8 +118,8 @@ const Carousel = ({
 			</div>
 
 			{/* Botões de navegação */}
-			<CarouselButton direction='prev' onClick={prevSlide} />
-			<CarouselButton direction='next' onClick={nextSlide} />
+			{/* <CarouselButton direction='prev' onClick={prevSlide} />
+			<CarouselButton direction='next' onClick={nextSlide} /> */}
 
 			{/* Indicadores */}
 			<CarouselIndicators
