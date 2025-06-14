@@ -4,7 +4,11 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { CiSearch } from 'react-icons/ci'
 
-export function InputSearch() {
+interface InputSearchProps {
+	tabIndex?: number
+}
+
+export function InputSearch({ tabIndex }: InputSearchProps) {
 	const router = useRouter()
 	const query = router.push
 	const searchParams = new URLSearchParams(query as unknown as string)
@@ -44,6 +48,7 @@ export function InputSearch() {
 				required
 				icon={<CiSearch />}
 				placeholder='Buscar...'
+				tabIndex={tabIndex}
 			/>
 		</form>
 	)

@@ -26,7 +26,7 @@ const VariableArticle = async ({
 						<AdBanner dataAdFormat='auto' dataAdSlot='5170095842' />
 					</div>
 				</div>
-				<ul className='md:col-span-2 overflow-y-scroll max-h-[768px] space-y-3 scrollbar-custom grid grid-cols-1 gap-2 lg:grid-cols-2'>
+				<div className='md:col-span-2 overflow-y-scroll max-h-[768px] space-y-3 scrollbar-custom grid grid-cols-1 gap-2 lg:grid-cols-2'>
 					{recentArticles.map((article) => (
 						<SmallCard
 							key={article.id}
@@ -36,7 +36,7 @@ const VariableArticle = async ({
 							slug={article.slug || ''}
 						/>
 					))}
-				</ul>
+				</div>
 			</div>
 		</div>
 	)

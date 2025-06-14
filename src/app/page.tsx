@@ -21,7 +21,7 @@ export default async function Home() {
 	} = await getHomePageData()
 
 	return (
-		<div className='space-y-8 lg:mt-20 mt-8'>
+		<div className='space-y-8 lg:mt-20 mt-0'>
 			<SectionBanner />
 			<div className='grid grid-cols-1 lg:grid-cols-12 gap-8'>
 				{/* Seção de Conteúdo Principal */}

@@ -8,7 +8,7 @@ import {
 	NavigationLink // Importar NavigationLink
 } from '@/components/ui'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { IoClose, IoMenu } from 'react-icons/io5'
 import { InputSearch } from '../global/search'
 import data from '@/config/categories.json' // Assumo que 'data' é usado para categorias
@@ -16,6 +16,18 @@ import { chakra } from '@/assets/fonts'
 
 const Header = () => {
 	const [isOpen, setIsOpen] = useState(false)
+	const [isMobile, setIsMobile] = useState(false)
+
+	useEffect(() => {
+		const checkIsMobile = () => {
+			setIsOpen(window.innerWidth < 1024)
+		}
+		checkIsMobile()
+
+		window.addEventListener('resize', checkIsMobile)
+
+		return () => window.removeEventListener('resize', checkIsMobile)
+	}, [])
 
 	const handleOpenMenu = () => {
 		setIsOpen(!isOpen)
@@ -57,7 +69,8 @@ const Header = () => {
 
 				{/* Navegação */}
 				<div
-					aria-hidden={!isOpen ? "true" : "false"}
+					aria-hidden={!isOpen}
+					tabIndex={!isOpen && isMobile ? -1 : 0}
 					className={`
             transition-all duration-300 ease-in-out
             p-1 z-50
@@ -74,6 +87,7 @@ const Header = () => {
 									key={link.label} // Usando a URL como key, se for única
 									className='truncate'
 									onClick={handleOpenMenu} // Fecha o menu mobile ao clicar no link
+									tabIndex={!isOpen && isMobile ? -1 : 0}
 								>
 									{/* Renderizando NavigationLink como filho direto do NavigationItem */}
 									<NavigationLink href={link.url}>
@@ -86,6 +100,7 @@ const Header = () => {
 								isDrop
 								id='dropdown1'
 								label="Categorias" // Passa o rótulo para o NavigationItem para uso no aria-label do botão
+								tabIndex={!isOpen && isMobile ? -1 : 0}
 								dropdownItems={data.categories.map((cat) => (
 									<NavigationLink // Usando NavigationLink para os itens do dropdown
 										onClick={handleOpenMenu}
@@ -101,7 +116,7 @@ const Header = () => {
 							</NavigationItem>
 						</NavigationList>
 					</Navigation>
-					<InputSearch />
+					<InputSearch tabIndex={!isOpen && isMobile ? -1 : 0} />
 				</div>
 			</div>
 		</header>
