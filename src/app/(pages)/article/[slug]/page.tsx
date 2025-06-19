@@ -165,7 +165,7 @@ export default async function ArticlePage({ params }: PagePostProps) {
 									name={product.name}
 									description={product.description}
 									imageUrl={product.image.url}
-									LinkUrl={product.url}
+									slug={product.slug}
 								/>
 							))}
 						</div>
