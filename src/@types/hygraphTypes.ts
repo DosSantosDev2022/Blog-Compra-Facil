@@ -18,10 +18,23 @@ export interface CategoryResponse {
 type Products = {
 	id: string
 	name: string
-	url: string
+	slug: string
 	description: string
+	category: Category
 	image: {
 		url: string
+	}
+	 affiliateLinks: {
+			id: string
+			name: string
+			link : string
+			icon: {
+				url: string
+			}
+		}[]
+	videoReviewUrl: string
+	technicalsheet: {
+		raw: RichTextContent
 	}
 }
 

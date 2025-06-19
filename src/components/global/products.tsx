@@ -15,14 +15,14 @@ interface ProductCardProps {
 	name: string
 	imageUrl: string
 	description: string
-	LinkUrl: string
+	slug: string
 }
 
 const ProductCard = ({
 	name,
 	imageUrl,
 	description,
-	LinkUrl,
+	slug
 }: ProductCardProps) => {
 	return (
 		<Card className='w-full max-w-xl p-4 flex flex-col justify-between'>
@@ -40,7 +40,7 @@ const ProductCard = ({
 				<CardDescription>{description}</CardDescription>
 				<CardFooter className='p-0'>
 					<Button variants='shine' sizes='full' asChild>
-						<Link target='_blank' href={LinkUrl}>
+						<Link target='_blank' href={`/products/${slug}`}>
 							Ver mais
 						</Link>
 					</Button>

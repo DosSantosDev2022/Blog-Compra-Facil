@@ -22,8 +22,9 @@ export default async function ProductsPage({
 	return (
 		<div className='py-8 lg:mt-32 mt-8'>
 			<SectionTitle title='Produtos recomendados' />
-			<div className='flex w-full items-center justify-between h-10 text-primary-foreground px-12 py-8 mt-6'>
-				<ul className='flex items-center gap-2 overflow-x-auto scrollbar-custom'>
+			{/* menu de categorias */}
+			<div className='sticky top-0 z-10 flex w-full items-center justify-between h-14 text-primary-foreground lg:px-12 lg:py-8 p-2 my-6'>
+				<ul className='flex items-center gap-2 overflow-x-auto scrollbar-custom p-2'>
 					<li
 						aria-label='todos-produtos'
 						className='text-xs lg:text-sm flex-shrink-0 bg-primary  duration-300 transition-all hover:bg-primary-hover px-3 py-1.5 rounded-2xl'
@@ -48,17 +49,21 @@ export default async function ProductsPage({
 					))}
 				</ul>
 			</div>
-			<div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 p-3 mt-16'>
-				{products.map((product) => (
-					<ProductCard
-						key={product.id}
-						name={product.name}
-						imageUrl={product.image.url}
-						description={product.description}
-						LinkUrl={product.url}
-					/>
-				))}
+			{/* lista de produtos */}
+			<div className='flex-grow overflow-y-auto max-h-[520px] scrollbar-custom lg:p-3 border border-border rounded-xl bg-secondary/20'>
+				<div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:p-3 p-2'>
+					{products.map((product) => (
+						<ProductCard
+							key={product.id}
+							name={product.name}
+							imageUrl={product.image.url}
+							description={product.description}
+							slug={product.slug}
+						/>
+					))}
+				</div>
 			</div>
+
 
 			<div className='p-2  mb-8'>
 				{/* anúncio horizontal 2 */}

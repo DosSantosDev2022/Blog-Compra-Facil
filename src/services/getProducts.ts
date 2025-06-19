@@ -5,14 +5,23 @@ export interface Category {
 }
 
 export interface Product {
-	id: string
-	name: string
-	description: string
-	category: Category // Agora 'category' é do tipo 'Category'
-	image: {
-		url: string
-	}
-	url: string
+  id: string
+  name: string
+  slug: string
+  description: string
+  category: Category
+  image: {
+    url: string
+  }
+   affiliateLinks: {
+      id: string
+      name: string
+      link : string
+      icon: {
+        url: string
+      }
+    }[]
+  videoReviewUrl: string
 }
 
 interface CategoryProduct {
@@ -35,9 +44,10 @@ export const getProducts = async (
 	if (category && category !== 'Todos') {
 		query = `
       query ProductsByCategory($category: String) {
-        products(where: { category: { name: $category } }) {
+        products(where: { category: { name: $category }}, first : 200 ) {
           id
           name
+          slug
           description
           category {
             name
@@ -45,7 +55,15 @@ export const getProducts = async (
           image {
             url
           }
-          url
+          videoReviewUrl
+          affiliateLinks {
+            id
+            name
+            link
+            icon {
+              url
+            }
+          }
         }
         categoryProducts {
           id
@@ -58,9 +76,10 @@ export const getProducts = async (
 	} else {
 		query = `
       query AllProducts {
-        products {
+        products (first : 200) {
           id
           name
+          slug
           description
           category {
             name
@@ -68,7 +87,6 @@ export const getProducts = async (
           image {
             url
           }
-          url
         }
         categoryProducts {
           id

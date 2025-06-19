@@ -31,6 +31,7 @@ export const getDetailsArticle = async (
         product {
           id
           name
+          slug
           url
           description
           image {
