@@ -88,6 +88,15 @@ export const getProducts = async (
             url
           }
         }
+          videoReviewUrl
+          affiliateLinks {
+            id
+            name
+            link
+            icon {
+              url
+            }
+          }
         categoryProducts {
           id
           name

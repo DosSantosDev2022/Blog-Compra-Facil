@@ -32,7 +32,6 @@ export const getDetailsArticle = async (
           id
           name
           slug
-          url
           description
           image {
             url
