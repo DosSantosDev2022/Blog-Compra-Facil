@@ -18,7 +18,7 @@ export default async function ProductsPage({
 }: ProductsPageParams) {
 	const category = (await searchParams).category
 	const { products, categoryProducts } = await getProducts(category)
-
+	console.log(products)
 	return (
 		<div className='py-8 lg:mt-32 mt-8'>
 			<SectionTitle title='Produtos recomendados' />
@@ -63,7 +63,6 @@ export default async function ProductsPage({
 					))}
 				</div>
 			</div>
-
 
 			<div className='p-2  mb-8'>
 				{/* anúncio horizontal 2 */}
