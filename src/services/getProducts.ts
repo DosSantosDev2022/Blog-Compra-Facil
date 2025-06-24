@@ -55,7 +55,7 @@ export const getProducts = async (
           image {
             url
           }
-          videoReviewUrl
+          
           affiliateLinks {
             id
             name
@@ -87,7 +87,6 @@ export const getProducts = async (
           image {
             url
           }
-        }
           videoReviewUrl
           affiliateLinks {
             id
@@ -97,6 +96,8 @@ export const getProducts = async (
               url
             }
           }
+        }
+
         categoryProducts {
           id
           name
