@@ -1,4 +1,6 @@
 import type { RichTextContent } from '@graphcms/rich-text-types'
+
+
 export interface Category {
 	id: string
 	name?: string
@@ -15,7 +17,7 @@ export interface CategoryResponse {
 	categories?: Category[] // O '?' indica que 'categories' pode ser undefined enquanto os dados estão sendo carregados
 }
 
-type Products = {
+export type Products = {
 	id: string
 	name: string
 	slug: string

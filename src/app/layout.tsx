@@ -4,6 +4,9 @@ import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { poppins } from '@/assets/fonts'
 import { ToggleTheme } from '@/components/global/toggleTheme'
+import { QueryClientProviderWrapper } from '@/providers/queryClientProviderWrapper'; // Vamos criar este arquivo
+import { CookieConsentBanner } from '@/components/global/cookieConsentBanner'
+
 
 export const metadata: Metadata = {
 	title: 'onTech Blog',
@@ -34,10 +37,14 @@ export default async function RootLayout({
 			<body
 				className={`${poppins.className} bg-background text-foreground antialiased scrollbar-custom overflow-x-hidden`}
 			>
-				<Header />
-				<main className='lg:px-14 px-4 py-6'>{children}</main>
-				<Footer />
-				<ToggleTheme />
+				<QueryClientProviderWrapper>
+					<Header />
+					<main className='lg:px-14 px-4 py-6'>{children}</main>
+					<Footer />
+					<ToggleTheme />
+					<CookieConsentBanner />
+				</QueryClientProviderWrapper>
+
 			</body>
 		</html>
 	)

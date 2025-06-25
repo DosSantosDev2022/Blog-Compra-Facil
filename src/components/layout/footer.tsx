@@ -73,7 +73,7 @@ const Footer = () => {
 
 			{/* Copyright */}
 			<div className='mt-8 h-10 border-t border-border dark:border-muted-foreground pt-4 text-xs text-center text-primary-foreground'>
-				© {new Date().getFullYear()} onTech. Todos os direitos reservados
+				<>© {new Date().getFullYear()} onTech. Todos os direitos reservados | <a href='/privacyPolicy'>Politica de privacidade</a></>
 			</div>
 		</footer>
 	)

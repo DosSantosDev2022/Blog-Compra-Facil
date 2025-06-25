@@ -41,22 +41,23 @@ export default async function AllPosts({ searchParams }: AllPostsParams) {
 								authorName={article.author.name}
 							/>
 						))}
-						{/* Paginação */}
-						<div className='w-full flex items-center gap-3 justify-start px-2 py-3 mt-10'>
-							<span className='font-light text-muted-foreground'>
-								Mostrando{' '}
-								{Math.min(
-									pageSize,
-									totalCount - (currentPage - 1) * pageSize,
-								)}{' '}
-								de {totalCount}
-							</span>
-							<Pagination
-								page={currentPage}
-								limit={pageSize}
-								total={totalCount}
-							/>
-						</div>
+
+					</div>
+					{/* Paginação */}
+					<div className='w-full flex items-center gap-3 justify-start px-2 py-3 mt-10'>
+						<span className='font-light text-muted-foreground'>
+							Mostrando{' '}
+							{Math.min(
+								pageSize,
+								totalCount - (currentPage - 1) * pageSize,
+							)}{' '}
+							de {totalCount}
+						</span>
+						<Pagination
+							page={currentPage}
+							limit={pageSize}
+							total={totalCount}
+						/>
 					</div>
 				</div>
 

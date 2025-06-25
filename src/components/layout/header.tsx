@@ -5,31 +5,43 @@ import {
 	Navigation,
 	NavigationItem,
 	NavigationList,
-	NavigationLink // Importar NavigationLink
+	NavigationLink,
 } from '@/components/ui'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { IoClose, IoMenu } from 'react-icons/io5'
 import { InputSearch } from '../global/search'
-import data from '@/config/categories.json' // Assumo que 'data' é usado para categorias
+import data from '@/config/categories.json'
 import { chakra } from '@/assets/fonts'
 
 const Header = () => {
 	const [isOpen, setIsOpen] = useState(false)
-	const [isMobile, setIsMobile] = useState(false)
+	const [isMobile, setIsMobile] = useState(false) // Estado para controlar se é mobile
 
 	useEffect(() => {
 		const checkIsMobile = () => {
-			setIsOpen(window.innerWidth < 1024)
+			// isMobile é true se a tela for menor que 1024px
+			setIsMobile(window.innerWidth < 1024)
+			// Se a tela for maior ou igual a 1024px, garante que o menu esteja sempre aberto (para desktop)
+			// e que o estado 'isOpen' seja redefinido para 'false' quando se torna mobile, para não iniciar aberto.
+			if (window.innerWidth >= 1024) {
+				setIsOpen(false)
+			}
 		}
+
+		// Chama a função uma vez para definir o estado inicial
 		checkIsMobile()
 
+		// Adiciona o event listener para redimensionamento
 		window.addEventListener('resize', checkIsMobile)
 
+		// Limpa o event listener
 		return () => window.removeEventListener('resize', checkIsMobile)
-	}, [])
+	}, []) // O array de dependências vazio garante que isso rode apenas uma vez na montagem
 
 	const handleOpenMenu = () => {
+		// Apenas alterna o estado isOpen.
+		// Ele será false por padrão em mobile e se tornará true/false com o clique.
 		setIsOpen(!isOpen)
 	}
 
@@ -44,69 +56,68 @@ const Header = () => {
 			<div className='flex flex-col lg:h-10 lg:flex-row items-center justify-between lg:gap-10'>
 				{/* Logo + Toggle Mobile */}
 				<div className='flex items-center justify-between w-full lg:w-auto'>
-					{/* O logo agora é um Link */}
 					<Link
-						href="/"
-						aria-label="Página inicial do OnTech Blog"
-						title="Ir para a página inicial do OnTech Blog"
+						href='/'
+						aria-label='Página inicial do OnTech Blog'
+						title='Ir para a página inicial do OnTech Blog'
 						className={`${chakra.className} text-5xl font-bold`}
 					>
 						onTech
 					</Link>
-					<Button
-						onClick={handleOpenMenu}
-						sizes='icon'
-						className='lg:hidden'
-						aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'} // Rótulo dinâmico para o botão
-					>
-						{isOpen ? (
-							<IoClose aria-hidden="true" size={28} /> // Ícone decorativo
-						) : (
-							<IoMenu aria-hidden="true" size={28} /> // Ícone decorativo
-						)}
-					</Button>
+					{/* O botão de menu só aparece em telas mobile */}
+					{isMobile && (
+						<Button
+							onClick={handleOpenMenu}
+							sizes='icon'
+							className='lg:hidden'
+							aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
+						>
+							{isOpen ? (
+								<IoClose aria-hidden='true' size={28} />
+							) : (
+								<IoMenu aria-hidden='true' size={28} />
+							)}
+						</Button>
+					)}
 				</div>
 
 				{/* Navegação */}
 				<div
-					aria-hidden={!isOpen}
-					tabIndex={!isOpen && isMobile ? -1 : 0}
+					aria-hidden={isMobile ? !isOpen : false}
+					tabIndex={isMobile && !isOpen ? -1 : 0}
 					className={`
             transition-all duration-300 ease-in-out
             p-1 z-50
             w-full lg:w-auto
-            ${isOpen ? 'max-h-[500px] opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'}
+            ${isMobile && !isOpen ? 'max-h-0 opacity-0 -translate-y-2 pointer-events-none' : 'max-h-[500px] opacity-100 translate-y-0'}
             lg:!max-h-none lg:!opacity-100 lg:!translate-y-0 lg:flex
             flex-col lg:flex-row items-start lg:items-center gap-5 lg:gap-10
           `}
 				>
 					<Navigation>
 						<NavigationList>
-							{links.map((link) => ( // Removido 'index' como key
+							{links.map((link) => (
 								<NavigationItem
-									key={link.label} // Usando a URL como key, se for única
+									key={link.label}
 									className='truncate'
-									onClick={handleOpenMenu} // Fecha o menu mobile ao clicar no link
-									tabIndex={!isOpen && isMobile ? -1 : 0}
+									onClick={isMobile ? handleOpenMenu : undefined} // Fecha o menu mobile ao clicar no link, apenas em mobile
+									tabIndex={isMobile && !isOpen ? -1 : 0}
 								>
-									{/* Renderizando NavigationLink como filho direto do NavigationItem */}
-									<NavigationLink href={link.url}>
-										{link.label}
-									</NavigationLink>
+									<NavigationLink href={link.url}>{link.label}</NavigationLink>
 								</NavigationItem>
 							))}
 
 							<NavigationItem
 								isDrop
 								id='dropdown1'
-								label="Categorias" // Passa o rótulo para o NavigationItem para uso no aria-label do botão
-								tabIndex={!isOpen && isMobile ? -1 : 0}
+								label='Categorias'
+								tabIndex={isMobile && !isOpen ? -1 : 0}
 								dropdownItems={data.categories.map((cat) => (
-									<NavigationLink // Usando NavigationLink para os itens do dropdown
-										onClick={handleOpenMenu}
+									<NavigationLink
+										onClick={isMobile ? handleOpenMenu : undefined} // Fecha o menu mobile ao clicar no link, apenas em mobile
 										key={cat.slug || cat.name}
 										href={`/category/${cat.slug || ''}`}
-										role="menuitem"
+										role='menuitem'
 									>
 										{cat.name}
 									</NavigationLink>
@@ -116,7 +127,7 @@ const Header = () => {
 							</NavigationItem>
 						</NavigationList>
 					</Navigation>
-					<InputSearch tabIndex={!isOpen && isMobile ? -1 : 0} />
+					<InputSearch tabIndex={isMobile && !isOpen ? -1 : 0} />
 				</div>
 			</div>
 		</header>

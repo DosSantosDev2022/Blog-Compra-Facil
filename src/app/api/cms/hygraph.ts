@@ -1,7 +1,7 @@
-import 'server-only'; // Boa prática para garantir que esta função só rode no servidor
+
 
 const HYGRAPH_API_ENDPOINT = process.env.NEXT_PUBLIC_HYGRAPH_API_ENDPOINT;
-const HYGRAPH_TOKEN = process.env.HYGRAPH_TOKEN;
+const HYGRAPH_TOKEN = process.env.NEXT_PUBLIC_HYGRAPH_TOKEN;
 
 // Definição das opções para a função HygraphQuery
 interface HygraphQueryOptions {

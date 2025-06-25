@@ -1,7 +1,7 @@
 import { AdBanner, SidebarAdBlock } from '@/components/global/google'
 import { CardSimple } from '@/components/global/posts/cardSimple'
 import { SectionTitle } from '@/components/global/sectionTitle'
-import { Button, Pagination } from '@/components/ui'
+import { Pagination } from '@/components/ui'
 import { getArticles } from '@/services/getArticles'
 import type { Metadata } from 'next'
 

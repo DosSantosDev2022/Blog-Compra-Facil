@@ -57,8 +57,8 @@ const CardSimple = ({
 					<AvatarContainer>
 						<Avatar name={authorName} src={authorImage || ''} />
 						<AvatarWrapper>
-							<AvatarName>{authorName}</AvatarName>
-							<AvatarLabel>{`Publicado em: ${format(createdAt, 'dd/MM/yyyy', { locale: ptBR })}`}</AvatarLabel>
+							<AvatarName className='text-primary dark:text-foreground'>{authorName}</AvatarName>
+							<AvatarLabel className='text-primary dark:text-foreground'>{`Publicado em: ${format(createdAt, 'dd/MM/yyyy', { locale: ptBR })}`}</AvatarLabel>
 						</AvatarWrapper>
 					</AvatarContainer>
 				</div>

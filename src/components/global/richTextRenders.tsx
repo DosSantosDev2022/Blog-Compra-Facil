@@ -3,6 +3,10 @@ import type { ReactNode } from 'react'
 interface defaultRendersProps {
 	children: ReactNode
 }
+interface defaultRendersLinkProps {
+	href?: string
+	children: ReactNode
+}
 interface ImageRenderProps {
 	src?: string
 	altText?: string
@@ -31,9 +35,8 @@ const defaultRenders = {
 	p: ({ children }: defaultRendersProps) => (
 		<p className='font-light text-base lg:text-lg mt-4'>{children}</p>
 	),
-	a: ({ children }: defaultRendersProps) => (
-		// biome-ignore lint/a11y/useValidAnchor: <explanation>
-		<a className='text-blue-400 cursor-pointer hover:underline'>
+	a: ({ children, href }: defaultRendersLinkProps) => (
+		<a href={href} className='text-blue-400 cursor-pointer hover:underline'>
 			{children}
 		</a>
 	),
@@ -46,7 +49,7 @@ const defaultRenders = {
 		<ul className=' p-2'>{children}</ul>
 	),
 	li: ({ children }: defaultRendersProps) => (
-		<li className='mb-2 text-start font-light text-foreground '>
+		<li className='mb-2 text-start font-light text-foreground text-sm lg:text-base'>
 			{children}
 		</li>
 	),
@@ -57,7 +60,7 @@ const defaultRenders = {
 				alt={altText ?? ''}
 				width={width}
 				height={height}
-				className='rounded-lg shadow-lg max-w-full h-[420px] object-cover'
+				className='rounded-lg shadow-lg max-w-full object-contain'
 			/>
 		</div>
 	),

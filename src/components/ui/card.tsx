@@ -55,7 +55,7 @@ const CardDescription = React.forwardRef<
 	<p
 		ref={ref}
 		className={twMerge(
-			'text-sm text-muted-foreground line-clamp-3',
+			'text-sm text-secondary-foreground line-clamp-3',
 			className,
 		)}
 		{...props}
