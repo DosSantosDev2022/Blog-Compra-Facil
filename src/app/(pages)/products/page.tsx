@@ -5,11 +5,12 @@ import { productsMetaData } from '@/metadata/productsMetaData';
 import { getProducts } from '@/services/getProducts';
 import Link from 'next/link';
 import { ProductsListInfinite } from '@/components/pages/product/productsListInfinite'; // Seu novo componente
+import { a } from 'vitest/dist/chunks/suite.d.FvehnV49.js';
 
 export const revalidate = 86400;
 
 interface ProductsPageParams {
-	searchParams: { category?: string }; // searchParams já vem como um objeto
+	searchParams: Promise<{ category?: string }>;
 }
 
 export const metadata = productsMetaData;
@@ -17,7 +18,7 @@ export const metadata = productsMetaData;
 export default async function ProductsPage({
 	searchParams,
 }: ProductsPageParams) {
-	const category = searchParams.category || 'Todos'; // Define 'Todos' como padrão
+	const category = (await searchParams).category || 'Todos';
 
 	// Busque apenas a primeira página de produtos no servidor
 	const { products: initialProducts, categoryProducts, hasMore: initialHasMore } = await getProducts({
