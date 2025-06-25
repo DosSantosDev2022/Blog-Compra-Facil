@@ -49,7 +49,7 @@ const defaultRenders = {
 		<ul className=' p-2'>{children}</ul>
 	),
 	li: ({ children }: defaultRendersProps) => (
-		<li className='mb-2 text-start font-light text-foreground text-sm lg:text-base list-disc list-inside'>
+		<li className='mb-2 text-start font-light text-foreground text-sm lg:text-base'>
 			{children}
 		</li>
 	),

@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/footer'
 import { poppins } from '@/assets/fonts'
 import { ToggleTheme } from '@/components/global/toggleTheme'
 import { QueryClientProviderWrapper } from '@/providers/queryClientProviderWrapper'; // Vamos criar este arquivo
+import { CookieConsentBanner } from '@/components/global/cookieConsentBanner'
 
 
 export const metadata: Metadata = {
@@ -41,6 +42,7 @@ export default async function RootLayout({
 					<main className='lg:px-14 px-4 py-6'>{children}</main>
 					<Footer />
 					<ToggleTheme />
+					<CookieConsentBanner />
 				</QueryClientProviderWrapper>
 
 			</body>
