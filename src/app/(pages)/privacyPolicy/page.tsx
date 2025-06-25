@@ -4,7 +4,6 @@ import { getPolicies } from '@/services/getPolicies';
 import { RichText } from '@/components/global/posts/richText';
 import { defaultRenders } from '@/components/global/richTextRenders';
 
-export const revalidate = 604.800; // 7 dias em segundos
 
 const dominio = 'https://www.ontech.blog/privacyPolicy'
 
