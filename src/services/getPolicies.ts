@@ -25,7 +25,7 @@ export async function getPolicies(): Promise<PrivacyPolicyResponse> {
   `;
 
   const {privacyPolicy} = await HygraphQuery<PrivacyPolicyResponse>(query, {
-    revalidate: 60 * 60 * 24 * 7, // revalida a cada 7 dias
+    revalidate: 60 * 60 * 24 * 30, // revalida a cada 30 dias
   });
 
   if (!privacyPolicy) {
