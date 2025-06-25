@@ -1,118 +1,114 @@
-import { HygraphQuery } from '@/app/api/cms/hygraph'
-
-export interface Category {
-	name: string
-}
-
-export interface Product {
-  id: string
-  name: string
-  slug: string
-  description: string
-  category: Category
-  image: {
-    url: string
-  }
-   affiliateLinks: {
-      id: string
-      name: string
-      link : string
-      icon: {
-        url: string
-      }
-    }[]
-  videoReviewUrl: string
-}
+// services/getProducts.ts
+import type { Products } from '@/@types/hygraphTypes';
+import { HygraphQuery } from '@/app/api/cms/hygraph';
 
 interface CategoryProduct {
-	id: string
-	name: string
-	slug: string
+  id: string;
+  name: string;
+  slug: string;
 }
 
 type ProductResponse = {
-	products: Product[]
-	categoryProducts: CategoryProduct[]
+  products: Products[];
+  categoryProducts: CategoryProduct[];
+  hasMore: boolean;
+};
+
+interface GetProductsOptions {
+  category?: string;
+  page?: number;
+  limit?: number;
 }
 
-export const getProducts = async (
-	category?: string,
-): Promise<ProductResponse> => {
-	let query: string
-	const variables: { category?: string } = {}
+export const getProducts = async ({
+  category,
+  page = 1,
+  limit = 30,
+}: GetProductsOptions): Promise<ProductResponse> => {
+  const skip = (page - 1) * limit;
 
-	if (category && category !== 'Todos') {
-		query = `
-      query ProductsByCategory($category: String) {
-        products(where: { category: { name: $category }}, first : 200 ) {
-          id
-          name
-          slug
-          description
-          category {
-            name
-          }
-          image {
-            url
-          }
-          
-          affiliateLinks {
-            id
-            name
-            link
-            icon {
-              url
-            }
-          }
-        }
-        categoryProducts {
-          id
-          name
-          slug
+  const includeCategoryFilter = category && category !== 'Todos';
+
+  const queryVariables: string[] = [];
+  let categoryWhereClauseContent = ''; // Conteúdo da cláusula where, sem os 'where: {}'
+
+  queryVariables.push('$limit: Int!', '$skip: Int!');
+
+  if (includeCategoryFilter) {
+    queryVariables.push('$categoryName: String!');
+    // biome-ignore lint/style/noUnusedTemplateLiteral: <explanation>
+    categoryWhereClauseContent = `category: { name: $categoryName }`;
+  }
+
+  const operationVariables = queryVariables.join(', ');
+
+  const query = `
+    query GetProductsPaginated(${operationVariables}) {
+      productsConnection${categoryWhereClauseContent ? `(where: { ${categoryWhereClauseContent} })` : ''} {
+        aggregate {
+          count
         }
       }
-    `
-		variables.category = category
-	} else {
-		query = `
-      query AllProducts {
-        products (first : 200) {
+      products(
+        first: $limit,
+        skip: $skip,
+        orderBy: createdAt_DESC
+        ${categoryWhereClauseContent ? `, where: { ${categoryWhereClauseContent} }` : ''}
+      ) {
+        id
+        name
+        slug
+        description
+        category {
+          name
+        }
+        image {
+          url
+        }
+        videoReviewUrl
+        affiliateLinks {
           id
           name
-          slug
-          description
-          category {
-            name
-          }
-          image {
+          link
+          icon {
             url
           }
-          videoReviewUrl
-          affiliateLinks {
-            id
-            name
-            link
-            icon {
-              url
-            }
-          }
-        }
-
-        categoryProducts {
-          id
-          name
-          slug
         }
       }
-    `
-	}
+      categoryProducts {
+        id
+        name
+        slug
+      }
+    }
+  `;
 
-	const data = await HygraphQuery<ProductResponse>(query, variables, {
-		revalidate: 60 * 60 * 24,  // revalida a página a cada 24h
-	})
+  const variables: { limit: number; skip: number; categoryName?: string } = {
+    limit,
+    skip,
+  };
 
-	return {
-		products: data?.products || [],
-		categoryProducts: data?.categoryProducts || [],
-	}
-}
+  if (includeCategoryFilter) {
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
+    variables.categoryName = category!;
+  }
+
+  const data = await HygraphQuery<{
+    products: Products[];
+    productsConnection: { aggregate: { count: number } };
+    categoryProducts: CategoryProduct[];
+  }>(query, variables, {
+    revalidate: 60 * 60 * 24,
+  });
+
+  const totalProducts = data?.productsConnection?.aggregate?.count || 0;
+  const currentProductsCount = (data?.products?.length || 0) + skip;
+
+  const hasMore = currentProductsCount < totalProducts;
+
+  return {
+    products: data?.products || [],
+    categoryProducts: data?.categoryProducts || [],
+    hasMore,
+  };
+};

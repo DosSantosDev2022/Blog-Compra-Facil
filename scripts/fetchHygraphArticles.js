@@ -1,7 +1,7 @@
 const fetch = require('node-fetch')
 
 const HYGRAPH_API_ENDPOINT = process.env.NEXT_PUBLIC_HYGRAPH_API_ENDPOINT
-const HYGRAPH_TOKEN = process.env.HYGRAPH_TOKEN
+const HYGRAPH_TOKEN = process.env.NEXT_PUBLIC_HYGRAPH_TOKEN
 
 if (!HYGRAPH_API_ENDPOINT || !HYGRAPH_TOKEN) {
 	console.error(

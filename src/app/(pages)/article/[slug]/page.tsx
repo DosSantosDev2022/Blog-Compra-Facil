@@ -102,7 +102,7 @@ export default async function ArticlePage({ params }: PagePostProps) {
 	const relatedArticles = relatedArticlesData.articles
 
 	return (
-		<div className='container mx-auto py-8'>
+		<div className='container mx-auto lg:py-8'>
 			{/* Header com foto de destaque */}
 			<div className='relative w-full lg:h-[520px] h-48 rounded-lg overflow-hidden mt-12'>
 				<Image
