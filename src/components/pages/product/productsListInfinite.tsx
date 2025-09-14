@@ -1,12 +1,14 @@
 // components/products/ProductsListInfinite.tsx
 'use client'; // Marca como Client Component
 
-import { useEffect } from 'react';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useInView } from 'react-intersection-observer';
-import { ProductCard } from '@/components/global/products'; // Seu ProductCard
-import { getProducts } from '@/services/getProducts'; // Sua função getProducts
 import type { Products } from '@/@types/hygraphTypes';
+import { Button, Card, CardContent, CardDescription, CardFooter, CardTitle } from '@/components/ui';
+import { getProducts } from '@/services/getProducts'; // Sua função getProducts
+import { useInfiniteQuery } from '@tanstack/react-query';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 
 interface ProductsListInfiniteProps {
@@ -73,13 +75,30 @@ export function ProductsListInfinite({ initialProducts, initialHasMore, currentC
     <>
       <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:p-3 p-2'>
         {allProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            name={product.name}
-            imageUrl={product.image.url}
-            description={product.description}
-            slug={product.slug}
-          />
+          <Card key={product.id} className='w-full max-w-xl p-4 flex flex-col justify-between'>
+            <div className='relative w-full h-46 overflow-hidden rounded-md'>
+              <Image
+                src={product.image.url}
+                alt={product.name}
+                fill
+                className='object-cover'
+                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+              />
+            </div>
+            <CardContent className='p-0 space-y-2'>
+              <CardTitle className='lg:text-base pt-2'>{product.name}</CardTitle>
+              <CardDescription>{product.description}</CardDescription>
+              <CardFooter className='p-0'>
+                {product.affiliateLinks.map((affiliateLink) => (
+                  <Button key={affiliateLink.id} variants='primary' sizes='full' asChild>
+                    <Link target='_blank' href={affiliateLink.link}>
+                      Comprar no {affiliateLink.name}
+                    </Link>
+                  </Button>
+                ))}
+              </CardFooter>
+            </CardContent>
+          </Card>
         ))}
       </div>
 

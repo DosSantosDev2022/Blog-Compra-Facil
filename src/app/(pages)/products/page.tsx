@@ -1,11 +1,10 @@
 // app/products/page.tsx
 import { AdBanner } from '@/components/global/google';
 import { SectionTitle } from '@/components/global/sectionTitle';
+import { ProductsListInfinite } from '@/components/pages/product/productsListInfinite';
 import { productsMetaData } from '@/metadata/productsMetaData';
 import { getProducts } from '@/services/getProducts';
 import Link from 'next/link';
-import { ProductsListInfinite } from '@/components/pages/product/productsListInfinite'; // Seu novo componente
-import { a } from 'vitest/dist/chunks/suite.d.FvehnV49.js';
 
 export const revalidate = 86400;
 
