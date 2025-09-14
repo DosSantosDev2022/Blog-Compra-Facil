@@ -45,10 +45,11 @@ const SidebarAdBlock = ({
 	slot,
 	text = 'Anúncio',
 }: SidebarAdBlockProps) => (
-	<div className='border-b border-border pb-4'>
+	<div className='border-b border-border my-4'>
 		<p className='text-sm text-muted-foreground mb-2'>{text}</p>
 		<AdBanner dataAdFormat='auto' dataAdSlot={slot} />
 	</div>
 )
 
 export { SidebarAdBlock }
+

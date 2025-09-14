@@ -1,9 +1,9 @@
 import { AdBanner, SidebarAdBlock } from '@/components/global/google'
 import { FeaturedCategories } from '@/components/global/postsSections/featuredCategories'
 import { HeroSection } from '@/components/global/postsSections/hero'
-import { VariableArticle } from '@/components/global/postsSections/variableArticle'
 import { MostViewedPosts } from '@/components/global/postsSections/mostViewedPosts'
 import { SectionBanner } from '@/components/global/postsSections/sectionBanner'
+import { VariableArticle } from '@/components/global/postsSections/variableArticle'
 import { homeMetaData } from '@/metadata/homeMetaData'
 import { getHomePageData } from '@/services/getHomePageData'
 import Link from 'next/link'
@@ -53,12 +53,6 @@ export default async function Home() {
 						recentArticles={recentArticles}
 					/>
 
-					<div className='mb-8'>
-						<p className='text-sm text-muted-foreground mb-2 space-y-2'>
-							Anúncio
-						</p>
-						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-					</div>
 
 					{/* seção de categorias em destaque */}
 					<FeaturedCategories categories={categories} />
@@ -73,13 +67,11 @@ export default async function Home() {
 
 				{/* Seção da Barra Lateral (Anúncios/Outros) */}
 				{/* Ordem 2 em mobile e desktop para aparecer depois do conteúdo principal */}
-				<aside className='order-2 lg:block space-y-8 lg:col-span-3 p-4'>
+				<aside className='order-2 lg:block lg:col-span-3 p-4 lg:sticky lg:top-20 lg:self-start lg:h-fit lg:max-h-screen overflow-y-auto scrollbar-custom'>
 					<div className='space-y-4'>
 						<SidebarAdBlock slot='9849617003' />
-						<SidebarAdBlock slot='9849617003' />
-						<SidebarAdBlock slot='9849617003' />
 						{/* categorias recomendadas */}
-						<>
+						<div className='space-y-4'>
 							<p className='text-sm text-muted-foreground mb-2'>
 								Categorias
 							</p>
@@ -94,20 +86,8 @@ export default async function Home() {
 									</Link>
 								))}
 							</div>
-						</>
+						</div>
 					</div>
-					<SidebarAdBlock slot='9849617003' />
-					<SidebarAdBlock slot='9849617003' />
-					<SidebarAdBlock slot='9849617003' />
-					<SidebarAdBlock slot='9849617003' />
-					<SidebarAdBlock slot='9849617003' />
-					<SidebarAdBlock slot='9849617003' />
-					<SidebarAdBlock slot='9849617003' />
-					<SidebarAdBlock slot='9849617003' />
-					<SidebarAdBlock slot='9849617003' />
-					<SidebarAdBlock slot='9849617003' />
-					<SidebarAdBlock slot='9849617003' />
-					<SidebarAdBlock slot='9849617003' />
 					<SidebarAdBlock slot='9849617003' />
 				</aside>
 			</div>

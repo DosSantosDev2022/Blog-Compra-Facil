@@ -1,11 +1,10 @@
-import type { Metadata } from 'next'
-import './globals.css'
-import { Header } from '@/components/layout/header'
-import { Footer } from '@/components/layout/footer'
-import { poppins } from '@/assets/fonts'
-import { ToggleTheme } from '@/components/global/toggleTheme'
+import { poppins } from '@/assets/fonts';
+import { CookieConsentBanner } from '@/components/global/cookieConsentBanner';
+import { Footer } from '@/components/layout/footer';
+import { Header } from '@/components/layout/header';
 import { QueryClientProviderWrapper } from '@/providers/queryClientProviderWrapper'; // Vamos criar este arquivo
-import { CookieConsentBanner } from '@/components/global/cookieConsentBanner'
+import type { Metadata } from 'next';
+import './globals.css';
 
 
 export const metadata: Metadata = {
@@ -35,13 +34,12 @@ export default async function RootLayout({
 				/>
 			</head>
 			<body
-				className={`${poppins.className} bg-background text-foreground antialiased scrollbar-custom overflow-x-hidden`}
+				className={`${poppins.className} bg-background text-foreground antialiased scrollbar-custom overflow-x-hidden dark`}
 			>
 				<QueryClientProviderWrapper>
 					<Header />
 					<main className='lg:px-14 px-4 py-6'>{children}</main>
 					<Footer />
-					<ToggleTheme />
 					<CookieConsentBanner />
 				</QueryClientProviderWrapper>
 

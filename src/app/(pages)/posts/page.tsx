@@ -1,4 +1,4 @@
-import { AdBanner, SidebarAdBlock } from '@/components/global/google'
+import { SidebarAdBlock } from '@/components/global/google'
 import { CardSimple } from '@/components/global/posts/cardSimple'
 import { SectionTitle } from '@/components/global/sectionTitle'
 import { Pagination } from '@/components/ui'
@@ -41,7 +41,6 @@ export default async function AllPosts({ searchParams }: AllPostsParams) {
 								authorName={article.author.name}
 							/>
 						))}
-
 					</div>
 					{/* Paginação */}
 					<div className='w-full flex items-center gap-3 justify-start px-2 py-3 mt-10'>
@@ -61,10 +60,9 @@ export default async function AllPosts({ searchParams }: AllPostsParams) {
 					</div>
 				</div>
 
-				<aside className='lg:col-span-3 mb-8 space-y-8 w-full p-4'>
-					<SidebarAdBlock slot='9849617003' />
-					<SidebarAdBlock slot='9849617003' />
-					<SidebarAdBlock slot='9849617003' />
+				{/* Seção da Barra Lateral (agora fixa) */}
+				<aside className='lg:col-span-3 mb-8 space-y-8 w-full p-4 lg:sticky lg:top-20 lg:self-start lg:h-fit lg:max-h-screen overflow-y-auto scrollbar-custom'>
+					<SidebarAdBlock slot='1597748894' />
 				</aside>
 			</div>
 		</div>

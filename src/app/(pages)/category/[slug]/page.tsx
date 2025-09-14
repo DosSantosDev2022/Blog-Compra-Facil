@@ -84,7 +84,7 @@ export default async function CategoryPage({
 					</div>
 
 					{/* Paginação */}
-					{totalCount > pageSize && ( // Renderiza a paginação apenas se houver mais de uma página
+					{totalCount > pageSize && (
 						<div className='w-full flex items-center gap-3 justify-start px-2 py-3 mt-10'>
 							<span className='font-light text-muted-foreground'>
 								Mostrando{' '}
@@ -102,10 +102,10 @@ export default async function CategoryPage({
 						</div>
 					)}
 				</div>
+
 				{/* seção com anunicos */}
-				<aside className='lg:col-span-3 mb-8 space-y-8 w-full p-4'>
-					<SidebarAdBlock slot='9849617003' />
-					<SidebarAdBlock slot='9849617003' />
+				<aside className='lg:col-span-3 mb-8 space-y-8 w-full p-4 lg:sticky lg:top-20 lg:self-start lg:h-fit lg:max-h-screen overflow-y-auto'>
+					<SidebarAdBlock slot='1597748894' />
 				</aside>
 			</div>
 			<div className='mb-8 mt-12'>
