@@ -1,25 +1,26 @@
 import { chakra } from '@/assets/fonts'
-import { NewsLetterForm } from '@/components/global/newsletterForm'
+import { NewsLetterForm } from '@/components/global'
 import Link from 'next/link'
 import { BsPinterest } from 'react-icons/bs'
 import { FaYoutube } from 'react-icons/fa'
 import { RiInstagramFill } from 'react-icons/ri'
+import { twMerge } from 'tailwind-merge'
 
 const Footer = () => {
 	const socialLinks = [
 		{
 			label: 'Instagram do OnTech Blog',
-			icon: <RiInstagramFill className='w-8 h-8' />,
+			icon: <RiInstagramFill className="h-6 w-6" />,
 			url: 'https://www.instagram.com/ontechblog/',
 		},
 		{
 			label: 'Canal Youtube do OnTech Blog',
-			icon: <FaYoutube className='w-8 h-8' />,
+			icon: <FaYoutube className="h-6 w-6" />,
 			url: 'https://www.youtube.com/channel/UCD80XkyM8H6OIV2bxztiYYQ',
 		},
 		{
 			label: 'Pinterest do OnTech Blog',
-			icon: <BsPinterest className='w-8 h-8' />,
+			icon: <BsPinterest className="h-6 w-6" />,
 			url: 'https://br.pinterest.com/ontechblog2025/',
 		},
 	]
@@ -36,34 +37,38 @@ const Footer = () => {
 	]
 
 	return (
-		<footer className='px-4 py-8 md:px-8 bg-primary dark:bg-secondary text-primary-foreground'>
-			<div className='max-w-full grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12 items-start'> {/* Ajustei o grid para 4 colunas */}
+		<footer className="w-full bg-card px-4 py-12 text-foreground md:px-8">
+			<div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-4 lg:gap-8">
 				{/* Logo / About */}
-				<div className='max-w-sm p-2 md:col-span-1'>
-					<Link className={`${chakra.className} text-5xl font-bold`} href="/" aria-label="Página inicial do OnTech Blog" title="Ir para a página inicial">
+				<div className="space-y-4">
+					<Link
+						className={twMerge(
+							chakra.className,
+							'text-5xl font-bold transition-colors hover:text-primary',
+						)}
+						href="/"
+						aria-label="Página inicial do OnTech Blog"
+						title="Ir para a página inicial"
+					>
 						onTech
 					</Link>
-					<p className='mt-2 text-base md:text-lg'>
-						Receba notícias todos os dias e se mantenha atualizado sobre o
-						mundo de tecnologia!
+					<p className="max-w-xs text-sm text-muted-foreground md:text-base">
+						Receba notícias e se mantenha atualizado sobre o mundo de tecnologia!
 					</p>
 				</div>
 
 				{/* Links de Navegação */}
-				<div className='md:col-span-1 w-full'>
+				<div className="lg:col-span-1">
 					<nav aria-label="Links de Navegação do Rodapé">
-						<h3 className='text-lg font-semibold mb-2'>
-							Navegação
-						</h3>
-						<ul className='space-y-1 text-sm'>
+						<h3 className="mb-4 text-xl font-semibold">Navegação</h3>
+						<ul className="space-y-3">
 							{navLinks.map((link) => (
 								<li key={link.label}>
 									<Link
 										href={link.url}
 										title={`Ir para ${link.label}`}
 										aria-label={`Ir para a página de ${link.label}`}
-										className="hover:underline"
-										target='_blank'
+										className="text-base text-muted-foreground transition-colors hover:text-foreground hover:underline"
 									>
 										{link.label}
 									</Link>
@@ -74,18 +79,19 @@ const Footer = () => {
 				</div>
 
 				{/* Social */}
-				<div className='md:col-span-1 w-full'>
+				<div className="lg:col-span-1">
 					<nav aria-label="Redes Sociais do OnTech Blog">
-						<h3 className='text-lg font-semibold mb-2'>
-							Siga nossas redes sociais
-						</h3>
-						<ul className='flex gap-2 space-y-1 text-sm'>
+						<h3 className="mb-4 text-xl font-semibold">Redes Sociais</h3>
+						<ul className="flex items-center gap-4">
 							{socialLinks.map((link) => (
 								<li key={link.label}>
 									<Link
 										href={link.url}
 										title={link.label}
 										aria-label={link.label}
+										className="text-muted-foreground transition-colors hover:text-foreground"
+										target="_blank"
+										rel="noopener noreferrer"
 									>
 										{link.icon}
 									</Link>
@@ -96,9 +102,9 @@ const Footer = () => {
 				</div>
 
 				{/* Newsletter */}
-				<div className='md:col-span-1 mt-6 w-full md:mt-0'>
-					<div className='space-y-2'>
-						<h3 className='text-xl md:text-2xl font-semibold mb-2'>
+				<div className="lg:col-span-1">
+					<div className="space-y-4">
+						<h3 className="text-xl font-semibold">
 							Inscreva-se para receber novidades
 						</h3>
 						<NewsLetterForm />
@@ -107,8 +113,8 @@ const Footer = () => {
 			</div>
 
 			{/* Copyright */}
-			<div className='mt-8 h-10 border-t border-border dark:border-muted-foreground pt-4 text-xs text-center text-primary-foreground'>
-				<>© {new Date().getFullYear()} onTech Blog. Todos os direitos reservados</>
+			<div className="mt-12 text-center text-xs text-muted-foreground">
+				© {new Date().getFullYear()} onTech Blog. Todos os direitos reservados.
 			</div>
 		</footer>
 	)

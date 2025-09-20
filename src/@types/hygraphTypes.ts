@@ -1,6 +1,5 @@
 import type { RichTextContent } from '@graphcms/rich-text-types'
 
-
 export interface Category {
 	id: string
 	name?: string
@@ -20,20 +19,19 @@ export interface CategoryResponse {
 export type Products = {
 	id: string
 	name: string
-	slug: string
 	description: string
 	category: Category
 	image: {
 		url: string
 	}
-	 affiliateLinks: {
-			id: string
-			name: string
-			link : string
-			icon: {
-				url: string
-			}
-		}[]
+	affiliateLinks: {
+		id: string
+		name: string
+		link: string
+		icon: {
+			url: string
+		}
+	}[]
 	videoReviewUrl: string
 	technicalsheet: {
 		raw: RichTextContent
@@ -75,7 +73,7 @@ export type ArticleDetail = {
 
 export type ArticleQueryResponse = {
 	articles: Article[]
-	totalCount: number;
+	totalCount: number
 }
 
 /* artigos relacionados type */

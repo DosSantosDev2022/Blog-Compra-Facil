@@ -1,4 +1,4 @@
-import { EmailTemplate } from '@/components/global/emails/email-template'
+import { EmailTemplate } from '@/components/global'
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 

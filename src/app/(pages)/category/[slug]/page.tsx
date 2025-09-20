@@ -1,6 +1,4 @@
-import { AdBanner, SidebarAdBlock } from '@/components/global/google'
-import { CardSimple } from '@/components/global/posts/cardSimple'
-import { SectionTitle } from '@/components/global/sectionTitle'
+import { AdBanner, CardSimple, SectionTitle } from '@/components/global'
 import { Pagination } from '@/components/ui'
 import { getArticles } from '@/services/getArticles'
 import type { Metadata } from 'next'
@@ -22,8 +20,7 @@ export async function generateMetadata({
 	})
 
 	const dominio = 'https://www.ontech.blog/'
-	const categoryName =
-		articles[0]?.category?.name || 'Categoria Não Encontrada'
+	const categoryName = articles[0]?.category?.name || 'Categoria Não Encontrada'
 	const categoryDescription = `Artigos sobre ${categoryName}`
 
 	return {
@@ -36,6 +33,8 @@ export async function generateMetadata({
 		},
 	}
 }
+
+export const revalidate = 86400
 
 export default async function CategoryPage({
 	params,
@@ -55,11 +54,16 @@ export default async function CategoryPage({
 		articles[0]?.category?.name || 'Esta categoria ainda não existe'
 
 	return (
-		<div className='container mx-auto py-8 lg:mt-24 mt-8'>
-			<SectionTitle title={`Categoria: ${currentCategoryName}`} />
-			<div className='grid grid-cols-1 lg:grid-cols-12 gap-8 mt-6 relative'>
-				<div className='lg:col-span-9'>
-					<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4'>
+		<div className="mx-auto w-full max-w-7xl px-4 py-8 lg:py-24">
+			{/* Título da Seção */}
+			<div className="mb-6">
+				<SectionTitle title={`Categoria: ${currentCategoryName}`} />
+			</div>
+
+			<div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+				{/* Conteúdo principal: Lista de Artigos */}
+				<div className="lg:col-span-9">
+					<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
 						{articles.length > 0 ? (
 							articles.map((article) => (
 								<CardSimple
@@ -75,24 +79,17 @@ export default async function CategoryPage({
 								/>
 							))
 						) : (
-							<div className='col-span-full flex justify-center items-center py-8 text-muted-foreground'>
-								<p className='text-2xl italic'>
-									Nenhum artigo encontrado por enquanto.
-								</p>
+							<div className="col-span-full flex items-center justify-center py-12 text-muted-foreground">
+								<p className="text-2xl italic">Nenhum artigo encontrado por enquanto.</p>
 							</div>
 						)}
 					</div>
 
 					{/* Paginação */}
 					{totalCount > pageSize && (
-						<div className='w-full flex items-center gap-3 justify-start px-2 py-3 mt-10'>
-							<span className='font-light text-muted-foreground'>
-								Mostrando{' '}
-								{Math.min(
-									pageSize,
-									totalCount - (currentPage - 1) * pageSize,
-								)}{' '}
-								de {totalCount}
+						<div className="flex flex-col items-center justify-between gap-4 py-8 md:flex-row">
+							<span className="text-sm font-light text-muted-foreground">
+								Mostrando {Math.min(pageSize, totalCount - (currentPage - 1) * pageSize)} de {totalCount} artigos
 							</span>
 							<Pagination
 								page={currentPage}
@@ -103,16 +100,15 @@ export default async function CategoryPage({
 					)}
 				</div>
 
-				{/* seção com anunicos */}
-				<aside className='lg:col-span-3 mb-8 space-y-8 w-full p-4 lg:sticky lg:top-20 lg:self-start lg:h-fit lg:max-h-screen overflow-y-auto'>
-					<SidebarAdBlock slot='1597748894' />
+				{/* Sidebar */}
+				<aside className="space-y-6 lg:col-span-3 lg:sticky lg:top-24 lg:h-fit">
+					<AdBanner dataAdFormat="auto" dataAdSlot="9849617003" />
 				</aside>
 			</div>
-			<div className='mb-8 mt-12'>
-				<p className='text-sm text-muted-foreground mb-2 space-y-2'>
-					Anúncio
-				</p>
-				<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
+
+			{/* Anúncio Inferior */}
+			<div className="mt-12">
+				<AdBanner dataAdFormat="auto" dataAdSlot="9849617003" />
 			</div>
 		</div>
 	)

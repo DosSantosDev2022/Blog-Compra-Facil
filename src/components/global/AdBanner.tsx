@@ -5,9 +5,10 @@ import { useEffect } from 'react'
 interface AdBannerTypes {
 	dataAdSlot: string
 	dataAdFormat: string
+	label?: string
 }
 
-export function AdBanner({ dataAdFormat, dataAdSlot }: AdBannerTypes) {
+export function AdBanner({ dataAdFormat, dataAdSlot, label }: AdBannerTypes) {
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
 			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -23,7 +24,8 @@ export function AdBanner({ dataAdFormat, dataAdSlot }: AdBannerTypes) {
 	}, [])
 
 	return (
-		<div className='p-1 mt-3 mb-2'>
+		<div aria-label={label} className='p-1 mt-3 mb-2'>
+			<p className='text-sm text-muted-foreground mb-2'>Anúncio</p>
 			<ins
 				className='adsbygoogle bg-transparent'
 				style={{ display: 'block' }}
@@ -35,21 +37,4 @@ export function AdBanner({ dataAdFormat, dataAdSlot }: AdBannerTypes) {
 		</div>
 	)
 }
-
-interface SidebarAdBlockProps {
-	slot: string
-	text?: string
-}
-
-const SidebarAdBlock = ({
-	slot,
-	text = 'Anúncio',
-}: SidebarAdBlockProps) => (
-	<div className='border-b border-border my-4'>
-		<p className='text-sm text-muted-foreground mb-2'>{text}</p>
-		<AdBanner dataAdFormat='auto' dataAdSlot={slot} />
-	</div>
-)
-
-export { SidebarAdBlock }
 

@@ -1,8 +1,7 @@
-import React from 'react';
-import type { Metadata } from 'next';
-import { getPolicies } from '@/services/getPolicies';
-import { RichText } from '@/components/global/posts/richText';
+import { RichText } from '@/components/global';
 import { defaultRenders } from '@/components/global/richTextRenders';
+import { getPolicies } from '@/services/getPolicies';
+import type { Metadata } from 'next';
 
 
 const dominio = 'https://www.ontech.blog/privacyPolicy'

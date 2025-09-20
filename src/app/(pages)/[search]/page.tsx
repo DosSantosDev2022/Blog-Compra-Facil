@@ -1,6 +1,4 @@
-import { AdBanner } from '@/components/global/google'
-import { CardSimple } from '@/components/global/posts/cardSimple'
-import { SectionTitle } from '@/components/global/sectionTitle'
+import { AdBanner, CardSimple, SectionTitle } from '@/components/global'
 import { Pagination } from '@/components/ui'
 import { getArticles } from '@/services/getArticles'
 import type { Metadata } from 'next'
@@ -56,7 +54,6 @@ export default async function SearchResultsPage({
 			<div className='mb-6'> </div>
 
 			<div className='mb-8 flex flex-col items-start  p-4'>
-				<p className='text-sm text-gray-500 mb-2 space-y-2'>Anúncio</p>
 				<div className='flex flex-col gap-4 w-full'>
 					<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 				</div>
@@ -98,7 +95,6 @@ export default async function SearchResultsPage({
 			</div>
 			{/* anúncio horizontal 2 */}
 			<div className='mb-8 flex flex-col items-start  p-4'>
-				<p className='text-sm text-gray-500 mb-2 space-y-2'>Anúncio</p>
 				<div className='flex flex-col gap-4 w-full'>
 					<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 				</div>

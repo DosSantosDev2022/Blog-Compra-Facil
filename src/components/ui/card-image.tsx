@@ -1,15 +1,12 @@
+/**
+ * @file card-image.tsx
+ * @description Componente de card de imagem para posts e outros conteúdos
+ * com efeito de hover e informações do post.
+ */
+import Image from 'next/image'
 import React, { type ComponentProps } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Badge } from './badge'
-import {
-	Avatar,
-	AvatarContainer,
-	AvatarLabel,
-	AvatarName,
-	AvatarWrapper,
-} from './avatar'
-import { ptBR } from 'date-fns/locale'
-import { format } from 'date-fns'
 
 interface CardImageProps {
 	image: string
@@ -19,6 +16,7 @@ interface CardImageProps {
 	authorImage?: string
 	createdAt?: string
 	category?: string
+	alt: string
 }
 
 const CardTitle = React.forwardRef<
@@ -30,7 +28,7 @@ const CardTitle = React.forwardRef<
 			ref={ref}
 			{...props}
 			className={twMerge(
-				'text-lg font-bold leading-tight text-primary-foreground',
+				'line-clamp-2 text-lg font-bold leading-tight text-white transition-colors group-hover:text-primary lg:text-xl',
 				className,
 			)}
 		>
@@ -41,26 +39,6 @@ const CardTitle = React.forwardRef<
 
 CardTitle.displayName = 'CardTitle'
 
-const CardLabel = React.forwardRef<
-	HTMLParagraphElement,
-	ComponentProps<'span'> & { label: string }
->(({ className, label, ...props }, ref) => {
-	return (
-		<span
-			ref={ref}
-			{...props}
-			className={twMerge(
-				'text-sm font-light leading-tight text-muted dark:text-primary-foreground lg:text-base',
-				className,
-			)}
-		>
-			{label}
-		</span>
-	)
-})
-
-CardLabel.displayName = 'CardLabel'
-
 const CardImage = React.forwardRef<
 	HTMLDivElement,
 	React.HTMLAttributes<HTMLDivElement> & CardImageProps
@@ -70,11 +48,11 @@ const CardImage = React.forwardRef<
 			className,
 			image,
 			title,
-			description,
 			authorName,
 			authorImage,
 			createdAt,
 			category,
+			alt,
 			...props
 		},
 		ref,
@@ -83,38 +61,57 @@ const CardImage = React.forwardRef<
 			<div
 				ref={ref}
 				className={twMerge(
-					'group relative overflow-hidden rounded-2xl p-0 shadow-sm',
-					'',
+					'group relative w-full overflow-hidden rounded-3xl p-0 shadow-xl transition-all duration-300 hover:shadow-2xl',
 					className,
 				)}
 				{...props}
 			>
-				{/* Imagem de fundo com efeito hover */}
-				<div
-					className={twMerge(
-						'flex h-full flex-col justify-end gap-3 p-4',
-						' transform transition-transform duration-300 ease-in group-hover:scale-105',
-						'rounded-md bg-cover bg-center bg-no-repeat',
-					)}
-					style={{ backgroundImage: `url(${image})` }}
-				/>
-				{/* Gradiente sobre a imagem */}
-				<div className='absolute inset-0 bg-gradient-to-t from-primary/75' />
+				{/* Imagem de fundo com efeito de zoom */}
+				<div className="relative h-full w-full">
+					<Image
+						src={image}
+						alt={alt}
+						fill
+						className="rounded-3xl object-cover transition-transform duration-500 group-hover:scale-105"
+						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+					/>
+				</div>
 
-				{/* Conteúdo */}
-				<div className='absolute inset-0 flex flex-col justify-end gap-2 p-4'>
-					<div>
-						<Badge size='md'>{category}</Badge>
-					</div>
+				{/* Gradiente sobre a imagem para escurecer o fundo e aumentar a legibilidade do texto */}
+				<div className="absolute inset-0 z-10 rounded-3xl bg-gradient-to-t from-gray-950/80 to-transparent p-6" />
+
+				{/* Conteúdo do Card */}
+				<div className="absolute inset-0 z-20 flex flex-col justify-end p-6">
+					{category && (
+						<div className="mb-2">
+							<Badge
+								variant="secondary"
+								className="backdrop-blur-sm"
+							>
+								{category}
+							</Badge>
+						</div>
+					)}
 					<CardTitle label={title || ''} />
-					<div className='flex flex-col items-center space-y-6'>
-						<AvatarContainer>
-							<Avatar name={authorName} src={authorImage || ''} />
-							<AvatarWrapper>
-								<AvatarName>{authorName}</AvatarName>
-								<AvatarLabel>{createdAt}</AvatarLabel>
-							</AvatarWrapper>
-						</AvatarContainer>
+					{/* Informações de Autor e Data */}
+					<div className="mt-2 flex items-center justify-between text-white/70">
+						<div className="flex items-center gap-2">
+							{authorImage && (
+								<Image
+									src={authorImage}
+									alt={authorName || 'Author'}
+									width={24}
+									height={24}
+									className="h-6 w-6 rounded-full object-cover"
+								/>
+							)}
+							{authorName && (
+								<span className="text-sm font-medium">{authorName}</span>
+							)}
+						</div>
+						{createdAt && (
+							<span className="text-xs">{createdAt}</span>
+						)}
 					</div>
 				</div>
 			</div>
@@ -124,4 +121,5 @@ const CardImage = React.forwardRef<
 
 CardImage.displayName = 'CardImage'
 
-export { CardImage }
+export { CardImage, type CardImageProps }
+

@@ -1,47 +1,29 @@
+/**
+ * @file header.tsx
+ * @description Componente de cabeçalho responsivo para navegação principal e busca.
+ */
+
 'use client'
 
+import { chakra } from '@/assets/fonts'
 import {
 	Button,
 	Navigation,
 	NavigationItem,
-	NavigationList,
 	NavigationLink,
+	NavigationList,
 } from '@/components/ui'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { IoClose, IoMenu } from 'react-icons/io5'
-import { InputSearch } from '../global/search'
 import data from '@/config/categories.json'
-import { chakra } from '@/assets/fonts'
+import Link from 'next/link'
+import { useState } from 'react'
+import { IoClose, IoMenu } from 'react-icons/io5'
+import { twMerge } from 'tailwind-merge'
+import { InputSearch } from '../global/search'
 
 const Header = () => {
 	const [isOpen, setIsOpen] = useState(false)
-	const [isMobile, setIsMobile] = useState(false) // Estado para controlar se é mobile
-
-	useEffect(() => {
-		const checkIsMobile = () => {
-			// isMobile é true se a tela for menor que 1024px
-			setIsMobile(window.innerWidth < 1024)
-			// Se a tela for maior ou igual a 1024px, garante que o menu esteja sempre aberto (para desktop)
-			// e que o estado 'isOpen' seja redefinido para 'false' quando se torna mobile, para não iniciar aberto.
-			if (window.innerWidth >= 1024) {
-				setIsOpen(false)
-			}
-		}
-
-		// Chama a função uma vez para definir o estado inicial
-		checkIsMobile()
-
-		// Adiciona o event listener para redimensionamento
-		window.addEventListener('resize', checkIsMobile)
-
-		// Limpa o event listener
-		return () => window.removeEventListener('resize', checkIsMobile)
-	}, []) // O array de dependências vazio garante que isso rode apenas uma vez na montagem
 
 	const handleOpenMenu = () => {
-		// Apenas alterna o estado isOpen.
-		// Ele será false por padrão em mobile e se tornará true/false com o clique.
 		setIsOpen(!isOpen)
 	}
 
@@ -52,72 +34,60 @@ const Header = () => {
 	]
 
 	return (
-		<header className='w-full lg:fixed top-0 z-50 px-4 py-5 lg:px-10 lg:py-6 border border-border bg-primary dark:bg-secondary text-primary-foreground'>
-			<div className='flex flex-col lg:h-10 lg:flex-row items-center justify-between lg:gap-10'>
-				{/* Logo + Toggle Mobile */}
-				<div className='flex items-center justify-between w-full lg:w-auto'>
+		<header className="fixed top-0 z-50 w-full border-b border-border bg-background px-4 py-5 text-foreground lg:px-10 lg:py-6">
+			<div className="mx-auto flex w-full flex-col items-center justify-between lg:h-10 lg:flex-row lg:gap-10">
+				{/* Logo e Botão do menu */}
+				<div className="flex w-full items-center justify-between lg:w-auto">
 					<Link
-						href='/'
-						aria-label='Página inicial do OnTech Blog'
-						title='Ir para a página inicial do OnTech Blog'
-						className={`${chakra.className} text-5xl font-bold`}
+						href="/"
+						aria-label="Página inicial do OnTech Blog"
+						title="Ir para a página inicial do OnTech Blog"
+						className={twMerge(
+							chakra.className,
+							'text-5xl font-bold text-foreground transition-colors hover:text-primary lg:text-3xl',
+						)}
 					>
 						onTech
 					</Link>
-					{/* O botão de menu só aparece em telas mobile */}
-					{isMobile && (
-						<Button
-							onClick={handleOpenMenu}
-							sizes='icon'
-							className='lg:hidden'
-							aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
-						>
-							{isOpen ? (
-								<IoClose aria-hidden='true' size={28} />
-							) : (
-								<IoMenu aria-hidden='true' size={28} />
-							)}
-						</Button>
-					)}
+					<Button
+						onClick={handleOpenMenu}
+						sizes="icon"
+						variants="primary"
+						className="rounded-full lg:hidden"
+						aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
+					>
+						{isOpen ? <IoClose size={28} /> : <IoMenu size={28} />}
+					</Button>
 				</div>
 
-				{/* Navegação */}
+				{/* Navegação e Busca */}
 				<div
-					aria-hidden={isMobile ? !isOpen : false}
-					tabIndex={isMobile && !isOpen ? -1 : 0}
-					className={`
-            transition-all duration-300 ease-in-out
-            p-1 z-50
-            w-full lg:w-auto
-            ${isMobile && !isOpen ? 'max-h-0 opacity-0 -translate-y-2 pointer-events-none' : 'max-h-[500px] opacity-100 translate-y-0'}
-            lg:!max-h-none lg:!opacity-100 lg:!translate-y-0 lg:flex
-            flex-col lg:flex-row items-start lg:items-center gap-5 lg:gap-10
-          `}
+					className={twMerge(
+						'flex flex-col items-start gap-5 transition-all duration-300 ease-in-out lg:flex-row lg:items-center lg:gap-4',
+						isOpen
+							? 'pointer-events-auto mt-4 max-h-[500px] opacity-100'
+							: 'pointer-events-none -translate-y-2 max-h-0 opacity-0',
+						'lg:pointer-events-auto lg:mt-0 lg:max-h-none lg:translate-y-0 lg:opacity-100',
+					)}
 				>
 					<Navigation>
 						<NavigationList>
 							{links.map((link) => (
-								<NavigationItem
-									key={link.label}
-									className='truncate'
-									onClick={isMobile ? handleOpenMenu : undefined} // Fecha o menu mobile ao clicar no link, apenas em mobile
-									tabIndex={isMobile && !isOpen ? -1 : 0}
-								>
-									<NavigationLink href={link.url}>{link.label}</NavigationLink>
+								<NavigationItem key={link.label}>
+									<NavigationLink onClick={handleOpenMenu} href={link.url}>
+										<span className="whitespace-nowrap">{link.label}</span>
+									</NavigationLink>
 								</NavigationItem>
 							))}
-
 							<NavigationItem
 								isDrop
-								id='dropdown1'
-								label='Categorias'
-								tabIndex={isMobile && !isOpen ? -1 : 0}
+								id="dropdown1"
+								label="Categorias"
 								dropdownItems={data.categories.map((cat) => (
 									<NavigationLink
-										onClick={isMobile ? handleOpenMenu : undefined} // Fecha o menu mobile ao clicar no link, apenas em mobile
+										onClick={handleOpenMenu}
 										key={cat.slug || cat.name}
 										href={`/category/${cat.slug || ''}`}
-										role='menuitem'
 									>
 										{cat.name}
 									</NavigationLink>
@@ -127,7 +97,7 @@ const Header = () => {
 							</NavigationItem>
 						</NavigationList>
 					</Navigation>
-					<InputSearch tabIndex={isMobile && !isOpen ? -1 : 0} />
+					<InputSearch />
 				</div>
 			</div>
 		</header>
@@ -135,3 +105,4 @@ const Header = () => {
 }
 
 export { Header }
+
