@@ -1,11 +1,14 @@
-import { AdBanner, SidebarAdBlock } from '@/components/global/google'
-import { FeaturedCategories } from '@/components/global/postsSections/featuredCategories'
-import { HeroSection } from '@/components/global/postsSections/hero'
-import { MostViewedPosts } from '@/components/global/postsSections/mostViewedPosts'
-import { SectionBanner } from '@/components/global/postsSections/sectionBanner'
-import { VariableArticle } from '@/components/global/postsSections/variableArticle'
+/**
+ * @file Home Page Component
+ * @description Renders the home page with a a list of posts
+ * and a sidebar
+ */
+import { AdBanner, CardSimple, SectionTitle, SmallCard } from '@/components/global'
+import { Button, CardImage } from '@/components/ui'
 import { homeMetaData } from '@/metadata/homeMetaData'
 import { getHomePageData } from '@/services/getHomePageData'
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import Link from 'next/link'
 
 export const revalidate = 86400
@@ -13,82 +16,152 @@ export const revalidate = 86400
 export const metadata = homeMetaData
 
 export default async function Home() {
-	const {
-		categories,
-		highlightArticles,
-		mostViewedArticles,
-		recentArticles,
-	} = await getHomePageData()
+	const { categories, highlightArticles, mostViewedArticles, recentArticles } =
+		await getHomePageData()
+
+	// Otimização: Acessa o primeiro artigo de destaque e o restante separadamente.
+	const [mainHighlightArticle, ...otherHighlightArticles] = highlightArticles
 
 	return (
-		<div className='space-y-8 lg:mt-20 mt-0'>
-			<SectionBanner />
-			<div className='grid grid-cols-1 lg:grid-cols-12 gap-8'>
-				{/* Seção de Conteúdo Principal */}
-				{/* Ordem 1 em mobile e desktop para aparecer primeiro */}
-				<main className='order-1 space-y-8 lg:col-span-9'>
-					{/* seção hero posts */}
-					<HeroSection highlightArticles={highlightArticles} />
-
-					<div className='mb-8'>
-						<p className='text-sm text-muted-foreground mb-2 space-y-2'>
-							Anúncio
-						</p>
-						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-					</div>
-
-					{/* posts mais vistos */}
-					<MostViewedPosts mostViewdArticles={mostViewedArticles} />
-
-					<div className='mb-8'>
-						<p className='text-sm text-muted-foreground mb-2 space-y-2'>
-							Anúncio
-						</p>
-						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-					</div>
-
-					{/* seção de últimas notícias em formato de lista */}
-					<VariableArticle
-						title='Posts recentes'
-						recentArticles={recentArticles}
-					/>
-
-
-					{/* seção de categorias em destaque */}
-					<FeaturedCategories categories={categories} />
-
-					<div className='mb-8'>
-						<p className='text-sm text-muted-foreground mb-2 space-y-2'>
-							Anúncio
-						</p>
-						<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-					</div>
-				</main>
-
-				{/* Seção da Barra Lateral (Anúncios/Outros) */}
-				{/* Ordem 2 em mobile e desktop para aparecer depois do conteúdo principal */}
-				<aside className='order-2 lg:block lg:col-span-3 p-4 lg:sticky lg:top-20 lg:self-start lg:h-fit lg:max-h-screen overflow-y-auto scrollbar-custom'>
-					<div className='space-y-4'>
-						<SidebarAdBlock slot='9849617003' />
-						{/* categorias recomendadas */}
-						<div className='space-y-4'>
-							<p className='text-sm text-muted-foreground mb-2'>
-								Categorias
-							</p>
-							<div className='flex flex-wrap justify-center gap-2'>
-								{categories.map((category) => (
+		<div className="space-y-12 pb-16 lg:mt-20">
+			<div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+				<main className="order-1 space-y-12 lg:col-span-9">
+					{/* Seção de Destaques */}
+					<section aria-label="Posts em destaque" className="space-y-6">
+						<SectionTitle title="Posts em destaque" />
+						<div className="flex flex-col gap-4 lg:flex-row">
+							{/* Renderiza o primeiro destaque (se existir) */}
+							{mainHighlightArticle && (
+								<div className="w-full lg:h-auto">
+									<Link href={`/article/${mainHighlightArticle.slug}`}>
+										<CardImage
+											alt={mainHighlightArticle.title || ''}
+											image={
+												mainHighlightArticle.coverImage?.url ||
+												'https://placehold.co/600x400'
+											}
+											title={mainHighlightArticle.title}
+											category={mainHighlightArticle.category?.name}
+											authorImage={mainHighlightArticle.author?.image.url}
+											authorName={mainHighlightArticle.author.name || ''}
+											createdAt={format(
+												mainHighlightArticle?.createdAt || '',
+												'dd/MM/yyyy',
+												{ locale: ptBR },
+											)}
+											className="h-full"
+										/>
+									</Link>
+								</div>
+							)}
+							{/* Renderiza os destaques restantes */}
+							<div className="grid w-full gap-4 lg:overflow-y-scroll lg:max-h-[628px] lg:grid-cols-1 scrollbar-custom">
+								{otherHighlightArticles.slice(0, 11).map((article) => (
 									<Link
-										className='lg:w-full xl-w-44 w-full text-center p-2 border border-border rounded-xl hover:bg-muted transition-all duration-300'
-										key={category.id}
-										href={`/category/${category.slug}`}
+										href={`/article/${article.slug}`}
+										key={article.id}
+										className="w-full"
 									>
-										{category.name}
+										<CardImage
+											alt={article.title || ''}
+											image={
+												article.coverImage?.url || 'https://placehold.co/600x400'
+											}
+											title={article.title}
+											category={article.category?.name || ''}
+											authorImage={article.author?.image.url}
+											authorName={article.author.name || ''}
+											createdAt={format(article.createdAt || '', 'dd/MM/yyyy', {
+												locale: ptBR,
+											})}
+											className="h-74"
+										/>
 									</Link>
 								))}
 							</div>
 						</div>
+					</section>
+
+					{/* Ad Banners */}
+					<div className="space-y-4">
+						<AdBanner
+							dataAdFormat="auto"
+							dataAdSlot="9849617003"
+							label="Anúncio"
+						/>
 					</div>
-					<SidebarAdBlock slot='9849617003' />
+
+					{/* Seção de Posts Mais Vistos */}
+					<section aria-label="Posts mais vistos" className="space-y-6">
+						<SectionTitle title="Posts mais vistos" />
+						<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+							{mostViewedArticles.map((article) => (
+								<CardSimple
+									id={article.id}
+									key={article.id}
+									slug={article.slug || ''}
+									createdAt={article.createdAt || ''}
+									alt={`card do posts: ${article.title}`}
+									coverImage={article.coverImage?.url || ''}
+									title={article.title || ''}
+									authorName={article.author.name}
+									authorImage={article.author.image.url}
+								/>
+							))}
+						</div>
+					</section>
+
+					{/* Seção de Posts Recentes */}
+					<section aria-label="Posts recentes" className="space-y-6">
+						<SectionTitle title="Posts recentes" />
+						<div className="grid items-start gap-6 md:grid-cols-3">
+							<div className="md:col-span-1">
+								<div className="space-y-4">
+									<AdBanner
+										dataAdFormat="auto"
+										dataAdSlot="5170095842"
+										label="Anúncio"
+									/>
+								</div>
+							</div>
+							<div className="grid gap-2 lg:overflow-y-scroll md:col-span-2 lg:grid-cols-2 scrollbar-custom lg:max-h-[768px]">
+								{recentArticles.map((article) => (
+									<SmallCard
+										key={article.id}
+										title={article.title || ''}
+										description={article.description || ''}
+										slug={article.slug || ''}
+									/>
+								))}
+							</div>
+
+							<AdBanner
+								dataAdFormat="auto"
+								dataAdSlot="5170095842"
+								label="Anúncio"
+							/>
+						</div>
+					</section>
+				</main>
+				{/* Sidebar */}
+				<aside className="order-2 space-y-8 p-4 lg:sticky lg:top-20 lg:col-span-3 lg:block lg:h-fit lg:max-h-[calc(100vh-80px)] lg:self-start lg:overflow-y-auto scrollbar-custom">
+					<AdBanner dataAdFormat="auto" dataAdSlot="9849617003" />
+					<div className="space-y-4">
+						<p className="text-sm text-muted-foreground">Categorias</p>
+						<div className="flex flex-wrap justify-center gap-2">
+							{categories.map((category) => (
+								<Button className='w-full hover:scale-105 duration-300 transition-all' variants='secondary' asChild key={category.id}>
+									<Link
+										href={`/category/${category.slug}`}
+									>
+										{category.name}
+									</Link>
+								</Button>
+
+							))}
+						</div>
+					</div>
+					<AdBanner dataAdFormat="auto" dataAdSlot="9849617003" />
 				</aside>
 			</div>
 		</div>

@@ -1,5 +1,6 @@
-export * from './Button'
+export * from './avatar'
 export * from './badge'
+export * from './Button'
 export * from './card'
 export * from './card-image'
 export * from './input'

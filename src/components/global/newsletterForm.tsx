@@ -1,7 +1,7 @@
 'use client'
+import { Button, Input } from '@/components/ui'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { type SubmitHandler, useForm } from 'react-hook-form'
-import { Button, Input } from '@/components/ui'
 import { MdEmail } from 'react-icons/md'
 import { z } from 'zod'
 
@@ -59,7 +59,7 @@ const NewsLetterForm = () => {
 				)}
 			</div>
 
-			<Button className='w-full' variants={'outline'}>
+			<Button className='w-full' variants={'primary'}>
 				Inscrever
 			</Button>
 		</form>

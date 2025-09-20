@@ -47,7 +47,7 @@ export function InputSearch({ tabIndex }: InputSearchProps) {
 				onChange={(e) => setSearchTerm(e.target.value)}
 				required
 				icon={<CiSearch />}
-				placeholder='Buscar...'
+				placeholder='Buscar posts...'
 				tabIndex={tabIndex}
 			/>
 		</form>

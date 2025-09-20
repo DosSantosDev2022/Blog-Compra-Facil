@@ -1,28 +1,33 @@
-import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
 import {
 	Button,
 	Card,
 	CardContent,
 	CardDescription,
 	CardFooter,
-	CardHeader,
-	CardTitle,
+	CardTitle
 } from '../ui'
-import Link from 'next/link'
-import Image from 'next/image'
 
 interface ProductCardProps {
 	name: string
 	imageUrl: string
 	description: string
-	slug: string
+	affiliateLinks: {
+		id: string
+		name: string
+		link: string
+		icon: {
+			url: string
+		}
+	}[]
 }
 
 const ProductCard = ({
 	name,
 	imageUrl,
 	description,
-	slug
+	affiliateLinks
 }: ProductCardProps) => {
 	return (
 		<Card className='w-full max-w-xl p-4 flex flex-col justify-between'>
@@ -38,12 +43,16 @@ const ProductCard = ({
 			<CardContent className='p-0 space-y-2'>
 				<CardTitle className='lg:text-base pt-2'>{name}</CardTitle>
 				<CardDescription>{description}</CardDescription>
-				<CardFooter className='p-0'>
-					<Button variants='shine' sizes='full' asChild>
-						<Link target='_blank' href={`/products/${slug}`}>
-							Ver mais
-						</Link>
-					</Button>
+				<CardFooter className='p-0 flex-col'>
+					<span className='text-xs text-muted-foreground my-2'>Compre em nossas lojas parceiras</span>
+					{affiliateLinks.map((affiliateLink) => (
+						<Button key={affiliateLink.id} variants='shine' sizes='full' asChild>
+							<Link target='_blank' href={affiliateLink.link}>
+								{`Comprar em ${affiliateLink.name}`}
+							</Link>
+						</Button>
+					))}
+
 				</CardFooter>
 			</CardContent>
 		</Card>
@@ -51,3 +60,4 @@ const ProductCard = ({
 }
 
 export { ProductCard }
+

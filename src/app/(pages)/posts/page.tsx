@@ -1,6 +1,4 @@
-import { SidebarAdBlock } from '@/components/global/google'
-import { CardSimple } from '@/components/global/posts/cardSimple'
-import { SectionTitle } from '@/components/global/sectionTitle'
+import { AdBanner, CardSimple, SectionTitle } from '@/components/global'
 import { Pagination } from '@/components/ui'
 import { postsMetaData } from '@/metadata/postsMetaData'
 import { getArticles } from '@/services/getArticles'
@@ -62,7 +60,7 @@ export default async function AllPosts({ searchParams }: AllPostsParams) {
 
 				{/* Seção da Barra Lateral (agora fixa) */}
 				<aside className='lg:col-span-3 mb-8 space-y-8 w-full p-4 lg:sticky lg:top-20 lg:self-start lg:h-fit lg:max-h-screen overflow-y-auto scrollbar-custom'>
-					<SidebarAdBlock slot='1597748894' />
+					<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
 				</aside>
 			</div>
 		</div>

@@ -1,5 +1,5 @@
-import { HygraphQuery } from '@/app/api/cms/hygraph'
 import type { Article, ArticleDetail } from '@/@types/hygraphTypes'
+import { HygraphQuery } from '@/app/api/cms/hygraph'
 
 export const getDetailsArticle = async (
 	slug: string,
@@ -31,7 +31,11 @@ export const getDetailsArticle = async (
         product {
           id
           name
-          slug
+          affiliateLinks {
+            id
+            name
+            link
+          }
           description
           image {
             url
@@ -41,11 +45,11 @@ export const getDetailsArticle = async (
     }
    `
 	const variables = { slug }
-  
-  const data = await HygraphQuery<{article: Article}>(query, variables, {
-     revalidate: 60 * 60 * 24, // revalida a página a cada 24h
-     tags: [`article-${slug}`],
-  })
-   
-	return {article: data?.article || null}
+
+	const data = await HygraphQuery<{ article: Article }>(query, variables, {
+		revalidate: 60 * 60 * 24, // revalida a página a cada 24h
+		tags: [`article-${slug}`],
+	})
+
+	return { article: data?.article || null }
 }
