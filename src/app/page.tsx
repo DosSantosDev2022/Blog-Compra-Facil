@@ -3,7 +3,7 @@
  * @description Renders the home page with a a list of posts
  * and a sidebar
  */
-import { AdBanner, CardSimple, SectionTitle, SmallCard } from '@/components/global'
+import { CardSimple, SectionTitle, SmallCard } from '@/components/global'
 import { Button, CardImage } from '@/components/ui'
 import { homeMetaData } from '@/metadata/homeMetaData'
 import { getHomePageData } from '@/services/getHomePageData'
@@ -42,8 +42,6 @@ export default async function Home() {
 											}
 											title={mainHighlightArticle.title}
 											category={mainHighlightArticle.category?.name}
-											authorImage={mainHighlightArticle.author?.image.url}
-											authorName={mainHighlightArticle.author.name || ''}
 											createdAt={format(
 												mainHighlightArticle?.createdAt || '',
 												'dd/MM/yyyy',
@@ -69,8 +67,6 @@ export default async function Home() {
 											}
 											title={article.title}
 											category={article.category?.name || ''}
-											authorImage={article.author?.image.url}
-											authorName={article.author.name || ''}
 											createdAt={format(article.createdAt || '', 'dd/MM/yyyy', {
 												locale: ptBR,
 											})}
@@ -81,16 +77,6 @@ export default async function Home() {
 							</div>
 						</div>
 					</section>
-
-					{/* Ad Banners */}
-					<div className="space-y-4">
-						<AdBanner
-							dataAdFormat="auto"
-							dataAdSlot="9849617003"
-							label="Anúncio"
-						/>
-					</div>
-
 					{/* Seção de Posts Mais Vistos */}
 					<section aria-label="Posts mais vistos" className="space-y-6">
 						<SectionTitle title="Posts mais vistos" />
@@ -104,48 +90,13 @@ export default async function Home() {
 									alt={`card do posts: ${article.title}`}
 									coverImage={article.coverImage?.url || ''}
 									title={article.title || ''}
-									authorName={article.author.name}
-									authorImage={article.author.image.url}
 								/>
 							))}
-						</div>
-					</section>
-
-					{/* Seção de Posts Recentes */}
-					<section aria-label="Posts recentes" className="space-y-6">
-						<SectionTitle title="Posts recentes" />
-						<div className="grid items-start gap-6 md:grid-cols-3">
-							<div className="md:col-span-1">
-								<div className="space-y-4">
-									<AdBanner
-										dataAdFormat="auto"
-										dataAdSlot="5170095842"
-										label="Anúncio"
-									/>
-								</div>
-							</div>
-							<div className="grid gap-2 lg:overflow-y-scroll md:col-span-2 lg:grid-cols-2 scrollbar-custom lg:max-h-[768px]">
-								{recentArticles.map((article) => (
-									<SmallCard
-										key={article.id}
-										title={article.title || ''}
-										description={article.description || ''}
-										slug={article.slug || ''}
-									/>
-								))}
-							</div>
-
-							<AdBanner
-								dataAdFormat="auto"
-								dataAdSlot="5170095842"
-								label="Anúncio"
-							/>
 						</div>
 					</section>
 				</main>
 				{/* Sidebar */}
 				<aside className="order-2 space-y-8 p-4 lg:sticky lg:top-20 lg:col-span-3 lg:block lg:h-fit lg:max-h-[calc(100vh-80px)] lg:self-start lg:overflow-y-auto scrollbar-custom">
-					<AdBanner dataAdFormat="auto" dataAdSlot="9849617003" />
 					<div className="space-y-4">
 						<p className="text-sm text-muted-foreground">Categorias</p>
 						<div className="flex flex-wrap justify-center gap-2">
@@ -161,7 +112,6 @@ export default async function Home() {
 							))}
 						</div>
 					</div>
-					<AdBanner dataAdFormat="auto" dataAdSlot="9849617003" />
 				</aside>
 			</div>
 		</div>

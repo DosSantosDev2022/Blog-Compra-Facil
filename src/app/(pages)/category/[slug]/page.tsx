@@ -1,4 +1,4 @@
-import { AdBanner, CardSimple, SectionTitle } from '@/components/global'
+import { CardSimple, SectionTitle } from '@/components/global'
 import { Pagination } from '@/components/ui'
 import { getArticles } from '@/services/getArticles'
 import type { Metadata } from 'next'
@@ -74,8 +74,6 @@ export default async function CategoryPage({
 									createdAt={article.createdAt || ''}
 									alt={article.title || ''}
 									key={article.id}
-									authorImage={article.author.image.url || ''}
-									authorName={article.author.name}
 								/>
 							))
 						) : (
@@ -102,13 +100,8 @@ export default async function CategoryPage({
 
 				{/* Sidebar */}
 				<aside className="space-y-6 lg:col-span-3 lg:sticky lg:top-24 lg:h-fit">
-					<AdBanner dataAdFormat="auto" dataAdSlot="9849617003" />
+					a
 				</aside>
-			</div>
-
-			{/* Anúncio Inferior */}
-			<div className="mt-12">
-				<AdBanner dataAdFormat="auto" dataAdSlot="9849617003" />
 			</div>
 		</div>
 	)

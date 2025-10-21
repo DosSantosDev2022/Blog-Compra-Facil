@@ -47,13 +47,6 @@ export const getArticles = async (
         coverImage {
           url
         }
-      author {
-        id
-        name
-        image {
-          url
-          }
-        }
         createdAt
         updatedAt
       }

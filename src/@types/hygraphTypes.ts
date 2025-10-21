@@ -24,14 +24,7 @@ export type Products = {
 	image: {
 		url: string
 	}
-	affiliateLinks: {
-		id: string
-		name: string
-		link: string
-		icon: {
-			url: string
-		}
-	}[]
+	affiliateLink: string
 	videoReviewUrl: string
 	technicalsheet: {
 		raw: RichTextContent
@@ -50,13 +43,6 @@ export interface Article {
 		id: string
 		name: string
 		slug: string
-	}
-	author: {
-		id: string
-		name: string
-		image: {
-			url: string
-		}
 	}
 	createdAt?: string
 	updatedAt?: string
@@ -83,13 +69,6 @@ export interface RelatedArticle {
 	title: string
 	coverImage: {
 		url: string
-	}
-	author: {
-		id: string
-		name: string
-		image: {
-			url: string
-		}
 	}
 	category: {
 		name: string

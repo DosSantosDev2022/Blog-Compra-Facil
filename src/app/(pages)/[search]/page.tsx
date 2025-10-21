@@ -1,4 +1,4 @@
-import { AdBanner, CardSimple, SectionTitle } from '@/components/global'
+import { CardSimple, SectionTitle } from '@/components/global'
 import { Pagination } from '@/components/ui'
 import { getArticles } from '@/services/getArticles'
 import type { Metadata } from 'next'
@@ -52,13 +52,6 @@ export default async function SearchResultsPage({
 		<div className='container mx-auto py-8 px-4 sm:px-6 lg:px-8 lg:mt-24 mt-8'>
 			<SectionTitle title={`Resultados da Busca para: "${query}"`} />
 			<div className='mb-6'> </div>
-
-			<div className='mb-8 flex flex-col items-start  p-4'>
-				<div className='flex flex-col gap-4 w-full'>
-					<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-				</div>
-			</div>
-
 			{hasResults ? (
 				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 mt-6'>
 					{articles.map((article, index) => (
@@ -70,8 +63,6 @@ export default async function SearchResultsPage({
 							createdAt={article.createdAt || ''}
 							alt={article.title || ''}
 							key={article.id}
-							authorImage={article.author.image.url || ''}
-							authorName={article.author.name}
 						/>
 					))}
 				</div>
@@ -92,12 +83,6 @@ export default async function SearchResultsPage({
 					limit={pageSize}
 					total={totalCount}
 				/>
-			</div>
-			{/* anúncio horizontal 2 */}
-			<div className='mb-8 flex flex-col items-start  p-4'>
-				<div className='flex flex-col gap-4 w-full'>
-					<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-				</div>
 			</div>
 		</div>
 	)

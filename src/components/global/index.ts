@@ -1,4 +1,3 @@
-export * from './AdBanner'
 export * from './card-simple'
 export * from './cookieConsentBanner'
 export * from './email-template'

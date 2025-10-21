@@ -1,5 +1,5 @@
 // app/products/page.tsx
-import { AdBanner, SectionTitle } from '@/components/global';
+import { SectionTitle } from '@/components/global';
 import { ProductsListInfinite } from '@/components/pages/product/productsListInfinite';
 import { productsMetaData } from '@/metadata/productsMetaData';
 import { getProducts } from '@/services/getProducts';
@@ -71,10 +71,6 @@ export default async function ProductsPage({
 					initialHasMore={initialHasMore}
 					currentCategory={category}
 				/>
-			</div>
-
-			<div className="p-2 mb-8 mt-12">
-				<AdBanner dataAdFormat="auto" dataAdSlot="9849617003" />
 			</div>
 		</div>
 	);

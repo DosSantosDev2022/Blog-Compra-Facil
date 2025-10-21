@@ -50,10 +50,10 @@ const Footer = () => {
 						aria-label="Página inicial do OnTech Blog"
 						title="Ir para a página inicial"
 					>
-						onTech
+						Compra Fácil
 					</Link>
 					<p className="max-w-xs text-sm text-muted-foreground md:text-base">
-						Receba notícias e se mantenha atualizado sobre o mundo de tecnologia!
+						Veja os melhores reviews e tenha acesso a grandes ofertas dos nossos parceiros!
 					</p>
 				</div>
 

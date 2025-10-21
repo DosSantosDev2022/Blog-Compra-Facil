@@ -13,14 +13,7 @@ interface ProductCardProps {
 	name: string
 	imageUrl: string
 	description: string
-	affiliateLinks: {
-		id: string
-		name: string
-		link: string
-		icon: {
-			url: string
-		}
-	}[]
+	affiliateLinks: string
 }
 
 const ProductCard = ({
@@ -45,13 +38,11 @@ const ProductCard = ({
 				<CardDescription>{description}</CardDescription>
 				<CardFooter className='p-0 flex-col'>
 					<span className='text-xs text-muted-foreground my-2'>Compre em nossas lojas parceiras</span>
-					{affiliateLinks.map((affiliateLink) => (
-						<Button key={affiliateLink.id} variants='shine' sizes='full' asChild>
-							<Link target='_blank' href={affiliateLink.link}>
-								{`Comprar em ${affiliateLink.name}`}
-							</Link>
-						</Button>
-					))}
+					<Button key={affiliateLinks} variants='shine' sizes='full' asChild>
+						<Link target='_blank' href={affiliateLinks}>
+							{`Comprar agora`}
+						</Link>
+					</Button>
 
 				</CardFooter>
 			</CardContent>

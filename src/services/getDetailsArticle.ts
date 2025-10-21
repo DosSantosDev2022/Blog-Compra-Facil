@@ -20,22 +20,11 @@ export const getDetailsArticle = async (
         content {
           raw
         }
-       author{
-          id
-          name
-          image {
-            url
-          }
-        }
         createdAt
         product {
           id
           name
-          affiliateLinks {
-            id
-            name
-            link
-          }
+          affiliateLink
           description
           image {
             url

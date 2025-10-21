@@ -31,13 +31,6 @@ export async function getHomePageData(): Promise<HomePageResponse> {
         id 
         name 
       }
-        author {
-        id
-        name
-        image {
-          url
-          }
-        }
        createdAt 
        highlights 
       }
@@ -49,13 +42,6 @@ export async function getHomePageData(): Promise<HomePageResponse> {
          url 
         }  
          createdAt 
-         author {
-        id
-        name
-        image {
-          url
-          }
-        }
        }
       recentArticles: articles(orderBy: createdAt_DESC, first: 20) {
         id 
@@ -63,13 +49,6 @@ export async function getHomePageData(): Promise<HomePageResponse> {
         title 
         description 
         createdAt
-        author {
-        id
-        name
-        image {
-          url
-          }
-        }
       }
     }
   `;

@@ -1,4 +1,4 @@
-import { AdBanner, CardSimple, SectionTitle } from '@/components/global'
+import { CardSimple, SectionTitle } from '@/components/global'
 import { Pagination } from '@/components/ui'
 import { postsMetaData } from '@/metadata/postsMetaData'
 import { getArticles } from '@/services/getArticles'
@@ -22,10 +22,10 @@ export default async function AllPosts({ searchParams }: AllPostsParams) {
 			<SectionTitle title={'Todos os posts'} />
 
 			{/* Contêiner principal para posts e anúncios */}
-			<div className='grid grid-cols-1 lg:grid-cols-12 gap-8 mt-6 relative'>
+			<div className='gap-8 mt-6 relative'>
 				{/* Seção dos Posts (ocupa a maior parte do espaço) */}
-				<div className='lg:col-span-9'>
-					<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4'>
+				<div className=''>
+					<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4'>
 						{articles.map((article) => (
 							<CardSimple
 								id={article.id}
@@ -35,8 +35,6 @@ export default async function AllPosts({ searchParams }: AllPostsParams) {
 								createdAt={article.createdAt || ''}
 								alt={article.title || ''}
 								key={article.id}
-								authorImage={article.author.image.url || ''}
-								authorName={article.author.name}
 							/>
 						))}
 					</div>
@@ -57,11 +55,6 @@ export default async function AllPosts({ searchParams }: AllPostsParams) {
 						/>
 					</div>
 				</div>
-
-				{/* Seção da Barra Lateral (agora fixa) */}
-				<aside className='lg:col-span-3 mb-8 space-y-8 w-full p-4 lg:sticky lg:top-20 lg:self-start lg:h-fit lg:max-h-screen overflow-y-auto scrollbar-custom'>
-					<AdBanner dataAdFormat='auto' dataAdSlot='9849617003' />
-				</aside>
 			</div>
 		</div>
 	)

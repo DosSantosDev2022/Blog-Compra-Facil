@@ -47,7 +47,7 @@ const Header = () => {
 							'text-5xl font-bold text-foreground transition-colors hover:text-primary lg:text-3xl',
 						)}
 					>
-						onTech
+						Compra Fácil
 					</Link>
 					<Button
 						onClick={handleOpenMenu}

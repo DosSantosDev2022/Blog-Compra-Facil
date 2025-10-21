@@ -17,8 +17,6 @@ export interface CardSimpleProps {
 	coverImage: string
 	slug: string
 	createdAt: string
-	authorName: string
-	authorImage: string
 	category?: string
 }
 
@@ -28,8 +26,6 @@ const CardSimple = ({
 	title,
 	slug,
 	createdAt,
-	authorImage,
-	authorName,
 	category,
 }: CardSimpleProps) => {
 	return (
@@ -65,16 +61,6 @@ const CardSimple = ({
 				<span className="mt-2 text-sm text-muted-foreground">
 					Publicado em: {format(new Date(createdAt), 'dd/MM/yyyy', { locale: ptBR })}
 				</span>
-				<div className="mt-auto flex items-center gap-3 pt-4">
-					<Image
-						src={authorImage}
-						alt={authorName}
-						width={32}
-						height={32}
-						className="h-8 w-8 rounded-full object-cover"
-					/>
-					<span className="text-sm font-medium text-muted-foreground">{authorName}</span>
-				</div>
 			</CardContent>
 		</Link>
 	)

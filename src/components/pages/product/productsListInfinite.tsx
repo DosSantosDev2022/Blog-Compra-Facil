@@ -90,13 +90,11 @@ export function ProductsListInfinite({ initialProducts, initialHasMore, currentC
               <CardDescription>{product.description}</CardDescription>
               <CardFooter className='p-0 flex-col'>
                 <span className='text-xs text-muted-foreground my-2'>Compre em nossas lojas parceiras</span>
-                {product.affiliateLinks.map((affiliateLink) => (
-                  <Button key={affiliateLink.id} variants='shine' sizes='full' asChild>
-                    <Link target='_blank' href={affiliateLink.link}>
-                      {`Comprar em ${affiliateLink.name}`}
-                    </Link>
-                  </Button>
-                ))}
+                <Button key={product.affiliateLink} variants='shine' sizes='full' asChild>
+                  <Link target='_blank' href={product.affiliateLink || ''}>
+                    {`Comprar agora`}
+                  </Link>
+                </Button>
               </CardFooter>
             </CardContent>
           </Card>

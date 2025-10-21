@@ -15,14 +15,7 @@ export interface Product {
   image: {
     url: string
   }
-   affiliateLinks: {
-      id: string
-      name: string
-      link : string
-      icon: {
-        url: string
-      }
-    }[]
+   affiliateLinks: string
   videoReviewUrl: string
   technicalsheet: {
     raw: RichTextContent
@@ -66,14 +59,7 @@ export const getDetailsProducts = async (slug?: string): Promise<ProductResponse
         image {
           url
         }
-         affiliateLinks {
-          id
-          name
-          link
-          icon {
-            url
-          }
-        }
+         affiliateLink
         videoReviewUrl
         technicalsheet {
           raw

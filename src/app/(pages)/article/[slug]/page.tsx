@@ -4,7 +4,6 @@
  */
 
 import {
-	AdBanner,
 	ProductCard,
 	RichText,
 	SectionTitle,
@@ -12,11 +11,6 @@ import {
 } from '@/components/global'
 import { ShareButtons } from '@/components/pages/article/shareButtons'
 import {
-	Avatar,
-	AvatarContainer,
-	AvatarLabel,
-	AvatarName,
-	AvatarWrapper,
 	CardImage,
 } from '@/components/ui'
 import { getDetailsArticle } from '@/services/getDetailsArticle'
@@ -123,26 +117,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 						<h1 className="text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
 							{article.title}
 						</h1>
-
-						<div className="flex items-center justify-between">
-							<AvatarContainer>
-								<Avatar
-									name={article.author.name}
-									src={article.author.image.url || ''}
-								/>
-								<AvatarWrapper>
-									<AvatarName>{article.author.name}</AvatarName>
-									<AvatarLabel>{`Publicado em: ${format(article.createdAt || '', 'dd/MM/yyyy', { locale: ptBR })}`}</AvatarLabel>
-								</AvatarWrapper>
-							</AvatarContainer>
-						</div>
-
-						<AdBanner
-							dataAdFormat="auto"
-							dataAdSlot="9849617003"
-							label="Anúncio"
-						/>
-
 						<div className="prose prose-sm prose-p:my-4 prose-a:text-primary prose-a:hover:text-primary-hover max-w-none text-foreground lg:prose-lg">
 							{article.content?.raw ? (
 								<RichText
@@ -168,20 +142,12 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 										name={product.name}
 										description={product.description}
 										imageUrl={product.image.url}
-										affiliateLinks={product.affiliateLinks}
+										affiliateLinks={product.affiliateLink || ''}
 									/>
 								))}
 							</div>
 						</div>
 					)}
-
-					<div className="mt-12 space-y-6">
-						<AdBanner
-							dataAdFormat="auto"
-							dataAdSlot="9849617003"
-							label="Anúncio"
-						/>
-					</div>
 				</div>
 
 				{/* Sidebar com artigos relacionados */}
@@ -199,8 +165,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 									title={relatedArticle.title}
 									category={relatedArticle.category?.name || ''}
 									className="h-48 md:h-52"
-									authorImage={relatedArticle.author.image.url || ''}
-									authorName={relatedArticle.author.name}
 									createdAt={format(relatedArticle.createdAt || '', 'dd/MM/yyyy', {
 										locale: ptBR,
 									})}
