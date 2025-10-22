@@ -25,6 +25,9 @@ export default async function RootLayout({
 			<body
 				className={`${poppins.className} bg-background text-foreground antialiased scrollbar-custom overflow-x-hidden dark`}
 			>
+				<head>
+					<meta name="google-site-verification" content="BQ3BsKxQv9wmjdsELFbZEa887IFYp_9gIOeMQ_mgnZc" />
+				</head>
 				<QueryClientProviderWrapper>
 					<Header />
 					<main className='lg:px-14 px-4 py-6'>{children}</main>
