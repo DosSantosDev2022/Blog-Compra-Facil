@@ -1,5 +1,5 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from 'next/image';
+import Link from 'next/link';
 import {
 	Button,
 	Card,
@@ -7,11 +7,11 @@ import {
 	CardDescription,
 	CardFooter,
 	CardTitle
-} from '../ui'
+} from '../ui';
 
 interface ProductCardProps {
 	name: string
-	imageUrl: string
+	imageUrl: string | null | undefined;
 	description: string
 	affiliateLinks: string
 }
@@ -22,16 +22,21 @@ const ProductCard = ({
 	description,
 	affiliateLinks
 }: ProductCardProps) => {
+
+	const hasImage = !!imageUrl;
+
 	return (
 		<Card className='w-full max-w-xl p-4 flex flex-col justify-between'>
 			<div className='relative w-full h-46 overflow-hidden rounded-md'>
-				<Image
-					src={imageUrl}
-					alt={name}
-					fill
-					className='object-cover'
-					sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-				/>
+				{hasImage && (
+					<Image
+						src={imageUrl}
+						alt={name}
+						fill
+						className="object-cover"
+						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+					/>
+				)}
 			</div>
 			<CardContent className='p-0 space-y-2'>
 				<CardTitle className='lg:text-base pt-2'>{name}</CardTitle>
@@ -50,5 +55,5 @@ const ProductCard = ({
 	)
 }
 
-export { ProductCard }
+export { ProductCard };
 

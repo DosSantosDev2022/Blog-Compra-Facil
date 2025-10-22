@@ -3,8 +3,9 @@
  * @description Renders the home page with a a list of posts
  * and a sidebar
  */
-import { CardSimple, SectionTitle, SmallCard } from '@/components/global'
+import { CardSimple, SectionTitle } from '@/components/global'
 import { Button, CardImage } from '@/components/ui'
+import { categories } from '@/config/categories.json'
 import { homeMetaData } from '@/metadata/homeMetaData'
 import { getHomePageData } from '@/services/getHomePageData'
 import { format } from 'date-fns'
@@ -16,7 +17,7 @@ export const revalidate = 86400
 export const metadata = homeMetaData
 
 export default async function Home() {
-	const { categories, highlightArticles, mostViewedArticles, recentArticles } =
+	const { highlightArticles, mostViewedArticles } =
 		await getHomePageData()
 
 	// Otimização: Acessa o primeiro artigo de destaque e o restante separadamente.
@@ -96,12 +97,12 @@ export default async function Home() {
 					</section>
 				</main>
 				{/* Sidebar */}
-				<aside className="order-2 space-y-8 p-4 lg:sticky lg:top-20 lg:col-span-3 lg:block lg:h-fit lg:max-h-[calc(100vh-80px)] lg:self-start lg:overflow-y-auto scrollbar-custom">
+				<aside className="order-2 space-y-8 p-4 lg:sticky lg:top-20 lg:col-span-3 lg:block lg:h-fit lg:max-h-[calc(100vh-220px)] lg:self-start lg:overflow-y-auto scrollbar-custom">
 					<div className="space-y-4">
 						<p className="text-sm text-muted-foreground">Categorias</p>
 						<div className="flex flex-wrap justify-center gap-2">
 							{categories.map((category) => (
-								<Button className='w-full hover:scale-105 duration-300 transition-all' variants='secondary' asChild key={category.id}>
+								<Button className='w-full hover:scale-105 duration-300 transition-all' variants='secondary' asChild key={category.name}>
 									<Link
 										href={`/category/${category.slug}`}
 									>

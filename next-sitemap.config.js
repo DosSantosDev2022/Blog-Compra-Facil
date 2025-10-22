@@ -12,7 +12,8 @@ console.log(
 )
 
 module.exports = {
-	siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ontech.blog',
+	siteUrl:
+		process.env.NEXT_PUBLIC_SITE_URL || 'https://www.comprafacil.blog',
 	generateRobotsTxt: true,
 	sitemapSize: 500,
 	outDir: './public',

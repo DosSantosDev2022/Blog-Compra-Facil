@@ -2,7 +2,7 @@
 'use client'; // Marca como Client Component
 
 import type { Products } from '@/@types/hygraphTypes';
-import { Button, Card, CardContent, CardDescription, CardFooter, CardTitle } from '@/components/ui';
+import { Button, Card, CardContent, CardFooter, CardTitle } from '@/components/ui';
 import { getProducts } from '@/services/getProducts'; // Sua função getProducts
 import { useInfiniteQuery } from '@tanstack/react-query';
 import Image from 'next/image';
@@ -78,7 +78,7 @@ export function ProductsListInfinite({ initialProducts, initialHasMore, currentC
           <Card key={product.id} className='w-full max-w-xl p-4 flex flex-col justify-between'>
             <div className='relative w-full h-46 overflow-hidden rounded-md'>
               <Image
-                src={product.image.url}
+                src={product.image.url || ''}
                 alt={product.name}
                 fill
                 className='object-cover'
@@ -87,7 +87,6 @@ export function ProductsListInfinite({ initialProducts, initialHasMore, currentC
             </div>
             <CardContent className='p-0 space-y-2'>
               <CardTitle className='lg:text-base pt-2'>{product.name}</CardTitle>
-              <CardDescription>{product.description}</CardDescription>
               <CardFooter className='p-0 flex-col'>
                 <span className='text-xs text-muted-foreground my-2'>Compre em nossas lojas parceiras</span>
                 <Button key={product.affiliateLink} variants='shine' sizes='full' asChild>

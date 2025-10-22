@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.ontech.blog
+Host: https://www.comprafacil.blog
 
 # Sitemaps
-Sitemap: https://www.ontech.blog/sitemap.xml
+Sitemap: https://www.comprafacil.blog/sitemap.xml

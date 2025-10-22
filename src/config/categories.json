@@ -1,52 +1,60 @@
 {
-	"categories": [
-		{
-			"name": "Smartphones",
-			"slug": "smartphones"
-		},
-		{
-			"name": "Notebooks e PCs",
-			"slug": "notebooks-e-pcs"
-		},
-		{
-			"name": "Acessórios tecnológicos",
-			"slug": "acessorios-tecnologicos"
-		},
-		{
-			"name": "Aplicativos",
-			"slug": "aplicativos"
-		},
-		{
-			"name": "Dicas e tutoriais",
-			"slug": "dicas-e-tutoriais"
-		},
-		{
-			"name": "Sistemas operacionais",
-			"slug": "sistemas-operacionais"
-		},
-		{
-			"name": "Games",
-			"slug": "games"
-		},
-		{
-			"name": "Programação",
-			"slug": "programacao"
-		},
-		{
-			"name": "Inovações & Tendências",
-			"slug": "inovacoes-and-tendencias"
-		},
-		{
-			"name": "Inteligência artificial",
-			"slug": "inteligencia-artificial"
-		},
-		{
-			"name": "Ferramentas ",
-			"slug": "ferramentas"
-		},
-		{
-			"name": "Eventos tech",
-			"slug": "eventos-tech"
-		}
-	]
+  "categories": [
+    {
+      "name": "Smartphones",
+      "slug": "smartphones"
+    },
+    {
+      "name": "Notebooks e PCs",
+      "slug": "notebooks-e-pcs"
+    },
+    {
+      "name": "Acessórios e Periféricos",
+      "slug": "acessorios-e-perifericos"
+    },
+    {
+      "name": "Games e Consoles",
+      "slug": "games-e-consoles"
+    },
+    {
+      "name": "Eletrodomésticos",
+      "slug": "eletrodomesticos"
+    },
+    {
+      "name": "Casa e Decoração",
+      "slug": "casa-e-decoracao"
+    },
+    {
+      "name": "Cozinha",
+      "slug": "cozinha"
+    },
+    {
+      "name": "Saúde e Bem-Estar",
+      "slug": "saude-e-bem-estar"
+    },
+    {
+      "name": "Ferramentas e Jardim",
+      "slug": "ferramentas-e-jardim"
+    },
+    {
+      "name": "Moda e Acessórios Pessoais",
+      "slug": "moda-e-acessorios-pessoais"
+    },
+    {
+      "name": "Esportes e Fitness",
+      "slug": "esportes-e-fitness"
+    },
+    {
+      "name": "Produtos para Bebês",
+      "slug": "produtos-para-bebes"
+    },
+    {
+      "name": "Softwares e Aplicativos",
+      "slug": "softwares-e-aplicativos"
+    },
+    {
+      "name": "Guias e Dicas de Compra",
+      "slug": "guias-e-dicas-de-compra"
+    }
+  ]
 }

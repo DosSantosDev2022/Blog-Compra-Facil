@@ -1,25 +1,25 @@
+import { keywords } from '@/metadata/keyWords';
 import type { Metadata } from "next";
-import {keywords} from '@/metadata/keyWords'
 
-const dominio = 'https://www.ontech.blog/posts'
-const title = 'OnTech Blog | Todos os Posts'
+const dominio = 'https://www.comprafacil.blog/posts'
+const title = 'Compra Fácil | Todos os Reviews e Guias'
 
-export const postsMetaData: Metadata = { 
+export const postsMetaData: Metadata = {
   title: title,
-  description: 'Explore todos os artigos do Blog onTech sobre tecnologia, programação, inteligência artificial, gadgets, e muito mais.',
+  description: 'Explore todos os reviews, análises e guias de compra do Blog Compra Fácil. Encontre o produto ideal, com o melhor custo-benefício, e faça a sua Compra Fácil e informada.',
   keywords: keywords,
-  authors: [{ name: 'onTech Blog', url: dominio }],
+  authors: [{ name: 'Compra Fácil', url: dominio }],
   openGraph: {
     title: title,
-    description: 'Veja todos os artigos sobre tecnologia, programação, IA e mais no Blog onTech.',
+    description: 'Veja todos os reviews de produtos, análises e guias de compra para fazer a melhor escolha.',
     url: dominio,
-    siteName: 'onTech Blog',
+    siteName: 'Compra Fácil',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Capa do Blog onTech com artigos de tecnologia',
+        alt: 'Capa do Blog Compra Fácil com diversos reviews de produtos',
       },
     ],
     locale: 'pt_BR',
@@ -27,10 +27,10 @@ export const postsMetaData: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'onTech Blog',
-    description: 'Fique por dentro das últimas notícias do mundo da tecnologia',
-    creator: '@onTechBlog',
+    title: 'Compra Fácil - Reviews e Guias de Compra',
+    description: 'Explore todos os reviews de produtos e guias de compra.',
+    creator: '@CompraFacilBlog',
     images: ['/og-image.png'],
   },
   metadataBase: new URL(dominio),
- }
+}

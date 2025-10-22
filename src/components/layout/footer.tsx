@@ -1,7 +1,6 @@
 import { chakra } from '@/assets/fonts'
 import { NewsLetterForm } from '@/components/global'
 import Link from 'next/link'
-import { BsPinterest } from 'react-icons/bs'
 import { FaYoutube } from 'react-icons/fa'
 import { RiInstagramFill } from 'react-icons/ri'
 import { twMerge } from 'tailwind-merge'
@@ -9,30 +8,14 @@ import { twMerge } from 'tailwind-merge'
 const Footer = () => {
 	const socialLinks = [
 		{
-			label: 'Instagram do OnTech Blog',
+			label: 'Instagram do Compra Fácil Blog',
 			icon: <RiInstagramFill className="h-6 w-6" />,
-			url: 'https://www.instagram.com/ontechblog/',
+			url: 'https://www.instagram.com/comprafacilafiliadooficial/',
 		},
 		{
-			label: 'Canal Youtube do OnTech Blog',
+			label: 'Canal Youtube do Compra Fácil Blog',
 			icon: <FaYoutube className="h-6 w-6" />,
 			url: 'https://www.youtube.com/channel/UCD80XkyM8H6OIV2bxztiYYQ',
-		},
-		{
-			label: 'Pinterest do OnTech Blog',
-			icon: <BsPinterest className="h-6 w-6" />,
-			url: 'https://br.pinterest.com/ontechblog2025/',
-		},
-	]
-
-	const navLinks = [
-		{
-			label: 'Política de Privacidade',
-			url: '/privacyPolicy',
-		},
-		{
-			label: 'Sobre Nós',
-			url: '/about',
 		},
 	]
 
@@ -55,27 +38,6 @@ const Footer = () => {
 					<p className="max-w-xs text-sm text-muted-foreground md:text-base">
 						Veja os melhores reviews e tenha acesso a grandes ofertas dos nossos parceiros!
 					</p>
-				</div>
-
-				{/* Links de Navegação */}
-				<div className="lg:col-span-1">
-					<nav aria-label="Links de Navegação do Rodapé">
-						<h3 className="mb-4 text-xl font-semibold">Navegação</h3>
-						<ul className="space-y-3">
-							{navLinks.map((link) => (
-								<li key={link.label}>
-									<Link
-										href={link.url}
-										title={`Ir para ${link.label}`}
-										aria-label={`Ir para a página de ${link.label}`}
-										className="text-base text-muted-foreground transition-colors hover:text-foreground hover:underline"
-									>
-										{link.label}
-									</Link>
-								</li>
-							))}
-						</ul>
-					</nav>
 				</div>
 
 				{/* Social */}
@@ -114,10 +76,11 @@ const Footer = () => {
 
 			{/* Copyright */}
 			<div className="mt-12 text-center text-xs text-muted-foreground">
-				© {new Date().getFullYear()} onTech Blog. Todos os direitos reservados.
+				© {new Date().getFullYear()} Compra Fácil Blog. Todos os direitos reservados.
 			</div>
 		</footer>
 	)
 }
 
 export { Footer }
+

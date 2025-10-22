@@ -141,7 +141,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 										key={product.id}
 										name={product.name}
 										description={product.description}
-										imageUrl={product.image.url}
+										imageUrl={product.image?.url || ''}
 										affiliateLinks={product.affiliateLink || ''}
 									/>
 								))}

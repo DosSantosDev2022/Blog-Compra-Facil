@@ -71,7 +71,7 @@ const defaultRenders = {
 		</pre>
 	),
 	ul: ({ children }: defaultRendersProps) => (
-		<ul className="list-disc list-inside space-y-2 pl-4">{children}</ul>
+		<ul className="list-disc space-y-2 pl-2">{children}</ul>
 	),
 	li: ({ children }: defaultRendersProps) => (
 		<li className="text-base text-foreground font-light leading-relaxed">

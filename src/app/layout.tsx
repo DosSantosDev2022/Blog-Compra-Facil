@@ -8,8 +8,8 @@ import './globals.css';
 
 
 export const metadata: Metadata = {
-	title: 'onTech Blog',
-	description: 'Seu blog de tecnologia, dicas, tutoriais e novidades.',
+	title: 'Compra Fácil Blog',
+	description: 'Reviews e guias atualizados regularmente com as melhores ofertas do mercado.',
 	icons: {
 		icon: '/favicon.svg', // Caminho para o seu favicon SVG
 	},
