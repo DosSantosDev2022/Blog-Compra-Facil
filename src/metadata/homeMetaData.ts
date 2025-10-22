@@ -1,7 +1,7 @@
 import { keywords } from '@/metadata/keyWords';
 import type { Metadata } from "next";
 
-const dominio = 'https://www.comprafacil.blog/' // Sugestão: Altere aqui para o seu novo domínio.
+const dominio = 'https://blog-compra-facil.vercel.app/' // Sugestão: Altere aqui para o seu novo domínio.
 
 export const homeMetaData: Metadata = {
   title: 'Compra Fácil - Reviews e Análises de Produtos',

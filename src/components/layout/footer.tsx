@@ -21,7 +21,7 @@ const Footer = () => {
 
 	return (
 		<footer className="w-full bg-card px-4 py-12 text-foreground md:px-8">
-			<div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-4 lg:gap-8">
+			<div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8">
 				{/* Logo / About */}
 				<div className="space-y-4">
 					<Link

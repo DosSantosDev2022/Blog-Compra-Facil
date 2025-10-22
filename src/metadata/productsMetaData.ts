@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
-const dominio = 'https://www.ontech.blog/products'
-const title = 'OnTech Blog | Produtos Recomendados'
+const dominio = 'https://blog-compra-facil.vercel.app/products'
+const title = 'Compra Fácil | Produtos Recomendados'
 
 export const productsMetaData: Metadata = {
-title: title,
+  title: title,
   description:
     'Confira nossa seleção de produtos recomendados sobre tecnologia: smartphones, notebooks, periféricos, acessórios e mais.',
   keywords: [
